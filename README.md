@@ -15,7 +15,7 @@ Repository of devenloping an antenna for CubeDesign2020
  - [ ] Simular um chat entre *Raspberry* e *Arduino* via 433MHz módulos
  - [ ] Aprender a usar o SD card no arduino
  - [ ] Aprender a importar imagens para o arduino, visualizar: [Library](https://learn.adafruit.com/adafruit-gfx-graphics-library/loading-images) e [Library2](https://www.arduino.cc/en/Reference/TFTLoadImage). Adpatar esses projetos para visualizar imagens:
- [Mouse](http://frenki.net/2013/12/convert-optical-mouse-into-arduino-web-camera/), [CÂmera](https://www.youtube.com/playlist?list=PLVilroPGLJaesaS5mP93i0goPck2JK-O4)
+ [Mouse](http://frenki.net/2013/12/convert-optical-mouse-into-arduino-web-camera/), [Câmera](https://www.youtube.com/playlist?list=PLVilroPGLJaesaS5mP93i0goPck2JK-O4)
  Importar via [SD Cards](https://www.youtube.com/watch?v=XTPi3sqK6SM)
  - [ ] Transmitir imagens via 433MHz modules entre *Arduinos*
  - [ ] Transmitir imagens entre *Raspberry* e *Arduino* via 433MHz módulos
