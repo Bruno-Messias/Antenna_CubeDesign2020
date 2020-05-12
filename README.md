@@ -8,8 +8,8 @@ Repository of devenloping an antenna for CubeDesign2020
 ### Roteiro :
 
  - [x] Aprender a usar a simular o Arduino no *Proteus*: [Tutorial](https://www.youtube.com/playlist?list=PLUg-RvBnK2zaHDeWkeXDkz20sXLry8oVH)
- - [ ] Aprender a usar o *Raspberry Pi*: [Tutorial](https://www.youtube.com/watch?v=RpseX2ylEuw&list=PLQVvvaa0QuDesV8WWHLLXW_avmTzHmJLv&index=2&t=29s) e usar  GPIO
- [About *Raspberry* GPIO](https://www.youtube.com/watch?v=tQEmtbaO2GY)
+ - [x] Aprender a usar o *Raspberry Pi*: [Tutorial](https://www.youtube.com/watch?v=RpseX2ylEuw&list=PLQVvvaa0QuDesV8WWHLLXW_avmTzHmJLv&index=2&t=29s) e usar  GPIO
+ [About *Raspberry* GPIO](https://www.youtube.com/watch?v=tQEmtbaO2GY), [Tutorial2](https://www.youtube.com/playlist?list=PLNnwglGGYoTvy37TSGFlv-aFkpg7owWrE)
  - [ ] Aprender a simular o *Raspberry* no *Proteus*: [Sobre](https://www.youtube.com/watch?v=PSp7XxqS8S4)
  - [ ] Simular chat entre *Arduinos* com os módulos 433MHZ: [Arduino_433MHz](https://www.youtube.com/watch?v=qIHIr61Yb10) e [Chat 433MHZ](https://www.youtube.com/watch?v=PCslmzSDMmA)
  - [ ] Simular um chat entre *Raspberry* e *Arduino* via 433MHz módulos
