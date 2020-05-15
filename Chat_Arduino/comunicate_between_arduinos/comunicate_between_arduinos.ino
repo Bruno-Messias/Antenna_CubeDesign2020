@@ -15,7 +15,7 @@ void loop() {
   char mss[200];
   while (Serial.available() >= 1) {
     if (index < 499) {
-      delay(100);
+      delay(10);
       inChar = Serial.read();
       inData[index] = inChar;
       index++;
@@ -30,7 +30,7 @@ void loop() {
     vw_wait_tx();
     Serial.print("You: ");
     Serial.println(mss);
-    delay(1000);
+    delay(600);
     newmessage = 0; // Indicate that there is no new message to wait for the new one
   }
 
