@@ -15,11 +15,12 @@ void loop() {
   char mss[200];
   while (Serial.available() >= 1) {
     if (index < 499) {
-      delay(100);
       inChar = Serial.read();
       inData[index] = inChar;
+      delay(100);
       index++;
       inData[index] = '\0';
+      delay(100);
     }
     newmessage = 1;
   }
