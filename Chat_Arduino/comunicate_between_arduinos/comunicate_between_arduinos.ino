@@ -30,7 +30,7 @@ void loop() {
     vw_wait_tx();
     Serial.print("You: ");
     Serial.println(mss);
-    delay(1000);
+    delay(600);
     newmessage = 0; // Indicate that there is no new message to wait for the new one
   }
 
