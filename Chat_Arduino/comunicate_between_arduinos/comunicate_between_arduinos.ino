@@ -17,7 +17,6 @@ void loop() {
     if (index < 499) {
       inChar = Serial.read();
       inData[index] = inChar;
-      delay(100);
       index++;
       inData[index] = '\0';
       delay(100);
