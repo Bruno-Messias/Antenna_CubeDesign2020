@@ -30,5 +30,5 @@ Repository of devenloping an antenna for CubeDesign2020
  ### Overview: 
 * Impedâcia casada em 50 Ohms
 * Conector SMA e cabos coaxiais
-
+* ...
 
