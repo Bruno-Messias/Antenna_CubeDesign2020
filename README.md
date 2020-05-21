@@ -1,4 +1,4 @@
-# Antenna_CubeDesign2020
+# Antenna CubeDesign2020/21
 
 Repository of devenloping an antenna for CubeDesign2020
 
