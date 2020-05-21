@@ -17,7 +17,7 @@ Repository of devenloping an antenna for CubeDesign2020
   * 2x SPI Bus - para Dados da Raspberry e para Beacon
   * 2x Ground - 1 ground separado dos outros pra RF (inteferências) 
   * 2x UART bus - para dados da EPS - telemetria no beacon outro para debug
-  * 2xI2C para o módulo da antenna e para a opraçao do rasp
+  * 2xI2C para o módulo da antenna e para a operação do Raspberry
   * 5xGPIO para controles gerais da radio
 
 * Frequência de operação: 437MHz - 438MHz(NGHam protocol) - pesquisar
