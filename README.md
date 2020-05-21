@@ -13,7 +13,9 @@ Repository of devenloping an antenna for CubeDesign2020
  - [x] Aprender a simular o *Raspberry* no *Proteus*: [Sobre](https://www.youtube.com/watch?v=PSp7XxqS8S4)
  - [x] Simular chat entre *Arduinos* com os módulos 433MHZ: [Arduino_433MHz](https://www.youtube.com/watch?v=qIHIr61Yb10) e [Chat 433MHZ](https://www.youtube.com/watch?v=PCslmzSDMmA)
  - [x] Aprender usar o `RadioHead`library: [Tutorial](https://www.digikey.com/en/maker/blogs/2019/how-to-wirelessly-transmit-data-on-arduino) e [Tutorial2](https://dronebotworkshop.com/433mhz-rf-modules-arduino/)
- - [ ] Simular um chat entre *Raspberry* e *Arduino* via 433MHz módulos
+ - [x] Aprender a usar o [Visual Design](https://www.youtube.com/playlist?list=PLXLOTYmVieaJH7-OCWccmdiWgGHp7-vnW)
+ - [ ] Simular comunicação entre arduino e raspberry pi: ENtre [Arduinos](https://www.youtube.com/watch?v=lb78DNIh6PU), [SPI](https://roboticsbackend.com/raspberry-pi-master-arduino-uno-slave-spi-communication-with-wiringpi/) e [12C](https://www.bluetin.io/interfacing/i2c-connect-raspberry-pi-arduino/)
+ - [ ] Simular um chat entre *Raspberry* e *Arduino* via 433MHz módulos: [Sobre](https://magpi.raspberrypi.org/articles/build-433mhz-radio-chat-device) e [Mais](https://www.piddlerintheroot.com/rf-433-mhz/) e [tbm](https://github.com/mrpjevans/rfchat)
  - [ ] Aprender a usar o SD card no arduino
  - [ ] Aprender a importar imagens para o arduino, visualizar: [Library](https://learn.adafruit.com/adafruit-gfx-graphics-library/loading-images) e [Library2](https://www.arduino.cc/en/Reference/TFTLoadImage). Adpatar esses projetos para visualizar imagens:
  [Mouse](http://frenki.net/2013/12/convert-optical-mouse-into-arduino-web-camera/), [Câmera](https://www.youtube.com/playlist?list=PLVilroPGLJaesaS5mP93i0goPck2JK-O4).
