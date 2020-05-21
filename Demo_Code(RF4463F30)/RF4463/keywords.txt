@@ -1,0 +1,34 @@
+#######################################
+# Syntax Coloring Map For RF4463
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+RF4463	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init				KEYWORD2
+checkDevice			KEYWORD2
+txPacket			KEYWORD2
+rxPacket			KEYWORD2
+rxInit				KEYWORD2
+waitnIRQ			KEYWORD2
+enterStandbyMode	KEYWORD2
+setGPIOMode			KEYWORD2
+setPreambleLen		KEYWORD2
+setSyncWords		KEYWORD2
+setTxPower			KEYWORD2
+setCommand			KEYWORD2
+getCommand			KEYWORD2
+setProperties		KEYWORD2
+getProperties		KEYWORD2
+clrInterrupts		KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################

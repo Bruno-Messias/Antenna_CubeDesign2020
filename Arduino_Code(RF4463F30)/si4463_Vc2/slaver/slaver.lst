@@ -1,0 +1,3651 @@
+
+
+HI-TECH Software PIC PRO Macro Assembler V9.83 build 10920 
+                                                                                               Wed Jul 22 16:02:54 2015
+
+HI-TECH Software Omniscient Code Generator (PRO mode) build 10920
+     1                           	processor	16F689
+     2                           	opt	pw 120
+     3                           	opt	pm
+     4                           	psect	strings,global,class=STRING,delta=2
+     5                           	psect	cinit,global,class=CODE,delta=2
+     6                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1
+     7                           	psect	clrtext,global,class=CODE,delta=2
+     8                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+     9                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1
+    10                           	psect	maintext,global,class=CODE,delta=2
+    11                           	psect	text450,local,class=CODE,delta=2
+    12                           	psect	text464,local,class=CODE,delta=2
+    13                           	psect	text468,local,class=CODE,delta=2
+    14                           	psect	text469,local,class=CODE,delta=2
+    15                           	psect	text470,local,class=CODE,delta=2
+    16                           	psect	text471,local,class=CODE,delta=2
+    17                           	psect	intentry,global,class=CODE,delta=2
+    18                           	psect	text472,local,class=CODE,delta=2
+    19                           	psect	pa_nodes,global,class=CODE,delta=2
+    20                           	dabs	1,0x7E,2
+    21  000A                     
+    22                           	psect	strings
+    23  0300                     __pstrings:	
+    24  0300                     stringtab:	
+    25                           ;	global	stringdir,stringtab,__stringbase
+    26                           
+    27                           
+    28                           ;	String table - string pointers are 1 byte each
+    29  0300  1BFF               	btfsc	btemp+1,7
+    30  0301  2B0A               	ljmp	stringcode
+    31  0302  1383               	bcf	3,7
+    32  0303  187F               	btfsc	btemp+1,0
+    33  0304  1783               	bsf	3,7
+    34  0305  0800               	movf	0,w
+    35  0306  0A84               	incf	4,f
+    36  0307  1903               	skipnz
+    37  0308  0AFF               	incf	btemp+1,f
+    38  0309  0008               	return
+    39  030A                     stringcode:	
+    40  030A                     stringdir:	
+    41  030A  3003               	movlw	high stringdir
+    42  030B  008A               	movwf	10
+    43  030C  0804               	movf	4,w
+    44  030D  0A84               	incf	4,f
+    45  030E  0782               	addwf	2,f
+    46  030F                     __stringbase:	
+    47  030F  3400               	retlw	0
+    48  0310                     _tx_ph_data:	
+    49  0310  3473               	retlw	115
+    50  0311  3477               	retlw	119
+    51  0312  3477               	retlw	119
+    52  0313  3478               	retlw	120
+    53  0314  3441               	retlw	65
+    54  0315  3442               	retlw	66
+    55  0316  3443               	retlw	67
+    56  0317  3444               	retlw	68
+    57  0318  3445               	retlw	69
+    58  0319  3446               	retlw	70
+    59  031A  3447               	retlw	71
+    60  031B  3448               	retlw	72
+    61  031C  3449               	retlw	73
+    62  031D  346D               	retlw	109
+    63  031E                     _RF_POWER_UP_data:	
+    64  031E  3402               	retlw	2
+    65  031F  3401               	retlw	1
+    66  0320  3400               	retlw	0
+    67  0321  3401               	retlw	1
+    68  0322  34C9               	retlw	201
+    69  0323  34C3               	retlw	195
+    70  0324  3480               	retlw	128
+    71  0325                     _AGC_WINDOW_SIZE_12_data:	
+    72  0325  3411               	retlw	17
+    73  0326  3420               	retlw	32
+    74  0327  340C               	retlw	12
+    75  0328  3438               	retlw	56
+    76  0329  3411               	retlw	17
+    77  032A  34AB               	retlw	171
+    78  032B  34AB               	retlw	171
+    79  032C  3480               	retlw	128
+    80  032D  341A               	retlw	26
+    81  032E  34FF               	retlw	255
+    82  032F  34FF               	retlw	255
+    83  0330  3400               	retlw	0
+    84  0331  342B               	retlw	43
+    85  0332  340C               	retlw	12
+    86  0333  34A4               	retlw	164
+    87  0334  3422               	retlw	34
+    88  0335                     _BCR_NCO_OFFSET_2_12_data:	
+    89  0335  3411               	retlw	17
+    90  0336  3420               	retlw	32
+    91  0337  340C               	retlw	12
+    92  0338  3424               	retlw	36
+    93  0339  3400               	retlw	0
+    94  033A  34A7               	retlw	167
+    95  033B  34C6               	retlw	198
+    96  033C  3400               	retlw	0
+    97  033D  3454               	retlw	84
+    98  033E  3402               	retlw	2
+    99  033F  34C2               	retlw	194
+   100  0340  3400               	retlw	0
+   101  0341  3404               	retlw	4
+   102  0342  3432               	retlw	50
+   103  0343  3480               	retlw	128
+   104  0344  3407               	retlw	7
+   105  0345                     _COE13_7_0_12_data:	
+   106  0345  3411               	retlw	17
+   107  0346  3421               	retlw	33
+   108  0347  340C               	retlw	12
+   109  0348  3400               	retlw	0
+   110  0349  34FF               	retlw	255
+   111  034A  34BA               	retlw	186
+   112  034B  340F               	retlw	15
+   113  034C  3451               	retlw	81
+   114  034D  34CF               	retlw	207
+   115  034E  34A9               	retlw	169
+   116  034F  34C9               	retlw	201
+   117  0350  34FC               	retlw	252
+   118  0351  341B               	retlw	27
+   119  0352  341E               	retlw	30
+   120  0353  340F               	retlw	15
+   121  0354  3401               	retlw	1
+   122  0355                     _COE1_7_0_12_data:	
+   123  0355  3411               	retlw	17
+   124  0356  3421               	retlw	33
+   125  0357  340C               	retlw	12
+   126  0358  340C               	retlw	12
+   127  0359  34FC               	retlw	252
+   128  035A  34FD               	retlw	253
+   129  035B  3415               	retlw	21
+   130  035C  34FF               	retlw	255
+   131  035D  3400               	retlw	0
+   132  035E  340F               	retlw	15
+   133  035F  34FF               	retlw	255
+   134  0360  34BA               	retlw	186
+   135  0361  340F               	retlw	15
+   136  0362  3451               	retlw	81
+   137  0363  34CF               	retlw	207
+   138  0364  34A9               	retlw	169
+   139  0365                     _COE7_7_0_12_data:	
+   140  0365  3411               	retlw	17
+   141  0366  3421               	retlw	33
+   142  0367  340C               	retlw	12
+   143  0368  3418               	retlw	24
+   144  0369  34C9               	retlw	201
+   145  036A  34FC               	retlw	252
+   146  036B  341B               	retlw	27
+   147  036C  341E               	retlw	30
+   148  036D  340F               	retlw	15
+   149  036E  3401               	retlw	1
+   150  036F  34FC               	retlw	252
+   151  0370  34FD               	retlw	253
+   152  0371  3415               	retlw	21
+   153  0372  34FF               	retlw	255
+   154  0373  3400               	retlw	0
+   155  0374  340F               	retlw	15
+   156  0375                     _RF_MODEM_MOD_TYPE_12_data:	
+   157  0375  3411               	retlw	17
+   158  0376  3420               	retlw	32
+   159  0377  340C               	retlw	12
+   160  0378  3400               	retlw	0
+   161  0379  3402               	retlw	2
+   162  037A  3400               	retlw	0
+   163  037B  3407               	retlw	7
+   164  037C  3400               	retlw	0
+   165  037D  342E               	retlw	46
+   166  037E  34E0               	retlw	224
+   167  037F  3401               	retlw	1
+   168  0380  34C9               	retlw	201
+   169  0381  34C3               	retlw	195
+   170  0382  3480               	retlw	128
+   171  0383  3400               	retlw	0
+   172  0384  3401               	retlw	1
+   173  0385                     _RF_MODEM_TX_RAMP_DELAY_12_data:	
+   174  0385  3411               	retlw	17
+   175  0386  3420               	retlw	32
+   176  0387  340C               	retlw	12
+   177  0388  3418               	retlw	24
+   178  0389  3401               	retlw	1
+   179  038A  3480               	retlw	128
+   180  038B  3408               	retlw	8
+   181  038C  3403               	retlw	3
+   182  038D  3480               	retlw	128
+   183  038E  3400               	retlw	0
+   184  038F  3470               	retlw	112
+   185  0390  3420               	retlw	32
+   186  0391  340C               	retlw	12
+   187  0392  34E8               	retlw	232
+   188  0393  3403               	retlw	3
+   189  0394  340D               	retlw	13
+   190  0395                     _RF_FREQ_CONTROL_INTE_8_data:	
+   191  0395  3411               	retlw	17
+   192  0396  3440               	retlw	64
+   193  0397  3408               	retlw	8
+   194  0398  3400               	retlw	0
+   195  0399  3438               	retlw	56
+   196  039A  340E               	retlw	14
+   197  039B  3466               	retlw	102
+   198  039C  3466               	retlw	102
+   199  039D  3444               	retlw	68
+   200  039E  3444               	retlw	68
+   201  039F  3420               	retlw	32
+   202  03A0  34FE               	retlw	254
+   203  03A1                     _RF_MODEM_RAW_CONTROL_8_data:	
+   204  03A1  3411               	retlw	17
+   205  03A2  3420               	retlw	32
+   206  03A3  3408               	retlw	8
+   207  03A4  3445               	retlw	69
+   208  03A5  3483               	retlw	131
+   209  03A6  3401               	retlw	1
+   210  03A7  3455               	retlw	85
+   211  03A8  3402               	retlw	2
+   212  03A9  3480               	retlw	128
+   213  03AA  34FF               	retlw	255
+   214  03AB  3408               	retlw	8
+   215  03AC  3400               	retlw	0
+   216  03AD                     _RF_SYNTH_PFDCP_CPFF_7_data:	
+   217  03AD  3411               	retlw	17
+   218  03AE  3423               	retlw	35
+   219  03AF  3407               	retlw	7
+   220  03B0  3400               	retlw	0
+   221  03B1  342C               	retlw	44
+   222  03B2  340E               	retlw	14
+   223  03B3  340B               	retlw	11
+   224  03B4  3404               	retlw	4
+   225  03B5  340C               	retlw	12
+   226  03B6  3473               	retlw	115
+   227  03B7  3403               	retlw	3
+   228  03B8                     _RF_FRR_CTL_A_MODE_4_data:	
+   229  03B8  3411               	retlw	17
+   230  03B9  3402               	retlw	2
+   231  03BA  3404               	retlw	4
+   232  03BB  3400               	retlw	0
+   233  03BC  3400               	retlw	0
+   234  03BD  3400               	retlw	0
+   235  03BE  3400               	retlw	0
+   236  03BF  3400               	retlw	0
+   237  03C0                     _RF_MODEM_AFC_LIMITER_1_3_data:	
+   238  03C0  3411               	retlw	17
+   239  03C1  3420               	retlw	32
+   240  03C2  3403               	retlw	3
+   241  03C3  3430               	retlw	48
+   242  03C4  3417               	retlw	23
+   243  03C5  342A               	retlw	42
+   244  03C6  3480               	retlw	128
+   245  03C7                     _RF_MODEM_RAW_SEARCH2_2_data:	
+   246  03C7  3411               	retlw	17
+   247  03C8  3420               	retlw	32
+   248  03C9  3402               	retlw	2
+   249  03CA  3450               	retlw	80
+   250  03CB  3484               	retlw	132
+   251  03CC  340A               	retlw	10
+   252  03CD                     _RF_MODEM_AGC_CONTROL_1_data:	
+   253  03CD  3411               	retlw	17
+   254  03CE  3420               	retlw	32
+   255  03CF  3401               	retlw	1
+   256  03D0  3435               	retlw	53
+   257  03D1  34E2               	retlw	226
+   258  03D2                     _RF_MODEM_FREQ_DEV_0_1_data:	
+   259  03D2  3411               	retlw	17
+   260  03D3  3420               	retlw	32
+   261  03D4  3401               	retlw	1
+   262  03D5  340C               	retlw	12
+   263  03D6  345E               	retlw	94
+   264  000B                     _INTCON	set	11
+   265  0007                     _PORTC	set	7
+   266  0010                     _T1CON	set	16
+   267  000F                     _TMR1H	set	15
+   268  000E                     _TMR1L	set	14
+   269  0028                     _RA0	set	40
+   270  0029                     _RA1	set	41
+   271  0039                     _RC1	set	57
+   272  003A                     _RC2	set	58
+   273  003C                     _RC4	set	60
+   274  003D                     _RC5	set	61
+   275  003E                     _RC6	set	62
+   276  003F                     _RC7	set	63
+   277  0060                     _TMR1IF	set	96
+   278  0096                     _IOCA	set	150
+   279  008F                     _OSCCON	set	143
+   280  0085                     _TRISA	set	133
+   281  0087                     _TRISC	set	135
+   282  0097                     _WDTCON	set	151
+   283  0095                     _WPUA	set	149
+   284  0460                     _TMR1IE	set	1120
+   285  011E                     _ANSEL	set	286
+   286  011F                     _ANSELH	set	287
+   287                           
+   288                           	psect	cinit
+   289  049D                     start_initialization:	
+   290  049D  3020               	movlw	low __pbssBANK0
+   291                           
+   292                           ; Clear objects allocated to BANK0
+   293  049E  1383               	bcf	3,7	;select IRP bank0
+   294  049F  0084               	movwf	4
+   295  04A0  3052               	movlw	low (__pbssBANK0+50)
+   296  04A1  118A  24A6         	fcall	clear_ram
+   297  04A3                     end_of_initialization:	
+   298                           ;End of C runtime variable initialization code
+   299                           
+   300  04A3  0183               	clrf	3
+   301  04A4  118A  2BD7         	ljmp	_main	;jump to C main() function
+   302                           
+   303                           	psect	bssBANK0
+   304  0020                     __pbssBANK0:	
+   305  0020                     _rx_buf:	
+   306  0020                     	ds	25
+   307  0039                     _spi_read_buf:	
+   308  0039                     	ds	20
+   309  004D                     _count_1hz:	
+   310  004D                     	ds	2
+   311  004F                     _rf_timeout:	
+   312  004F                     	ds	2
+   313  0051                     _Flag:	
+   314  0051                     	ds	1
+   315                           
+   316                           	psect	clrtext
+   317  04A6                     clear_ram:	
+   318                           ;	Called with FSR containing the base address, and
+   319                           ;	W with the last address+1
+   320                           
+   321  04A6  0064               	clrwdt	;clear the watchdog before getting into this loop
+   322  04A7                     clrloop:	
+   323  04A7  0180               	clrf	0	;clear RAM location pointed to by FSR
+   324  04A8  0A84               	incf	4,f	;increment pointer
+   325  04A9  0604               	xorwf	4,w	;XOR with final address
+   326  04AA  1903               	btfsc	3,2	;have we reached the end yet?
+   327  04AB  3400               	retlw	0	;all done for this memory range, return
+   328  04AC  0604               	xorwf	4,w	;XOR again to restore value
+   329  04AD  2CA7               	goto	clrloop	;do the next byte
+   330                           
+   331                           	psect	cstackCOMMON
+   332  0070                     __pcstackCOMMON:	
+   333  0070                     ?_port_init:	
+   334  0070                     ?_nop_10:	
+   335                           ; 0 bytes @ 0x0
+   336                           
+   337  0070                     ?_timer1_init:	
+   338                           ; 0 bytes @ 0x0
+   339                           
+   340  0070                     ?_sdn_reset:	
+   341                           ; 0 bytes @ 0x0
+   342                           
+   343  0070                     ?_SI4463_init:	
+   344                           ; 0 bytes @ 0x0
+   345                           
+   346  0070                     ?_rx_init:	
+   347                           ; 0 bytes @ 0x0
+   348                           
+   349  0070                     ?_clr_interrupt:	
+   350                           ; 0 bytes @ 0x0
+   351                           
+   352  0070                     ?_spi_read_fifo:	
+   353                           ; 0 bytes @ 0x0
+   354                           
+   355  0070                     ?_fifo_reset:	
+   356                           ; 0 bytes @ 0x0
+   357                           
+   358  0070                     ?_tx_data:	
+   359                           ; 0 bytes @ 0x0
+   360                           
+   361  0070                     ?_spi_write_fifo:	
+   362                           ; 0 bytes @ 0x0
+   363                           
+   364  0070                     ?_main:	
+   365                           ; 0 bytes @ 0x0
+   366                           
+   367  0070                     ?_enable_rx_interrupt:	
+   368                           ; 0 bytes @ 0x0
+   369                           
+   370  0070                     ?_enable_tx_interrupt:	
+   371                           ; 0 bytes @ 0x0
+   372                           
+   373  0070                     ?_tx_start:	
+   374                           ; 0 bytes @ 0x0
+   375                           
+   376  0070                     ?_rx_start:	
+   377                           ; 0 bytes @ 0x0
+   378                           
+   379  0070                     ?_delay_10ms:	
+   380                           ; 0 bytes @ 0x0
+   381                           
+   382  0070                     ?_ISR_timer:	
+   383                           ; 0 bytes @ 0x0
+   384                           
+   385  0070                     ??_ISR_timer:	
+   386                           ; 0 bytes @ 0x0
+   387                           
+   388  0070                     ?_check_cts:	
+   389                           ; 0 bytes @ 0x0
+   390                           
+   391  0070                     ?_spi_byte:	
+   392                           ; 1 bytes @ 0x0
+   393                           
+   394                           
+   395                           ; 1 bytes @ 0x0
+   396  0070                     	ds	2
+   397  0072                     ??_port_init:	
+   398  0072                     ??_nop_10:	
+   399                           ; 0 bytes @ 0x2
+   400                           
+   401  0072                     ??_timer1_init:	
+   402                           ; 0 bytes @ 0x2
+   403                           
+   404  0072                     ?_delay_1ms:	
+   405                           ; 0 bytes @ 0x2
+   406                           
+   407  0072                     ??_spi_byte:	
+   408                           ; 0 bytes @ 0x2
+   409                           
+   410  0072                     ??_delay_10ms:	
+   411                           ; 0 bytes @ 0x2
+   412                           
+   413  0072                     spi_byte@i:	
+   414                           ; 0 bytes @ 0x2
+   415                           
+   416  0072                     delay_1ms@delay_time:	
+   417                           ; 1 bytes @ 0x2
+   418                           
+   419  0072                     delay_10ms@i:	
+   420                           ; 2 bytes @ 0x2
+   421                           
+   422                           
+   423                           ; 2 bytes @ 0x2
+   424  0072                     	ds	1
+   425  0073                     spi_byte@data:	
+   426                           
+   427                           ; 1 bytes @ 0x3
+   428  0073                     	ds	1
+   429  0074                     ?_delay_x10ms:	
+   430  0074                     ??_delay_1ms:	
+   431                           ; 0 bytes @ 0x4
+   432                           
+   433  0074                     ??_check_cts:	
+   434                           ; 0 bytes @ 0x4
+   435                           
+   436  0074                     check_cts@i:	
+   437                           ; 0 bytes @ 0x4
+   438                           
+   439  0074                     delay_1ms@i:	
+   440                           ; 1 bytes @ 0x4
+   441                           
+   442  0074                     delay_x10ms@dx10ms:	
+   443                           ; 2 bytes @ 0x4
+   444                           
+   445                           
+   446                           ; 2 bytes @ 0x4
+   447  0074                     	ds	1
+   448  0075                     ??_spi_read_fifo:	
+   449  0075                     ?_spi_write:	
+   450                           ; 0 bytes @ 0x5
+   451                           
+   452  0075                     ??_spi_write_fifo:	
+   453                           ; 0 bytes @ 0x5
+   454                           
+   455  0075                     spi_write_fifo@i:	
+   456                           ; 0 bytes @ 0x5
+   457                           
+   458  0075                     spi_read_fifo@i:	
+   459                           ; 1 bytes @ 0x5
+   460                           
+   461  0075                     spi_write@p:	
+   462                           ; 1 bytes @ 0x5
+   463                           
+   464                           
+   465                           ; 2 bytes @ 0x5
+   466  0075                     	ds	1
+   467  0076                     ??_delay_x10ms:	
+   468  0076                     ??_sdn_reset:	
+   469                           ; 0 bytes @ 0x6
+   470                           
+   471  0076                     sdn_reset@i:	
+   472                           ; 0 bytes @ 0x6
+   473                           
+   474  0076                     delay_x10ms@j:	
+   475                           ; 1 bytes @ 0x6
+   476                           
+   477                           
+   478                           ; 2 bytes @ 0x6
+   479  0076                     	ds	1
+   480  0077                     ??_spi_write:	
+   481  0077                     spi_write@tx_length:	
+   482                           ; 0 bytes @ 0x7
+   483                           
+   484                           
+   485                           ; 1 bytes @ 0x7
+   486  0077                     	ds	1
+   487  0078                     spi_write@j:	
+   488                           
+   489                           ; 1 bytes @ 0x8
+   490  0078                     	ds	1
+   491  0079                     spi_write@i:	
+   492                           
+   493                           ; 1 bytes @ 0x9
+   494  0079                     	ds	1
+   495  007A                     ??_SI4463_init:	
+   496  007A                     ??_fifo_reset:	
+   497                           ; 0 bytes @ 0xA
+   498                           
+   499  007A                     ?_spi_read:	
+   500                           ; 0 bytes @ 0xA
+   501                           
+   502  007A                     ??_enable_rx_interrupt:	
+   503                           ; 0 bytes @ 0xA
+   504                           
+   505  007A                     ??_enable_tx_interrupt:	
+   506                           ; 0 bytes @ 0xA
+   507                           
+   508  007A                     ??_tx_start:	
+   509                           ; 0 bytes @ 0xA
+   510                           
+   511  007A                     ??_rx_start:	
+   512                           ; 0 bytes @ 0xA
+   513                           
+   514  007A                     spi_read@api_command:	
+   515                           ; 0 bytes @ 0xA
+   516                           
+   517  007A                     fifo_reset@p:	
+   518                           ; 1 bytes @ 0xA
+   519                           
+   520                           
+   521                           ; 2 bytes @ 0xA
+   522  007A                     	ds	1
+   523  007B                     ??_clr_interrupt:	
+   524  007B                     ??_spi_read:	
+   525                           ; 0 bytes @ 0xB
+   526                           
+   527                           
+   528                           ; 0 bytes @ 0xB
+   529  007B                     	ds	1
+   530  007C                     ??_rx_init:	
+   531  007C                     ??_tx_data:	
+   532                           ; 0 bytes @ 0xC
+   533                           
+   534  007C                     ??_main:	
+   535                           ; 0 bytes @ 0xC
+   536                           
+   537                           
+   538                           	psect	cstackBANK0
+   539  0052                     __pcstackBANK0:	
+   540                           ; 0 bytes @ 0xC
+   541                           
+   542  0052                     spi_read@data_length:	
+   543  0052                     tx_start@p:	
+   544                           ; 1 bytes @ 0x0
+   545                           
+   546  0052                     enable_tx_interrupt@p:	
+   547                           ; 5 bytes @ 0x0
+   548                           
+   549  0052                     enable_rx_interrupt@p:	
+   550                           ; 6 bytes @ 0x0
+   551                           
+   552  0052                     rx_start@p:	
+   553                           ; 7 bytes @ 0x0
+   554                           
+   555  0052                     SI4463_init@app_command_buf:	
+   556                           ; 8 bytes @ 0x0
+   557                           
+   558                           
+   559                           ; 20 bytes @ 0x0
+   560  0052                     	ds	1
+   561  0053                     spi_read@p:	
+   562                           
+   563                           ; 1 bytes @ 0x1
+   564  0053                     	ds	1
+   565  0054                     spi_read@i:	
+   566                           
+   567                           ; 1 bytes @ 0x2
+   568  0054                     	ds	1
+   569  0055                     clr_interrupt@p:	
+   570                           
+   571                           ; 4 bytes @ 0x3
+   572  0055                     	ds	17
+   573  0066                     main@chksum:	
+   574                           
+   575                           ; 1 bytes @ 0x14
+   576  0066                     	ds	1
+   577  0067                     main@i:	
+   578                           
+   579                           ; 1 bytes @ 0x15
+   580  0067                     	ds	1
+   581                           
+   582                           	psect	maintext
+   583  03D7                     __pmaintext:	
+   584 ;;Data sizes: Strings 0, constant 199, data 0, bss 50, persistent 0 stack 0
+   585 ;;Auto spaces:   Size  Autos    Used
+   586 ;; COMMON          14     12      12
+   587 ;; BANK0           80     22      72
+   588 ;; BANK1           80      0       0
+   589 ;; BANK2           80      0       0
+   590 ;;
+   591 ;; Pointer list with targets:
+   592 ;; spi_write@p	PTR unsigned char  size(2) Largest target is 20
+   593 ;;		 -> spi_read@p(BANK0[1]), rx_start@p(BANK0[8]), tx_start@p(BANK0[5]), rf_standby@p(COMMON[2]), 
+   594 ;;		 -> enable_tx_interrupt@p(BANK0[6]), enable_rx_interrupt@p(BANK0[7]), clr_interrupt@p(BANK0[4]), fifo_reset@p(COMMON
+      +[2]), 
+   595 ;;		 -> RF_FREQ_CONTROL_INTE_8_data(CODE[12]), RF_MODEM_RAW_SEARCH2_2_data(CODE[6]), RF_SYNTH_PFDCP_CPFF_7_data(CODE[11]
+      +), COE7_7_0_12_data(CODE[16]), 
+   596 ;;		 -> COE1_7_0_12_data(CODE[16]), COE13_7_0_12_data(CODE[16]), RF_MODEM_RAW_CONTROL_8_data(CODE[12]), AGC_WINDOW_SIZE_
+      +12_data(CODE[16]), 
+   597 ;;		 -> RF_MODEM_AGC_CONTROL_1_data(CODE[5]), RF_MODEM_AFC_LIMITER_1_3_data(CODE[7]), BCR_NCO_OFFSET_2_12_data(CODE[16])
+      +, RF_MODEM_TX_RAMP_DELAY_12_data(CODE[16]), 
+   598 ;;		 -> RF_MODEM_FREQ_DEV_0_1_data(CODE[5]), RF_MODEM_MOD_TYPE_12_data(CODE[16]), RF_FRR_CTL_A_MODE_4_data(CODE[8]), SI4
+      +463_init@app_command_buf(BANK0[20]), 
+   599 ;;
+   600 ;;
+   601 ;; Critical Paths under _main in COMMON
+   602 ;;
+   603 ;;   _main->_fifo_reset
+   604 ;;   _tx_data->_fifo_reset
+   605 ;;   _rx_init->_fifo_reset
+   606 ;;   _clr_interrupt->_spi_read
+   607 ;;   _rx_start->_spi_write
+   608 ;;   _tx_start->_spi_write
+   609 ;;   _enable_tx_interrupt->_spi_write
+   610 ;;   _enable_rx_interrupt->_spi_write
+   611 ;;   _spi_read->_spi_write
+   612 ;;   _fifo_reset->_spi_write
+   613 ;;   _SI4463_init->_spi_write
+   614 ;;   _spi_write_fifo->_check_cts
+   615 ;;   _spi_write->_check_cts
+   616 ;;   _spi_read_fifo->_check_cts
+   617 ;;   _check_cts->_spi_byte
+   618 ;;   _sdn_reset->_delay_1ms
+   619 ;;   _delay_x10ms->_delay_10ms
+   620 ;;
+   621 ;; Critical Paths under _ISR_timer in COMMON
+   622 ;;
+   623 ;;   None.
+   624 ;;
+   625 ;; Critical Paths under _main in BANK0
+   626 ;;
+   627 ;;   _main->_SI4463_init
+   628 ;;   _tx_data->_SI4463_init
+   629 ;;   _rx_init->_rx_start
+   630 ;;   _clr_interrupt->_spi_read
+   631 ;;
+   632 ;; Critical Paths under _ISR_timer in BANK0
+   633 ;;
+   634 ;;   None.
+   635 ;;
+   636 ;; Critical Paths under _main in BANK1
+   637 ;;
+   638 ;;   None.
+   639 ;;
+   640 ;; Critical Paths under _ISR_timer in BANK1
+   641 ;;
+   642 ;;   None.
+   643 ;;
+   644 ;; Critical Paths under _main in BANK2
+   645 ;;
+   646 ;;   None.
+   647 ;;
+   648 ;; Critical Paths under _ISR_timer in BANK2
+   649 ;;
+   650 ;;   None.
+   651 ;;
+   652 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   653 ;;
+   654 ;;
+   655 ;;Call Graph Tables:
+   656 ;;
+   657 ;; ---------------------------------------------------------------------------------
+   658 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   659 ;; ---------------------------------------------------------------------------------
+   660 ;; (0) _main                                                 2     2      0   14074
+   661 ;;                                             20 BANK0      2     2      0
+   662 ;;                        _delay_x10ms
+   663 ;;                          _port_init
+   664 ;;                             _nop_10
+   665 ;;                        _timer1_init
+   666 ;;                          _sdn_reset
+   667 ;;                        _SI4463_init
+   668 ;;                            _rx_init
+   669 ;;                      _clr_interrupt
+   670 ;;                      _spi_read_fifo
+   671 ;;                         _fifo_reset
+   672 ;;                          _delay_1ms
+   673 ;;                            _tx_data
+   674 ;; ---------------------------------------------------------------------------------
+   675 ;; (1) _tx_data                                              0     0      0    6086
+   676 ;;                         _fifo_reset
+   677 ;;                     _spi_write_fifo
+   678 ;;                _enable_tx_interrupt
+   679 ;;                      _clr_interrupt
+   680 ;;                           _tx_start
+   681 ;;                          _sdn_reset
+   682 ;;                        _SI4463_init
+   683 ;; ---------------------------------------------------------------------------------
+   684 ;; (1) _rx_init                                              0     0      0    2605
+   685 ;;                         _fifo_reset
+   686 ;;                _enable_rx_interrupt
+   687 ;;                      _clr_interrupt
+   688 ;;                           _rx_start
+   689 ;; ---------------------------------------------------------------------------------
+   690 ;; (2) _clr_interrupt                                        4     4      0    1159
+   691 ;;                                              3 BANK0      4     4      0
+   692 ;;                          _spi_write
+   693 ;;                           _spi_read
+   694 ;; ---------------------------------------------------------------------------------
+   695 ;; (2) _rx_start                                             8     8      0     538
+   696 ;;                                              0 BANK0      8     8      0
+   697 ;;                          _spi_write
+   698 ;; ---------------------------------------------------------------------------------
+   699 ;; (2) _tx_start                                             5     5      0     466
+   700 ;;                                              0 BANK0      5     5      0
+   701 ;;                          _spi_write
+   702 ;; ---------------------------------------------------------------------------------
+   703 ;; (2) _enable_tx_interrupt                                  6     6      0     490
+   704 ;;                                              0 BANK0      6     6      0
+   705 ;;                          _spi_write
+   706 ;; ---------------------------------------------------------------------------------
+   707 ;; (2) _enable_rx_interrupt                                  7     7      0     514
+   708 ;;                                              0 BANK0      7     7      0
+   709 ;;                          _spi_write
+   710 ;; ---------------------------------------------------------------------------------
+   711 ;; (3) _spi_read                                             4     3      1     717
+   712 ;;                                             10 COMMON     1     0      1
+   713 ;;                                              0 BANK0      3     3      0
+   714 ;;                          _check_cts
+   715 ;;                          _spi_write
+   716 ;;                           _spi_byte
+   717 ;; ---------------------------------------------------------------------------------
+   718 ;; (2) _fifo_reset                                           2     2      0     394
+   719 ;;                                             10 COMMON     2     2      0
+   720 ;;                          _spi_write
+   721 ;; ---------------------------------------------------------------------------------
+   722 ;; (2) _SI4463_init                                         20    20      0    3046
+   723 ;;                                              0 BANK0     20    20      0
+   724 ;;                          _spi_write
+   725 ;; ---------------------------------------------------------------------------------
+   726 ;; (2) _spi_write_fifo                                       1     1      0     301
+   727 ;;                                              5 COMMON     1     1      0
+   728 ;;                          _check_cts
+   729 ;;                           _spi_byte
+   730 ;; ---------------------------------------------------------------------------------
+   731 ;; (3) _spi_write                                            5     3      2     346
+   732 ;;                                              5 COMMON     5     3      2
+   733 ;;                          _check_cts
+   734 ;;                           _spi_byte
+   735 ;; ---------------------------------------------------------------------------------
+   736 ;; (1) _spi_read_fifo                                        1     1      0     301
+   737 ;;                                              5 COMMON     1     1      0
+   738 ;;                          _check_cts
+   739 ;;                           _spi_byte
+   740 ;; ---------------------------------------------------------------------------------
+   741 ;; (4) _check_cts                                            1     1      0     116
+   742 ;;                                              4 COMMON     1     1      0
+   743 ;;                           _spi_byte
+   744 ;; ---------------------------------------------------------------------------------
+   745 ;; (2) _sdn_reset                                            1     1      0     230
+   746 ;;                                              6 COMMON     1     1      0
+   747 ;;                          _delay_1ms
+   748 ;;                           _spi_byte
+   749 ;; ---------------------------------------------------------------------------------
+   750 ;; (1) _delay_x10ms                                          4     2      2      92
+   751 ;;                                              4 COMMON     4     2      2
+   752 ;;                         _delay_10ms
+   753 ;; ---------------------------------------------------------------------------------
+   754 ;; (2) _delay_10ms                                           2     2      0      46
+   755 ;;                                              2 COMMON     2     2      0
+   756 ;; ---------------------------------------------------------------------------------
+   757 ;; (4) _spi_byte                                             2     2      0      93
+   758 ;;                                              2 COMMON     2     2      0
+   759 ;; ---------------------------------------------------------------------------------
+   760 ;; (3) _delay_1ms                                            4     2      2      69
+   761 ;;                                              2 COMMON     4     2      2
+   762 ;; ---------------------------------------------------------------------------------
+   763 ;; (1) _timer1_init                                          0     0      0       0
+   764 ;; ---------------------------------------------------------------------------------
+   765 ;; (1) _nop_10                                               0     0      0       0
+   766 ;; ---------------------------------------------------------------------------------
+   767 ;; (1) _port_init                                            0     0      0       0
+   768 ;; ---------------------------------------------------------------------------------
+   769 ;; Estimated maximum stack depth 4
+   770 ;; ---------------------------------------------------------------------------------
+   771 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   772 ;; ---------------------------------------------------------------------------------
+   773 ;; (7) _ISR_timer                                            2     2      0       0
+   774 ;;                                              0 COMMON     2     2      0
+   775 ;; ---------------------------------------------------------------------------------
+   776 ;; Estimated maximum stack depth 7
+   777 ;; ---------------------------------------------------------------------------------
+   778 ;; Call Graph Graphs:
+   779 ;; _main (ROOT)
+   780 ;;   _delay_x10ms
+   781 ;;     _delay_10ms
+   782 ;;   _port_init
+   783 ;;   _nop_10
+   784 ;;   _timer1_init
+   785 ;;   _sdn_reset
+   786 ;;     _delay_1ms
+   787 ;;     _spi_byte
+   788 ;;   _SI4463_init
+   789 ;;     _spi_write
+   790 ;;       _check_cts
+   791 ;;         _spi_byte
+   792 ;;       _spi_byte
+   793 ;;   _rx_init
+   794 ;;     _fifo_reset
+   795 ;;       _spi_write
+   796 ;;         _check_cts
+   797 ;;           _spi_byte
+   798 ;;         _spi_byte
+   799 ;;     _enable_rx_interrupt
+   800 ;;       _spi_write
+   801 ;;         _check_cts
+   802 ;;           _spi_byte
+   803 ;;         _spi_byte
+   804 ;;     _clr_interrupt
+   805 ;;       _spi_write
+   806 ;;         _check_cts
+   807 ;;           _spi_byte
+   808 ;;         _spi_byte
+   809 ;;       _spi_read
+   810 ;;         _check_cts
+   811 ;;           _spi_byte
+   812 ;;         _spi_write
+   813 ;;           _check_cts
+   814 ;;             _spi_byte
+   815 ;;           _spi_byte
+   816 ;;         _spi_byte
+   817 ;;     _rx_start
+   818 ;;       _spi_write
+   819 ;;         _check_cts
+   820 ;;           _spi_byte
+   821 ;;         _spi_byte
+   822 ;;   _clr_interrupt
+   823 ;;     _spi_write
+   824 ;;       _check_cts
+   825 ;;         _spi_byte
+   826 ;;       _spi_byte
+   827 ;;     _spi_read
+   828 ;;       _check_cts
+   829 ;;         _spi_byte
+   830 ;;       _spi_write
+   831 ;;         _check_cts
+   832 ;;           _spi_byte
+   833 ;;         _spi_byte
+   834 ;;       _spi_byte
+   835 ;;   _spi_read_fifo
+   836 ;;     _check_cts
+   837 ;;       _spi_byte
+   838 ;;     _spi_byte
+   839 ;;   _fifo_reset
+   840 ;;     _spi_write
+   841 ;;       _check_cts
+   842 ;;         _spi_byte
+   843 ;;       _spi_byte
+   844 ;;   _delay_1ms
+   845 ;;   _tx_data
+   846 ;;     _fifo_reset
+   847 ;;       _spi_write
+   848 ;;         _check_cts
+   849 ;;           _spi_byte
+   850 ;;         _spi_byte
+   851 ;;     _spi_write_fifo
+   852 ;;       _check_cts
+   853 ;;         _spi_byte
+   854 ;;       _spi_byte
+   855 ;;     _enable_tx_interrupt
+   856 ;;       _spi_write
+   857 ;;         _check_cts
+   858 ;;           _spi_byte
+   859 ;;         _spi_byte
+   860 ;;     _clr_interrupt
+   861 ;;       _spi_write
+   862 ;;         _check_cts
+   863 ;;           _spi_byte
+   864 ;;         _spi_byte
+   865 ;;       _spi_read
+   866 ;;         _check_cts
+   867 ;;           _spi_byte
+   868 ;;         _spi_write
+   869 ;;           _check_cts
+   870 ;;             _spi_byte
+   871 ;;           _spi_byte
+   872 ;;         _spi_byte
+   873 ;;     _tx_start
+   874 ;;       _spi_write
+   875 ;;         _check_cts
+   876 ;;           _spi_byte
+   877 ;;         _spi_byte
+   878 ;;     _sdn_reset
+   879 ;;       _delay_1ms
+   880 ;;       _spi_byte
+   881 ;;     _SI4463_init
+   882 ;;       _spi_write
+   883 ;;         _check_cts
+   884 ;;           _spi_byte
+   885 ;;         _spi_byte
+   886 ;;
+   887 ;; _ISR_timer (ROOT)
+   888 ;;
+   889 ;; Address spaces:
+   890 ;;Name               Size   Autos  Total    Cost      Usage
+   891 ;;BITCOMMON            E      0       0       0        0.0%
+   892 ;;EEDATA             100      0       0       0        0.0%
+   893 ;;NULL                 0      0       0       0        0.0%
+   894 ;;CODE                 0      0       0       0        0.0%
+   895 ;;COMMON               E      C       C       1       85.7%
+   896 ;;BITSFR0              0      0       0       1        0.0%
+   897 ;;SFR0                 0      0       0       1        0.0%
+   898 ;;BITSFR1              0      0       0       2        0.0%
+   899 ;;SFR1                 0      0       0       2        0.0%
+   900 ;;STACK                0      0       6       2        0.0%
+   901 ;;BANK0               50     16      48       3       90.0%
+   902 ;;BITBANK1            50      0       0       4        0.0%
+   903 ;;BITSFR3              0      0       0       4        0.0%
+   904 ;;SFR3                 0      0       0       4        0.0%
+   905 ;;BANK1               50      0       0       5        0.0%
+   906 ;;BITSFR2              0      0       0       5        0.0%
+   907 ;;SFR2                 0      0       0       5        0.0%
+   908 ;;BITBANK2            50      0       0       6        0.0%
+   909 ;;BANK2               50      0       0       7        0.0%
+   910 ;;ABS                  0      0      54       8        0.0%
+   911 ;;BITBANK0            50      0       0       9        0.0%
+   912 ;;DATA                 0      0      5A      10        0.0%
+   913                           
+   914                           
+   915 ;; *************** function _main *****************
+   916 ;; Defined at:
+   917 ;;		line 126 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+   918 ;; Parameters:    Size  Location     Type
+   919 ;;		None
+   920 ;; Auto vars:     Size  Location     Type
+   921 ;;  i               1   21[BANK0 ] unsigned char 
+   922 ;;  chksum          1   20[BANK0 ] unsigned char 
+   923 ;; Return value:  Size  Location     Type
+   924 ;;		None               void
+   925 ;; Registers used:
+   926 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   927 ;; Tracked objects:
+   928 ;;		On entry : 17F/0
+   929 ;;		On exit  : 60/0
+   930 ;;		Unchanged: FFE00/0
+   931 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   932 ;;      Params:         0       0       0       0
+   933 ;;      Locals:         0       2       0       0
+   934 ;;      Temps:          0       0       0       0
+   935 ;;      Totals:         0       2       0       0
+   936 ;;Total ram usage:        2 bytes
+   937 ;; Hardware stack levels required when called:    7
+   938 ;; This function calls:
+   939 ;;		_delay_x10ms
+   940 ;;		_port_init
+   941 ;;		_nop_10
+   942 ;;		_timer1_init
+   943 ;;		_sdn_reset
+   944 ;;		_SI4463_init
+   945 ;;		_rx_init
+   946 ;;		_clr_interrupt
+   947 ;;		_spi_read_fifo
+   948 ;;		_fifo_reset
+   949 ;;		_delay_1ms
+   950 ;;		_tx_data
+   951 ;; This function is called by:
+   952 ;;		Startup code after reset
+   953 ;; This function uses a non-reentrant model
+   954 ;;
+   955  03D7                     _main:	
+   956                           
+   957                           ;slaver.c: 127: unsigned char i,chksum;
+   958                           ;slaver.c: 128: OSCCON = 0X70;
+   959                           
+   960                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   961  03D7  3070               	movlw	112
+   962  03D8  1683               	bsf	3,5	;RP0=1, select bank1
+   963  03D9  008F               	movwf	15	;volatile
+   964                           
+   965                           ;slaver.c: 130: WDTCON = 0X00;
+   966  03DA  0197               	clrf	23	;volatile
+   967                           
+   968                           ;slaver.c: 131: delay_x10ms(50);
+   969  03DB  3032               	movlw	50
+   970  03DC  00F4               	movwf	?_delay_x10ms
+   971  03DD  01F5               	clrf	?_delay_x10ms+1
+   972  03DE  118A  2456  118A   	fcall	_delay_x10ms
+   973                           
+   974                           ;slaver.c: 133: port_init();
+   975  03E1  118A  2478  118A   	fcall	_port_init
+   976                           
+   977                           ;slaver.c: 134: nop_10();
+   978  03E4  118A  2488  118A   	fcall	_nop_10
+   979                           
+   980                           ;slaver.c: 136: RA0 = 0;
+   981  03E7  1283               	bcf	3,5	;RP0=0, select bank0
+   982  03E8  1303               	bcf	3,6	;RP1=0, select bank0
+   983  03E9  1005               	bcf	5,0
+   984                           
+   985                           ;slaver.c: 137: RA1 = 0;
+   986  03EA  1085               	bcf	5,1
+   987                           
+   988                           ;slaver.c: 138: timer1_init();
+   989  03EB  118A  2493  118A   	fcall	_timer1_init
+   990  03EE  0000               	nop	;#
+   991                           
+   992                           ;slaver.c: 142: sdn_reset();
+   993  03EF  118A  222C  118A   	fcall	_sdn_reset
+   994                           
+   995                           ;slaver.c: 143: SI4463_init();
+   996  03F2  118A  2031  118A   	fcall	_SI4463_init
+   997                           
+   998                           ;slaver.c: 144: rx_init();
+   999  03F5  118A  200D  118A   	fcall	_rx_init
+  1000  03F8  30C0               	movlw	192
+  1001                           
+  1002                           ;slaver.c: 146: count_1hz = 0;
+  1003  03F9  01CD               	clrf	_count_1hz
+  1004  03FA  01CE               	clrf	_count_1hz+1
+  1005                           
+  1006                           ;slaver.c: 147: Flag.reach_1s = 0;
+  1007  03FB  1051               	bcf	_Flag,0
+  1008                           
+  1009                           ;slaver.c: 148: INTCON = 0xc0;
+  1010  03FC  008B               	movwf	11	;volatile
+  1011  03FD                     l3247:	
+  1012                           
+  1013                           ;slaver.c: 150: {
+  1014                           ;slaver.c: 151: if(!Flag.is_tx)
+  1015  03FD  1CD1               	btfss	_Flag,1
+  1016                           
+  1017                           ;slaver.c: 152: {
+  1018                           ;slaver.c: 153: if(!RC2)
+  1019  03FE  1907               	btfsc	7,2
+  1020  03FF  2BFD               	goto	l3247
+  1021                           
+  1022                           ;slaver.c: 154: {
+  1023                           ;slaver.c: 155: clr_interrupt();
+  1024  0400  118A  2291  118A   	fcall	_clr_interrupt
+  1025                           
+  1026                           ;slaver.c: 157: if((spi_read_buf[4] &0x08) == 0)
+  1027  0403  19BD               	btfsc	_spi_read_buf+4,3
+  1028  0404  2C2C               	goto	l3283
+  1029                           
+  1030                           ;slaver.c: 158: {
+  1031                           ;slaver.c: 159: spi_read_fifo();
+  1032  0405  118A  21BD  118A   	fcall	_spi_read_fifo
+  1033                           
+  1034                           ;slaver.c: 160: fifo_reset();
+  1035  0408  118A  226C  118A   	fcall	_fifo_reset
+  1036  040B  3004               	movlw	4
+  1037                           
+  1038                           ;slaver.c: 162: chksum = 0;
+  1039  040C  01E6               	clrf	main@chksum
+  1040                           
+  1041                           ;slaver.c: 163: for(i=4;i<14-1;i++)
+  1042  040D  00E7               	movwf	main@i
+  1043  040E                     l3267:	
+  1044                           
+  1045                           ;slaver.c: 164: chksum += rx_buf[i];
+  1046  040E  0867               	movf	main@i,w
+  1047  040F  3E20               	addlw	_rx_buf& (0+255)
+  1048  0410  0084               	movwf	4
+  1049  0411  1383               	bcf	3,7	;select IRP bank0
+  1050  0412  0800               	movf	0,w
+  1051  0413  07E6               	addwf	main@chksum,f
+  1052  0414  300D               	movlw	13
+  1053  0415  0AE7               	incf	main@i,f
+  1054  0416  0267               	subwf	main@i,w
+  1055  0417  1C03               	skipc
+  1056  0418  2C0E               	goto	l3267
+  1057                           
+  1058                           ;slaver.c: 166: if(( chksum == rx_buf[14-1] )&&( rx_buf[4] == 0x41 ))
+  1059  0419  082D               	movf	_rx_buf+13,w
+  1060  041A  0666               	xorwf	main@chksum,w
+  1061  041B  1D03               	skipz
+  1062  041C  2C2C               	goto	l3283
+  1063  041D  0824               	movf	_rx_buf+4,w
+  1064  041E  3A41               	xorlw	65
+  1065  041F  1D03               	skipz
+  1066  0420  2C2C               	goto	l3283
+  1067                           
+  1068                           ;slaver.c: 167: {
+  1069                           ;slaver.c: 168: RA0 ^= 1;
+  1070  0421  3001               	movlw	1
+  1071  0422  0685               	xorwf	5,f
+  1072                           
+  1073                           ;slaver.c: 169: delay_1ms(100);
+  1074  0423  3064               	movlw	100
+  1075  0424  00F2               	movwf	?_delay_1ms
+  1076  0425  01F3               	clrf	?_delay_1ms+1
+  1077  0426  118A  2253  118A   	fcall	_delay_1ms
+  1078                           
+  1079                           ;slaver.c: 170: tx_data();
+  1080  0429  118A  2015  118A   	fcall	_tx_data
+  1081  042C                     l3283:	
+  1082                           
+  1083                           ;slaver.c: 171: rx_init();
+  1084  042C  118A  200D  118A   	fcall	_rx_init
+  1085                           
+  1086                           ;slaver.c: 172: }
+  1087  042F  2BFD               	goto	l3247
+  1088  0430                     __end_of_main:	
+  1089                           
+  1090                           	psect	text450
+  1091  000D                     __ptext450:	
+  1092 ;; =============== function _tx_data ends ============
+  1093                           
+  1094                           
+  1095 ;; *************** function _rx_init *****************
+  1096 ;; Defined at:
+  1097 ;;		line 450 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  1098 ;; Parameters:    Size  Location     Type
+  1099 ;;		None
+  1100 ;; Auto vars:     Size  Location     Type
+  1101 ;;		None
+  1102 ;; Return value:  Size  Location     Type
+  1103 ;;		None               void
+  1104 ;; Registers used:
+  1105 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  1106 ;; Tracked objects:
+  1107 ;;		On entry : 60/0
+  1108 ;;		On exit  : 60/0
+  1109 ;;		Unchanged: FFE9F/0
+  1110 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1111 ;;      Params:         0       0       0       0
+  1112 ;;      Locals:         0       0       0       0
+  1113 ;;      Temps:          0       0       0       0
+  1114 ;;      Totals:         0       0       0       0
+  1115 ;;Total ram usage:        0 bytes
+  1116 ;; Hardware stack levels used:    1
+  1117 ;; Hardware stack levels required when called:    6
+  1118 ;; This function calls:
+  1119 ;;		_fifo_reset
+  1120 ;;		_enable_rx_interrupt
+  1121 ;;		_clr_interrupt
+  1122 ;;		_rx_start
+  1123 ;; This function is called by:
+  1124 ;;		_main
+  1125 ;; This function uses a non-reentrant model
+  1126 ;;
+  1127  000D                     _rx_init:	
+  1128                           
+  1129                           ;slaver.c: 451: Flag.is_tx = 0;
+  1130                           
+  1131                           ; Regs used in _rx_init: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1132  000D  10D1               	bcf	_Flag,1
+  1133                           
+  1134                           ;slaver.c: 452: fifo_reset();
+  1135  000E  226C  118A         	fcall	_fifo_reset
+  1136                           
+  1137                           ;slaver.c: 453: enable_rx_interrupt();
+  1138  0010  22A0  118A         	fcall	_enable_rx_interrupt
+  1139                           
+  1140                           ;slaver.c: 454: clr_interrupt();
+  1141  0012  2291  118A         	fcall	_clr_interrupt
+  1142                           
+  1143                           ;slaver.c: 455: rx_start();
+  1144  0014  2AB0               	ljmp	l3161
+  1145  0015                     __end_of_rx_init:	
+  1146  0015                     __ptext449:	
+  1147 ;; =============== function _main ends ============
+  1148                           
+  1149                           
+  1150 ;; *************** function _tx_data *****************
+  1151 ;; Defined at:
+  1152 ;;		line 459 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  1153 ;; Parameters:    Size  Location     Type
+  1154 ;;		None
+  1155 ;; Auto vars:     Size  Location     Type
+  1156 ;;		None
+  1157 ;; Return value:  Size  Location     Type
+  1158 ;;		None               void
+  1159 ;; Registers used:
+  1160 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  1161 ;; Tracked objects:
+  1162 ;;		On entry : 0/0
+  1163 ;;		On exit  : 60/0
+  1164 ;;		Unchanged: FFE00/0
+  1165 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1166 ;;      Params:         0       0       0       0
+  1167 ;;      Locals:         0       0       0       0
+  1168 ;;      Temps:          0       0       0       0
+  1169 ;;      Totals:         0       0       0       0
+  1170 ;;Total ram usage:        0 bytes
+  1171 ;; Hardware stack levels used:    1
+  1172 ;; Hardware stack levels required when called:    6
+  1173 ;; This function calls:
+  1174 ;;		_fifo_reset
+  1175 ;;		_spi_write_fifo
+  1176 ;;		_enable_tx_interrupt
+  1177 ;;		_clr_interrupt
+  1178 ;;		_tx_start
+  1179 ;;		_sdn_reset
+  1180 ;;		_SI4463_init
+  1181 ;; This function is called by:
+  1182 ;;		_main
+  1183 ;; This function uses a non-reentrant model
+  1184 ;;
+  1185  0015                     _tx_data:	
+  1186                           
+  1187                           ;slaver.c: 460: Flag.is_tx = 1;
+  1188                           
+  1189                           ; Regs used in _tx_data: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1190  0015  1283               	bcf	3,5	;RP0=0, select bank0
+  1191  0016  3002               	movlw	2
+  1192  0017  1303               	bcf	3,6	;RP1=0, select bank0
+  1193  0018  14D1               	bsf	_Flag,1
+  1194                           
+  1195                           ;slaver.c: 461: RA1 ^= 1;
+  1196  0019  0685               	xorwf	5,f
+  1197                           
+  1198                           ;slaver.c: 462: fifo_reset();
+  1199  001A  226C  118A         	fcall	_fifo_reset
+  1200                           
+  1201                           ;slaver.c: 463: spi_write_fifo();
+  1202  001C  219F  118A         	fcall	_spi_write_fifo
+  1203                           
+  1204                           ;slaver.c: 464: enable_tx_interrupt();
+  1205  001E  2275  118A         	fcall	_enable_tx_interrupt
+  1206                           
+  1207                           ;slaver.c: 465: clr_interrupt();
+  1208  0020  2291  118A         	fcall	_clr_interrupt
+  1209                           
+  1210                           ;slaver.c: 466: tx_start();
+  1211  0022  2285  118A         	fcall	_tx_start
+  1212                           
+  1213                           ;slaver.c: 467: rf_timeout = 0;
+  1214  0024  01CF               	clrf	_rf_timeout
+  1215  0025  01D0               	clrf	_rf_timeout+1
+  1216                           
+  1217                           ;slaver.c: 468: Flag.rf_reach_timeout = 0;
+  1218  0026  1151               	bcf	_Flag,2
+  1219  0027                     l890:	
+  1220                           ;slaver.c: 470: while(RC2)
+  1221                           
+  1222  0027  1D07               	btfss	7,2
+  1223  0028  0008               	return
+  1224  0029  0064               	clrwdt	;#
+  1225                           
+  1226                           ;slaver.c: 473: if(Flag.rf_reach_timeout)
+  1227  002A  1283               	bcf	3,5	;RP0=0, select bank0
+  1228  002B  1303               	bcf	3,6	;RP1=0, select bank0
+  1229  002C  1D51               	btfss	_Flag,2
+  1230  002D  2827               	goto	l890
+  1231                           
+  1232                           ;slaver.c: 474: {
+  1233                           ;slaver.c: 475: sdn_reset();
+  1234  002E  222C  118A         	fcall	_sdn_reset
+  1235                           
+  1236                           ;slaver.c: 476: SI4463_init();
+  1237  0030  2831               	ljmp	l2879
+  1238  0031                     __end_of_tx_data:	
+  1239                           ;slaver.c: 477: break;
+  1240                           
+  1241  0031                     __ptext458:	
+  1242 ;; =============== function _fifo_reset ends ============
+  1243                           
+  1244                           
+  1245 ;; *************** function _SI4463_init *****************
+  1246 ;; Defined at:
+  1247 ;;		line 186 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  1248 ;; Parameters:    Size  Location     Type
+  1249 ;;		None
+  1250 ;; Auto vars:     Size  Location     Type
+  1251 ;;  app_command_   20    0[BANK0 ] unsigned char [20]
+  1252 ;; Return value:  Size  Location     Type
+  1253 ;;		None               void
+  1254 ;; Registers used:
+  1255 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  1256 ;; Tracked objects:
+  1257 ;;		On entry : 0/0
+  1258 ;;		On exit  : 60/0
+  1259 ;;		Unchanged: FFE9F/0
+  1260 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1261 ;;      Params:         0       0       0       0
+  1262 ;;      Locals:         0      20       0       0
+  1263 ;;      Temps:          0       0       0       0
+  1264 ;;      Totals:         0      20       0       0
+  1265 ;;Total ram usage:       20 bytes
+  1266 ;; Hardware stack levels used:    1
+  1267 ;; Hardware stack levels required when called:    4
+  1268 ;; This function calls:
+  1269 ;;		_spi_write
+  1270 ;; This function is called by:
+  1271 ;;		_main
+  1272 ;;		_tx_data
+  1273 ;; This function uses a non-reentrant model
+  1274 ;;
+  1275  0031                     _SI4463_init:	
+  1276  0031                     l2879:	
+  1277                           ; Regs used in _SI4463_init: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1278                           
+  1279                           
+  1280                           ;slaver.c: 187: U8 app_command_buf[20];
+  1281                           ;slaver.c: 189: app_command_buf[0] = 0x13;
+  1282  0031  3013               	movlw	19
+  1283  0032  1283               	bcf	3,5	;RP0=0, select bank0
+  1284  0033  1303               	bcf	3,6	;RP1=0, select bank0
+  1285  0034  00D2               	movwf	SI4463_init@app_command_buf
+  1286                           
+  1287                           ;slaver.c: 190: app_command_buf[1] = 0x14;
+  1288  0035  3014               	movlw	20
+  1289  0036  00D3               	movwf	SI4463_init@app_command_buf+1
+  1290                           
+  1291                           ;slaver.c: 191: app_command_buf[2] = 0x02;
+  1292  0037  3002               	movlw	2
+  1293  0038  00D4               	movwf	SI4463_init@app_command_buf+2
+  1294                           
+  1295                           ;slaver.c: 192: app_command_buf[3] = 0x21;
+  1296  0039  3021               	movlw	33
+  1297  003A  00D5               	movwf	SI4463_init@app_command_buf+3
+  1298                           
+  1299                           ;slaver.c: 193: app_command_buf[4] = 0x20;
+  1300  003B  3020               	movlw	32
+  1301  003C  00D6               	movwf	SI4463_init@app_command_buf+4
+  1302                           
+  1303                           ;slaver.c: 194: app_command_buf[5] = 0x27;
+  1304  003D  3027               	movlw	39
+  1305  003E  00D7               	movwf	SI4463_init@app_command_buf+5
+  1306                           
+  1307                           ;slaver.c: 195: app_command_buf[6] = 0x0b;
+  1308  003F  300B               	movlw	11
+  1309  0040  00D8               	movwf	SI4463_init@app_command_buf+6
+  1310                           
+  1311                           ;slaver.c: 196: spi_write(7, app_command_buf);
+  1312  0041  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  1313  0042  00F5               	movwf	?_spi_write
+  1314  0043  3007               	movlw	7
+  1315  0044  01F6               	clrf	?_spi_write+1
+  1316  0045  217D  118A         	fcall	_spi_write
+  1317                           
+  1318                           ;slaver.c: 199: app_command_buf[0] = 0x11;
+  1319  0047  3011               	movlw	17
+  1320  0048  00D2               	movwf	SI4463_init@app_command_buf
+  1321  0049  3062               	movlw	98
+  1322                           
+  1323                           ;slaver.c: 200: app_command_buf[1] = 0x00;
+  1324  004A  01D3               	clrf	SI4463_init@app_command_buf+1
+  1325                           
+  1326                           ;slaver.c: 201: app_command_buf[2] = 0x01;
+  1327  004B  01D4               	clrf	SI4463_init@app_command_buf+2
+  1328  004C  0AD4               	incf	SI4463_init@app_command_buf+2,f
+  1329                           
+  1330                           ;slaver.c: 202: app_command_buf[3] = 0x00;
+  1331  004D  01D5               	clrf	SI4463_init@app_command_buf+3
+  1332                           
+  1333                           ;slaver.c: 203: app_command_buf[4] = 98;
+  1334                           
+  1335                           ;slaver.c: 204: spi_write(5, app_command_buf);
+  1336  004E  22BF  118A         	fcall	PL2	;call to abstracted procedure
+  1337  0050  217D  118A         	fcall	_spi_write
+  1338                           
+  1339                           ;slaver.c: 207: app_command_buf[0] = 0x11;
+  1340  0052  3011               	movlw	17
+  1341  0053  00D2               	movwf	SI4463_init@app_command_buf
+  1342  0054  3003               	movlw	3
+  1343                           
+  1344                           ;slaver.c: 208: app_command_buf[1] = 0x00;
+  1345  0055  01D3               	clrf	SI4463_init@app_command_buf+1
+  1346                           
+  1347                           ;slaver.c: 209: app_command_buf[2] = 0x01;
+  1348                           
+  1349                           ;slaver.c: 210: app_command_buf[3] = 0x03;
+  1350                           
+  1351                           ;slaver.c: 211: app_command_buf[4] = 0x40;
+  1352  0056  22C5  118A         	fcall	PL3	;call to abstracted procedure
+  1353                           
+  1354                           ;slaver.c: 212: spi_write(5, app_command_buf);
+  1355  0058  22BF  118A         	fcall	PL2	;call to abstracted procedure
+  1356  005A  217D  118A         	fcall	_spi_write
+  1357                           
+  1358                           ;slaver.c: 214: spi_write(0x08, RF_FRR_CTL_A_MODE_4_data);
+  1359  005C  30A9               	movlw	low (_RF_FRR_CTL_A_MODE_4_data-__stringbase)
+  1360  005D  00F5               	movwf	?_spi_write
+  1361  005E  3080               	movlw	128
+  1362  005F  00F6               	movwf	?_spi_write+1
+  1363  0060  3008               	movlw	8
+  1364  0061  217D  118A         	fcall	_spi_write
+  1365                           
+  1366                           ;slaver.c: 217: app_command_buf[0] = 0x11;
+  1367  0063  3011               	movlw	17
+  1368  0064  00D2               	movwf	SI4463_init@app_command_buf
+  1369                           
+  1370                           ;slaver.c: 218: app_command_buf[1] = 0x10;
+  1371  0065  3010               	movlw	16
+  1372  0066  00D3               	movwf	SI4463_init@app_command_buf+1
+  1373                           
+  1374                           ;slaver.c: 219: app_command_buf[2] = 0x09;
+  1375  0067  3009               	movlw	9
+  1376  0068  00D4               	movwf	SI4463_init@app_command_buf+2
+  1377  0069  3008               	movlw	8
+  1378                           
+  1379                           ;slaver.c: 220: app_command_buf[3] = 0x00;
+  1380  006A  01D5               	clrf	SI4463_init@app_command_buf+3
+  1381                           
+  1382                           ;slaver.c: 221: app_command_buf[4] = 0x08;
+  1383  006B  00D6               	movwf	SI4463_init@app_command_buf+4
+  1384                           
+  1385                           ;slaver.c: 222: app_command_buf[5] = 0x14;
+  1386  006C  3014               	movlw	20
+  1387  006D  00D7               	movwf	SI4463_init@app_command_buf+5
+  1388  006E  300F               	movlw	15
+  1389                           
+  1390                           ;slaver.c: 223: app_command_buf[6] = 0x00;
+  1391  006F  01D8               	clrf	SI4463_init@app_command_buf+6
+  1392                           
+  1393                           ;slaver.c: 224: app_command_buf[7] = 0x0f;
+  1394  0070  00D9               	movwf	SI4463_init@app_command_buf+7
+  1395                           
+  1396                           ;slaver.c: 225: app_command_buf[8] = 0x31;
+  1397  0071  3031               	movlw	49
+  1398  0072  00DA               	movwf	SI4463_init@app_command_buf+8
+  1399  0073  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  1400                           
+  1401                           ;slaver.c: 226: app_command_buf[9] = 0x00;
+  1402  0074  01DB               	clrf	SI4463_init@app_command_buf+9
+  1403                           
+  1404                           ;slaver.c: 227: app_command_buf[10] = 0x00;
+  1405  0075  01DC               	clrf	SI4463_init@app_command_buf+10
+  1406                           
+  1407                           ;slaver.c: 228: app_command_buf[11] = 0x00;
+  1408  0076  01DD               	clrf	SI4463_init@app_command_buf+11
+  1409                           
+  1410                           ;slaver.c: 229: app_command_buf[12] = 0x00;
+  1411  0077  01DE               	clrf	SI4463_init@app_command_buf+12
+  1412                           
+  1413                           ;slaver.c: 230: spi_write(13, app_command_buf);
+  1414  0078  00F5               	movwf	?_spi_write
+  1415  0079  300D               	movlw	13
+  1416  007A  01F6               	clrf	?_spi_write+1
+  1417  007B  217D  118A         	fcall	_spi_write
+  1418                           
+  1419                           ;slaver.c: 233: app_command_buf[0] = 0x11;
+  1420  007D  3011               	movlw	17
+  1421  007E  00D2               	movwf	SI4463_init@app_command_buf
+  1422                           
+  1423                           ;slaver.c: 234: app_command_buf[1] = 0x11;
+  1424  007F  00D3               	movwf	SI4463_init@app_command_buf+1
+  1425                           
+  1426                           ;slaver.c: 235: app_command_buf[2] = 0x05;
+  1427  0080  3005               	movlw	5
+  1428  0081  00D4               	movwf	SI4463_init@app_command_buf+2
+  1429  0082  302D               	movlw	45
+  1430                           
+  1431                           ;slaver.c: 236: app_command_buf[3] = 0x00;
+  1432  0083  01D5               	clrf	SI4463_init@app_command_buf+3
+  1433                           
+  1434                           ;slaver.c: 237: app_command_buf[4] = 0x01;
+  1435  0084  01D6               	clrf	SI4463_init@app_command_buf+4
+  1436  0085  0AD6               	incf	SI4463_init@app_command_buf+4,f
+  1437                           
+  1438                           ;slaver.c: 238: app_command_buf[5] = 0x2d;
+  1439  0086  00D7               	movwf	SI4463_init@app_command_buf+5
+  1440                           
+  1441                           ;slaver.c: 239: app_command_buf[6] = 0xd4;
+  1442  0087  30D4               	movlw	212
+  1443  0088  00D8               	movwf	SI4463_init@app_command_buf+6
+  1444  0089  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  1445                           
+  1446                           ;slaver.c: 240: app_command_buf[7] = 0x00;
+  1447  008A  01D9               	clrf	SI4463_init@app_command_buf+7
+  1448                           
+  1449                           ;slaver.c: 241: app_command_buf[8] = 0x00;
+  1450  008B  01DA               	clrf	SI4463_init@app_command_buf+8
+  1451                           
+  1452                           ;slaver.c: 242: spi_write(9, app_command_buf);
+  1453  008C  00F5               	movwf	?_spi_write
+  1454  008D  3009               	movlw	9
+  1455  008E  01F6               	clrf	?_spi_write+1
+  1456  008F  217D  118A         	fcall	_spi_write
+  1457                           
+  1458                           ;slaver.c: 245: app_command_buf[0] = 0x11;
+  1459  0091  3011               	movlw	17
+  1460  0092  00D2               	movwf	SI4463_init@app_command_buf
+  1461                           
+  1462                           ;slaver.c: 246: app_command_buf[1] = 0x12;
+  1463  0093  3012               	movlw	18
+  1464  0094  00D3               	movwf	SI4463_init@app_command_buf+1
+  1465  0095  3081               	movlw	129
+  1466                           
+  1467                           ;slaver.c: 247: app_command_buf[2] = 0x01;
+  1468  0096  01D4               	clrf	SI4463_init@app_command_buf+2
+  1469  0097  0AD4               	incf	SI4463_init@app_command_buf+2,f
+  1470                           
+  1471                           ;slaver.c: 248: app_command_buf[3] = 0x00;
+  1472  0098  01D5               	clrf	SI4463_init@app_command_buf+3
+  1473                           
+  1474                           ;slaver.c: 249: app_command_buf[4] = 0x81;
+  1475                           
+  1476                           ;slaver.c: 250: spi_write(5, app_command_buf);
+  1477  0099  22BF  118A         	fcall	PL2	;call to abstracted procedure
+  1478  009B  217D  118A         	fcall	_spi_write
+  1479                           
+  1480                           ;slaver.c: 253: app_command_buf[0] = 0x11;
+  1481  009D  3011               	movlw	17
+  1482  009E  00D2               	movwf	SI4463_init@app_command_buf
+  1483                           
+  1484                           ;slaver.c: 254: app_command_buf[1] = 0x12;
+  1485  009F  3012               	movlw	18
+  1486  00A0  00D3               	movwf	SI4463_init@app_command_buf+1
+  1487  00A1  3006               	movlw	6
+  1488                           
+  1489                           ;slaver.c: 255: app_command_buf[2] = 0x01;
+  1490  00A2  01D4               	clrf	SI4463_init@app_command_buf+2
+  1491  00A3  0AD4               	incf	SI4463_init@app_command_buf+2,f
+  1492                           
+  1493                           ;slaver.c: 256: app_command_buf[3] = 0x06;
+  1494  00A4  00D5               	movwf	SI4463_init@app_command_buf+3
+  1495                           
+  1496                           ;slaver.c: 257: app_command_buf[4] = 0x02;
+  1497  00A5  3002               	movlw	2
+  1498                           
+  1499                           ;slaver.c: 258: spi_write(5, app_command_buf);
+  1500  00A6  22BF  118A         	fcall	PL2	;call to abstracted procedure
+  1501  00A8  217D  118A         	fcall	_spi_write
+  1502                           
+  1503                           ;slaver.c: 261: app_command_buf[0] = 0x11;
+  1504  00AA  3011               	movlw	17
+  1505  00AB  00D2               	movwf	SI4463_init@app_command_buf
+  1506                           
+  1507                           ;slaver.c: 262: app_command_buf[1] = 0x12;
+  1508  00AC  3012               	movlw	18
+  1509  00AD  00D3               	movwf	SI4463_init@app_command_buf+1
+  1510                           
+  1511                           ;slaver.c: 263: app_command_buf[2] = 0x03;
+  1512  00AE  3003               	movlw	3
+  1513  00AF  00D4               	movwf	SI4463_init@app_command_buf+2
+  1514                           
+  1515                           ;slaver.c: 264: app_command_buf[3] = 0x08;
+  1516  00B0  3008               	movlw	8
+  1517                           
+  1518                           ;slaver.c: 265: app_command_buf[4] = 0x00;
+  1519                           
+  1520                           ;slaver.c: 266: app_command_buf[5] = 0x00;
+  1521                           
+  1522                           ;slaver.c: 267: app_command_buf[6] = 0x00;
+  1523  00B1  22CD  118A         	fcall	PL5	;call to abstracted procedure
+  1524                           
+  1525                           ;slaver.c: 268: spi_write(7, app_command_buf);
+  1526  00B3  00F5               	movwf	?_spi_write
+  1527  00B4  3007               	movlw	7
+  1528  00B5  01F6               	clrf	?_spi_write+1
+  1529  00B6  217D  118A         	fcall	_spi_write
+  1530                           
+  1531                           ;slaver.c: 270: app_command_buf[0] = 0x11;
+  1532  00B8  3011               	movlw	17
+  1533  00B9  00D2               	movwf	SI4463_init@app_command_buf
+  1534                           
+  1535                           ;slaver.c: 271: app_command_buf[1] = 0x12;
+  1536  00BA  3012               	movlw	18
+  1537  00BB  00D3               	movwf	SI4463_init@app_command_buf+1
+  1538                           
+  1539                           ;slaver.c: 272: app_command_buf[2] = 0x0c;
+  1540  00BC  300C               	movlw	12
+  1541  00BD  00D4               	movwf	SI4463_init@app_command_buf+2
+  1542                           
+  1543                           ;slaver.c: 273: app_command_buf[3] = 0x0d;
+  1544  00BE  300D               	movlw	13
+  1545  00BF  00D5               	movwf	SI4463_init@app_command_buf+3
+  1546  00C0  300E               	movlw	14
+  1547                           
+  1548                           ;slaver.c: 274: app_command_buf[4] = 0x00;
+  1549  00C1  01D6               	clrf	SI4463_init@app_command_buf+4
+  1550                           
+  1551                           ;slaver.c: 275: app_command_buf[5] = 14;
+  1552  00C2  00D7               	movwf	SI4463_init@app_command_buf+5
+  1553                           
+  1554                           ;slaver.c: 276: app_command_buf[6] = 0x04;
+  1555  00C3  3004               	movlw	4
+  1556  00C4  00D8               	movwf	SI4463_init@app_command_buf+6
+  1557                           
+  1558                           ;slaver.c: 277: app_command_buf[7] = 0xaa;
+  1559  00C5  30AA               	movlw	170
+  1560  00C6  00D9               	movwf	SI4463_init@app_command_buf+7
+  1561  00C7  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  1562                           
+  1563                           ;slaver.c: 278: app_command_buf[8] = 0x00;
+  1564  00C8  01DA               	clrf	SI4463_init@app_command_buf+8
+  1565                           
+  1566                           ;slaver.c: 279: app_command_buf[9] = 0x00;
+  1567  00C9  01DB               	clrf	SI4463_init@app_command_buf+9
+  1568                           
+  1569                           ;slaver.c: 280: app_command_buf[10] = 0x00;
+  1570  00CA  01DC               	clrf	SI4463_init@app_command_buf+10
+  1571                           
+  1572                           ;slaver.c: 281: app_command_buf[11] = 0x00;
+  1573  00CB  01DD               	clrf	SI4463_init@app_command_buf+11
+  1574                           
+  1575                           ;slaver.c: 282: app_command_buf[12] = 0x00;
+  1576  00CC  01DE               	clrf	SI4463_init@app_command_buf+12
+  1577                           
+  1578                           ;slaver.c: 283: app_command_buf[13] = 0x00;
+  1579  00CD  01DF               	clrf	SI4463_init@app_command_buf+13
+  1580                           
+  1581                           ;slaver.c: 284: app_command_buf[14] = 0x00;
+  1582  00CE  01E0               	clrf	SI4463_init@app_command_buf+14
+  1583                           
+  1584                           ;slaver.c: 285: app_command_buf[15] = 0x00;
+  1585  00CF  01E1               	clrf	SI4463_init@app_command_buf+15
+  1586                           
+  1587                           ;slaver.c: 286: spi_write(16, app_command_buf);
+  1588  00D0  00F5               	movwf	?_spi_write
+  1589  00D1  3010               	movlw	16
+  1590  00D2  01F6               	clrf	?_spi_write+1
+  1591  00D3  217D  118A         	fcall	_spi_write
+  1592                           
+  1593                           ;slaver.c: 289: app_command_buf[0] = 0x11;
+  1594  00D5  3011               	movlw	17
+  1595  00D6  00D2               	movwf	SI4463_init@app_command_buf
+  1596                           
+  1597                           ;slaver.c: 290: app_command_buf[1] = 0x12;
+  1598  00D7  3012               	movlw	18
+  1599  00D8  00D3               	movwf	SI4463_init@app_command_buf+1
+  1600                           
+  1601                           ;slaver.c: 291: app_command_buf[2] = 0x08;
+  1602  00D9  3008               	movlw	8
+  1603  00DA  00D4               	movwf	SI4463_init@app_command_buf+2
+  1604                           
+  1605                           ;slaver.c: 292: app_command_buf[3] = 0x19;
+  1606  00DB  3019               	movlw	25
+  1607                           
+  1608                           ;slaver.c: 293: app_command_buf[4] = 0x00;
+  1609                           
+  1610                           ;slaver.c: 294: app_command_buf[5] = 0x00;
+  1611                           
+  1612                           ;slaver.c: 295: app_command_buf[6] = 0x00;
+  1613  00DC  22CD  118A         	fcall	PL5	;call to abstracted procedure
+  1614                           
+  1615                           ;slaver.c: 296: app_command_buf[7] = 0x00;
+  1616  00DE  01D9               	clrf	SI4463_init@app_command_buf+7
+  1617                           
+  1618                           ;slaver.c: 297: app_command_buf[8] = 0x00;
+  1619  00DF  01DA               	clrf	SI4463_init@app_command_buf+8
+  1620                           
+  1621                           ;slaver.c: 298: app_command_buf[9] = 0x00;
+  1622  00E0  01DB               	clrf	SI4463_init@app_command_buf+9
+  1623                           
+  1624                           ;slaver.c: 299: app_command_buf[10] = 0x00;
+  1625  00E1  01DC               	clrf	SI4463_init@app_command_buf+10
+  1626                           
+  1627                           ;slaver.c: 300: app_command_buf[11] = 0x00;
+  1628  00E2  01DD               	clrf	SI4463_init@app_command_buf+11
+  1629                           
+  1630                           ;slaver.c: 301: spi_write(12, app_command_buf);
+  1631  00E3  00F5               	movwf	?_spi_write
+  1632  00E4  3000               	movlw	0
+  1633  00E5  00F6               	movwf	?_spi_write+1
+  1634  00E6  300C               	movlw	12
+  1635  00E7  217D  118A         	fcall	_spi_write
+  1636                           
+  1637                           ;slaver.c: 303: spi_write(0x10, RF_MODEM_MOD_TYPE_12_data);
+  1638  00E9  3066               	movlw	low (_RF_MODEM_MOD_TYPE_12_data-__stringbase)
+  1639  00EA  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1640  00EC  217D  118A         	fcall	_spi_write
+  1641                           
+  1642                           ;slaver.c: 304: spi_write(0x05, RF_MODEM_FREQ_DEV_0_1_data);
+  1643  00EE  30C3               	movlw	low (_RF_MODEM_FREQ_DEV_0_1_data-__stringbase)
+  1644  00EF  22D3  118A         	fcall	PL6	;call to abstracted procedure
+  1645  00F1  217D  118A         	fcall	_spi_write
+  1646                           
+  1647                           ;slaver.c: 306: spi_write(0x10, RF_MODEM_TX_RAMP_DELAY_12_data);
+  1648  00F3  3076               	movlw	low (_RF_MODEM_TX_RAMP_DELAY_12_data-__stringbase)
+  1649  00F4  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1650  00F6  217D  118A         	fcall	_spi_write
+  1651                           
+  1652                           ;slaver.c: 307: spi_write(0x10, BCR_NCO_OFFSET_2_12_data);
+  1653  00F8  3026               	movlw	low (_BCR_NCO_OFFSET_2_12_data-__stringbase)
+  1654  00F9  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1655  00FB  217D  118A         	fcall	_spi_write
+  1656                           
+  1657                           ;slaver.c: 308: spi_write(0x10, RF_MODEM_TX_RAMP_DELAY_12_data);
+  1658  00FD  3076               	movlw	low (_RF_MODEM_TX_RAMP_DELAY_12_data-__stringbase)
+  1659  00FE  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1660  0100  217D  118A         	fcall	_spi_write
+  1661                           
+  1662                           ;slaver.c: 309: spi_write(0x07, RF_MODEM_AFC_LIMITER_1_3_data);
+  1663  0102  30B1               	movlw	low (_RF_MODEM_AFC_LIMITER_1_3_data-__stringbase)
+  1664  0103  00F5               	movwf	?_spi_write
+  1665  0104  3080               	movlw	128
+  1666  0105  00F6               	movwf	?_spi_write+1
+  1667  0106  3007               	movlw	7
+  1668  0107  217D  118A         	fcall	_spi_write
+  1669                           
+  1670                           ;slaver.c: 312: spi_write(0x05, RF_MODEM_AGC_CONTROL_1_data);
+  1671  0109  30BE               	movlw	low (_RF_MODEM_AGC_CONTROL_1_data-__stringbase)
+  1672  010A  22D3  118A         	fcall	PL6	;call to abstracted procedure
+  1673  010C  217D  118A         	fcall	_spi_write
+  1674                           
+  1675                           ;slaver.c: 313: spi_write(0x10, AGC_WINDOW_SIZE_12_data);
+  1676  010E  3016               	movlw	low (_AGC_WINDOW_SIZE_12_data-__stringbase)
+  1677  010F  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1678  0111  217D  118A         	fcall	_spi_write
+  1679                           
+  1680                           ;slaver.c: 314: spi_write(0x0c, RF_MODEM_RAW_CONTROL_8_data);
+  1681  0113  3092               	movlw	low (_RF_MODEM_RAW_CONTROL_8_data-__stringbase)
+  1682  0114  22D7  118A         	fcall	PL7	;call to abstracted procedure
+  1683  0116  217D  118A         	fcall	_spi_write
+  1684                           
+  1685                           ;slaver.c: 318: app_command_buf[0] = 0x11;
+  1686  0118  3011               	movlw	17
+  1687  0119  00D2               	movwf	SI4463_init@app_command_buf
+  1688                           
+  1689                           ;slaver.c: 319: app_command_buf[1] = 0x20;
+  1690  011A  3020               	movlw	32
+  1691  011B  00D3               	movwf	SI4463_init@app_command_buf+1
+  1692  011C  304E               	movlw	78
+  1693                           
+  1694                           ;slaver.c: 320: app_command_buf[2] = 0x01;
+  1695                           
+  1696                           ;slaver.c: 321: app_command_buf[3] = 0x4e;
+  1697                           
+  1698                           ;slaver.c: 322: app_command_buf[4] = 0x40;
+  1699  011D  22C5  118A         	fcall	PL3	;call to abstracted procedure
+  1700                           
+  1701                           ;slaver.c: 323: spi_write(5, app_command_buf);
+  1702  011F  22BF  118A         	fcall	PL2	;call to abstracted procedure
+  1703  0121  217D  118A         	fcall	_spi_write
+  1704                           
+  1705                           ;slaver.c: 325: spi_write(0x10, COE13_7_0_12_data);
+  1706  0123  3036               	movlw	low (_COE13_7_0_12_data-__stringbase)
+  1707  0124  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1708  0126  217D  118A         	fcall	_spi_write
+  1709                           
+  1710                           ;slaver.c: 326: spi_write(0x10, COE1_7_0_12_data);
+  1711  0128  3046               	movlw	low (_COE1_7_0_12_data-__stringbase)
+  1712  0129  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1713  012B  217D  118A         	fcall	_spi_write
+  1714                           
+  1715                           ;slaver.c: 327: spi_write(0x10, COE7_7_0_12_data);
+  1716  012D  3056               	movlw	low (_COE7_7_0_12_data-__stringbase)
+  1717  012E  22C9  118A         	fcall	PL4	;call to abstracted procedure
+  1718  0130  217D  118A         	fcall	_spi_write
+  1719                           
+  1720                           ;slaver.c: 330: app_command_buf[0] = 0x11;
+  1721  0132  3011               	movlw	17
+  1722  0133  00D2               	movwf	SI4463_init@app_command_buf
+  1723                           
+  1724                           ;slaver.c: 331: app_command_buf[1] = 0x22;
+  1725  0134  3022               	movlw	34
+  1726  0135  00D3               	movwf	SI4463_init@app_command_buf+1
+  1727                           
+  1728                           ;slaver.c: 332: app_command_buf[2] = 0x04;
+  1729  0136  3004               	movlw	4
+  1730  0137  00D4               	movwf	SI4463_init@app_command_buf+2
+  1731  0138  3008               	movlw	8
+  1732                           
+  1733                           ;slaver.c: 333: app_command_buf[3] = 0x00;
+  1734  0139  01D5               	clrf	SI4463_init@app_command_buf+3
+  1735                           
+  1736                           ;slaver.c: 334: app_command_buf[4] = 0x08;
+  1737  013A  00D6               	movwf	SI4463_init@app_command_buf+4
+  1738                           
+  1739                           ;slaver.c: 335: app_command_buf[5] = 127;
+  1740  013B  307F               	movlw	127
+  1741  013C  00D7               	movwf	SI4463_init@app_command_buf+5
+  1742  013D  303D               	movlw	61
+  1743                           
+  1744                           ;slaver.c: 336: app_command_buf[6] =0x00;
+  1745  013E  01D8               	clrf	SI4463_init@app_command_buf+6
+  1746                           
+  1747                           ;slaver.c: 337: app_command_buf[7] = 0x3d;
+  1748  013F  00D9               	movwf	SI4463_init@app_command_buf+7
+  1749                           
+  1750                           ;slaver.c: 338: spi_write(8, app_command_buf);
+  1751  0140  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  1752  0141  00F5               	movwf	?_spi_write
+  1753  0142  3008               	movlw	8
+  1754  0143  01F6               	clrf	?_spi_write+1
+  1755  0144  217D  118A         	fcall	_spi_write
+  1756                           
+  1757                           ;slaver.c: 340: spi_write(0x0B, RF_SYNTH_PFDCP_CPFF_7_data);
+  1758  0146  309E               	movlw	low (_RF_SYNTH_PFDCP_CPFF_7_data-__stringbase)
+  1759  0147  00F5               	movwf	?_spi_write
+  1760  0148  3080               	movlw	128
+  1761  0149  00F6               	movwf	?_spi_write+1
+  1762  014A  300B               	movlw	11
+  1763  014B  217D  118A         	fcall	_spi_write
+  1764                           
+  1765                           ;slaver.c: 343: app_command_buf[0] = 0x11;
+  1766  014D  3011               	movlw	17
+  1767  014E  00D2               	movwf	SI4463_init@app_command_buf
+  1768                           
+  1769                           ;slaver.c: 344: app_command_buf[1] = 0x30;
+  1770  014F  3030               	movlw	48
+  1771  0150  00D3               	movwf	SI4463_init@app_command_buf+1
+  1772                           
+  1773                           ;slaver.c: 345: app_command_buf[2] = 0x0c;
+  1774  0151  300C               	movlw	12
+  1775  0152  00D4               	movwf	SI4463_init@app_command_buf+2
+  1776  0153  3073               	movlw	115
+  1777                           
+  1778                           ;slaver.c: 346: app_command_buf[3] = 0x00;
+  1779  0154  01D5               	clrf	SI4463_init@app_command_buf+3
+  1780                           
+  1781                           ;slaver.c: 347: app_command_buf[4] = 's';
+  1782  0155  00D6               	movwf	SI4463_init@app_command_buf+4
+  1783                           
+  1784                           ;slaver.c: 348: app_command_buf[5] = 0xff;
+  1785  0156  30FF               	movlw	255
+  1786  0157  00D7               	movwf	SI4463_init@app_command_buf+5
+  1787                           
+  1788                           ;slaver.c: 349: app_command_buf[6] = 0x40;
+  1789  0158  3040               	movlw	64
+  1790  0159  00D8               	movwf	SI4463_init@app_command_buf+6
+  1791                           
+  1792                           ;slaver.c: 350: app_command_buf[7] = 'w';
+  1793  015A  3077               	movlw	119
+  1794  015B  00D9               	movwf	SI4463_init@app_command_buf+7
+  1795                           
+  1796                           ;slaver.c: 351: app_command_buf[8] = 0xff;
+  1797  015C  30FF               	movlw	255
+  1798  015D  00DA               	movwf	SI4463_init@app_command_buf+8
+  1799  015E  3077               	movlw	119
+  1800                           
+  1801                           ;slaver.c: 352: app_command_buf[9] = 0x01;
+  1802  015F  01DB               	clrf	SI4463_init@app_command_buf+9
+  1803  0160  0ADB               	incf	SI4463_init@app_command_buf+9,f
+  1804                           
+  1805                           ;slaver.c: 353: app_command_buf[10] = 'w';
+  1806  0161  00DC               	movwf	SI4463_init@app_command_buf+10
+  1807                           
+  1808                           ;slaver.c: 354: app_command_buf[11] =0xff;
+  1809  0162  30FF               	movlw	255
+  1810  0163  00DD               	movwf	SI4463_init@app_command_buf+11
+  1811                           
+  1812                           ;slaver.c: 355: app_command_buf[12] =0x02;
+  1813  0164  3002               	movlw	2
+  1814  0165  00DE               	movwf	SI4463_init@app_command_buf+12
+  1815                           
+  1816                           ;slaver.c: 356: app_command_buf[13] = 'x';
+  1817  0166  3078               	movlw	120
+  1818  0167  00DF               	movwf	SI4463_init@app_command_buf+13
+  1819                           
+  1820                           ;slaver.c: 357: app_command_buf[14] = 0xff;
+  1821  0168  30FF               	movlw	255
+  1822  0169  00E0               	movwf	SI4463_init@app_command_buf+14
+  1823                           
+  1824                           ;slaver.c: 358: app_command_buf[15] =0x03;
+  1825  016A  3003               	movlw	3
+  1826  016B  00E1               	movwf	SI4463_init@app_command_buf+15
+  1827                           
+  1828                           ;slaver.c: 359: spi_write(16, app_command_buf);
+  1829  016C  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  1830  016D  00F5               	movwf	?_spi_write
+  1831  016E  3010               	movlw	16
+  1832  016F  01F6               	clrf	?_spi_write+1
+  1833  0170  217D  118A         	fcall	_spi_write
+  1834                           
+  1835                           ;slaver.c: 361: spi_write(6, RF_MODEM_RAW_SEARCH2_2_data);
+  1836  0172  30B8               	movlw	low (_RF_MODEM_RAW_SEARCH2_2_data-__stringbase)
+  1837  0173  00F5               	movwf	?_spi_write
+  1838  0174  3080               	movlw	128
+  1839  0175  00F6               	movwf	?_spi_write+1
+  1840  0176  3006               	movlw	6
+  1841  0177  217D  118A         	fcall	_spi_write
+  1842                           
+  1843                           ;slaver.c: 362: spi_write(12, RF_FREQ_CONTROL_INTE_8_data);
+  1844  0179  3086               	movlw	low (_RF_FREQ_CONTROL_INTE_8_data-__stringbase)
+  1845  017A  22D7  118A         	fcall	PL7	;call to abstracted procedure
+  1846  017C  297D               	ljmp	_spi_write
+  1847  017D                     __end_of_SI4463_init:	
+  1848  017D                     __ptext460:	
+  1849 ;; =============== function _spi_write_fifo ends ============
+  1850                           
+  1851                           
+  1852 ;; *************** function _spi_write *****************
+  1853 ;; Defined at:
+  1854 ;;		line 507 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  1855 ;; Parameters:    Size  Location     Type
+  1856 ;;  tx_length       1    wreg     unsigned char 
+  1857 ;;  p               2    5[COMMON] PTR unsigned char 
+  1858 ;;		 -> spi_read@p(1), rx_start@p(8), tx_start@p(5), rf_standby@p(2), 
+  1859 ;;		 -> enable_tx_interrupt@p(6), enable_rx_interrupt@p(7), clr_interrupt@p(4), fifo_reset@p(2), 
+  1860 ;;		 -> RF_FREQ_CONTROL_INTE_8_data(12), RF_MODEM_RAW_SEARCH2_2_data(6), RF_SYNTH_PFDCP_CPFF_7_data(11), COE7_7_0_12_dat
+      +a(16), 
+  1861 ;;		 -> COE1_7_0_12_data(16), COE13_7_0_12_data(16), RF_MODEM_RAW_CONTROL_8_data(12), AGC_WINDOW_SIZE_12_data(16), 
+  1862 ;;		 -> RF_MODEM_AGC_CONTROL_1_data(5), RF_MODEM_AFC_LIMITER_1_3_data(7), BCR_NCO_OFFSET_2_12_data(16), RF_MODEM_TX_RAMP
+      +_DELAY_12_data(16), 
+  1863 ;;		 -> RF_MODEM_FREQ_DEV_0_1_data(5), RF_MODEM_MOD_TYPE_12_data(16), RF_FRR_CTL_A_MODE_4_data(8), SI4463_init@app_comma
+      +nd_buf(20), 
+  1864 ;; Auto vars:     Size  Location     Type
+  1865 ;;  tx_length       1    7[COMMON] unsigned char 
+  1866 ;;  i               1    9[COMMON] unsigned char 
+  1867 ;;  j               1    8[COMMON] unsigned char 
+  1868 ;; Return value:  Size  Location     Type
+  1869 ;;		None               void
+  1870 ;; Registers used:
+  1871 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  1872 ;; Tracked objects:
+  1873 ;;		On entry : 60/0
+  1874 ;;		On exit  : 60/0
+  1875 ;;		Unchanged: FFE9F/0
+  1876 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1877 ;;      Params:         2       0       0       0
+  1878 ;;      Locals:         3       0       0       0
+  1879 ;;      Temps:          0       0       0       0
+  1880 ;;      Totals:         5       0       0       0
+  1881 ;;Total ram usage:        5 bytes
+  1882 ;; Hardware stack levels used:    1
+  1883 ;; Hardware stack levels required when called:    3
+  1884 ;; This function calls:
+  1885 ;;		_check_cts
+  1886 ;;		_spi_byte
+  1887 ;; This function is called by:
+  1888 ;;		_SI4463_init
+  1889 ;;		_fifo_reset
+  1890 ;;		_clr_interrupt
+  1891 ;;		_enable_rx_interrupt
+  1892 ;;		_enable_tx_interrupt
+  1893 ;;		_tx_start
+  1894 ;;		_rx_start
+  1895 ;;		_spi_read
+  1896 ;; This function uses a non-reentrant model
+  1897 ;;
+  1898  017D                     _spi_write:	
+  1899                           
+  1900                           ; Regs used in _spi_write: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1901                           ;spi_write@tx_length stored from wreg
+  1902  017D  00F7               	movwf	spi_write@tx_length
+  1903                           
+  1904                           ;slaver.c: 508: unsigned char i,j;
+  1905                           ;slaver.c: 510: i = 0;
+  1906  017E  01F9               	clrf	spi_write@i
+  1907  017F                     l2847:	
+  1908                           ;slaver.c: 511: while(i!=0xff)
+  1909                           
+  1910  017F  0879               	movf	spi_write@i,w
+  1911  0180  3AFF               	xorlw	255
+  1912  0181  1903               	btfsc	3,2
+  1913  0182  2987               	goto	l908
+  1914                           
+  1915                           ;slaver.c: 512: i = check_cts();
+  1916  0183  2223  118A         	fcall	_check_cts
+  1917  0185  00F9               	movwf	spi_write@i
+  1918  0186  297F               	goto	l2847
+  1919  0187                     l908:	
+  1920                           
+  1921                           ;slaver.c: 514: RC7 = 0;
+  1922  0187  1387               	bcf	7,7
+  1923                           
+  1924                           ;slaver.c: 515: RC6 = 0;
+  1925  0188  1307               	bcf	7,6
+  1926                           
+  1927                           ;slaver.c: 517: for (i = 0; i < tx_length; i++)
+  1928  0189  01F9               	clrf	spi_write@i
+  1929  018A                     l2857:	
+  1930  018A  0877               	movf	spi_write@tx_length,w
+  1931  018B  0279               	subwf	spi_write@i,w
+  1932  018C  1803               	btfsc	3,0
+  1933  018D  299D               	goto	l911
+  1934                           
+  1935                           ;slaver.c: 518: {
+  1936                           ;slaver.c: 519: j = *(p+i);
+  1937  018E  0879               	movf	spi_write@i,w
+  1938  018F  0775               	addwf	spi_write@p,w
+  1939  0190  0084               	movwf	4
+  1940  0191  0876               	movf	spi_write@p+1,w
+  1941  0192  1803               	skipnc
+  1942  0193  0A76               	incf	spi_write@p+1,w
+  1943  0194  00FF               	movwf	127
+  1944  0195  118A  2300  118A   	fcall	stringtab
+  1945  0198  00F8               	movwf	spi_write@j
+  1946                           
+  1947                           ;slaver.c: 520: spi_byte(j);
+  1948  0199  220C  118A         	fcall	_spi_byte
+  1949  019B  0AF9               	incf	spi_write@i,f
+  1950  019C  298A               	goto	l2857
+  1951  019D                     l911:	
+  1952                           
+  1953                           ;slaver.c: 521: }
+  1954                           ;slaver.c: 523: RC6 = 1;
+  1955  019D  1707               	bsf	7,6
+  1956  019E  0008               	return
+  1957  019F                     __end_of_spi_write:	
+  1958  019F                     __ptext459:	
+  1959 ;; =============== function _SI4463_init ends ============
+  1960                           
+  1961                           
+  1962 ;; *************** function _spi_write_fifo *****************
+  1963 ;; Defined at:
+  1964 ;;		line 565 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  1965 ;; Parameters:    Size  Location     Type
+  1966 ;;		None
+  1967 ;; Auto vars:     Size  Location     Type
+  1968 ;;  i               1    5[COMMON] unsigned char 
+  1969 ;; Return value:  Size  Location     Type
+  1970 ;;		None               void
+  1971 ;; Registers used:
+  1972 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1973 ;; Tracked objects:
+  1974 ;;		On entry : 60/0
+  1975 ;;		On exit  : 60/0
+  1976 ;;		Unchanged: FFF9F/0
+  1977 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  1978 ;;      Params:         0       0       0       0
+  1979 ;;      Locals:         1       0       0       0
+  1980 ;;      Temps:          0       0       0       0
+  1981 ;;      Totals:         1       0       0       0
+  1982 ;;Total ram usage:        1 bytes
+  1983 ;; Hardware stack levels used:    1
+  1984 ;; Hardware stack levels required when called:    3
+  1985 ;; This function calls:
+  1986 ;;		_check_cts
+  1987 ;;		_spi_byte
+  1988 ;; This function is called by:
+  1989 ;;		_tx_data
+  1990 ;; This function uses a non-reentrant model
+  1991 ;;
+  1992  019F                     _spi_write_fifo:	
+  1993                           
+  1994                           ;slaver.c: 566: U8 i;
+  1995                           ;slaver.c: 568: i = 0;
+  1996                           
+  1997                           ; Regs used in _spi_write_fifo: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1998  019F  01F5               	clrf	spi_write_fifo@i
+  1999  01A0                     l2863:	
+  2000                           ;slaver.c: 569: while(i!=0xff)
+  2001                           
+  2002  01A0  0875               	movf	spi_write_fifo@i,w
+  2003  01A1  3AFF               	xorlw	255
+  2004  01A2  1903               	btfsc	3,2
+  2005  01A3  29A8               	goto	l932
+  2006                           
+  2007                           ;slaver.c: 570: i = check_cts();
+  2008  01A4  2223  118A         	fcall	_check_cts
+  2009  01A6  00F5               	movwf	spi_write_fifo@i
+  2010  01A7  29A0               	goto	l2863
+  2011  01A8                     l932:	
+  2012  01A8  3066               	movlw	102
+  2013                           
+  2014                           ;slaver.c: 571: RC6 = 1;
+  2015  01A9  1707               	bsf	7,6
+  2016                           
+  2017                           ;slaver.c: 572: RC7 = 0;
+  2018  01AA  1387               	bcf	7,7
+  2019                           
+  2020                           ;slaver.c: 573: RC6 = 0;
+  2021  01AB  1307               	bcf	7,6
+  2022                           
+  2023                           ;slaver.c: 574: spi_byte(0x66);
+  2024  01AC  220C               	fcall	_spi_byte
+  2025                           
+  2026                           ;slaver.c: 576: for (i = 0; i< 14; i++)
+  2027  01AD  01F5               	clrf	spi_write_fifo@i
+  2028  01AE                     l2873:	
+  2029                           
+  2030                           ;slaver.c: 577: {
+  2031                           ;slaver.c: 578: spi_byte(tx_ph_data[i]);
+  2032  01AE  0875               	movf	spi_write_fifo@i,w
+  2033  01AF  3E01               	addlw	low (_tx_ph_data-__stringbase)
+  2034  01B0  0084               	movwf	4
+  2035  01B1  118A  230A  118A   	fcall	stringdir
+  2036  01B4  220C  118A         	fcall	_spi_byte
+  2037  01B6  300E               	movlw	14
+  2038  01B7  0AF5               	incf	spi_write_fifo@i,f
+  2039  01B8  0275               	subwf	spi_write_fifo@i,w
+  2040  01B9  1C03               	skipc
+  2041  01BA  29AE               	goto	l2873
+  2042                           
+  2043                           ;slaver.c: 579: }
+  2044                           ;slaver.c: 580: RC6 = 1;
+  2045  01BB  1707               	bsf	7,6
+  2046  01BC  0008               	return
+  2047  01BD                     __end_of_spi_write_fifo:	
+  2048  01BD                     __ptext461:	
+  2049 ;; =============== function _spi_write ends ============
+  2050                           
+  2051                           
+  2052 ;; *************** function _spi_read_fifo *****************
+  2053 ;; Defined at:
+  2054 ;;		line 584 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2055 ;; Parameters:    Size  Location     Type
+  2056 ;;		None
+  2057 ;; Auto vars:     Size  Location     Type
+  2058 ;;  i               1    5[COMMON] unsigned char 
+  2059 ;; Return value:  Size  Location     Type
+  2060 ;;		None               void
+  2061 ;; Registers used:
+  2062 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  2063 ;; Tracked objects:
+  2064 ;;		On entry : 60/0
+  2065 ;;		On exit  : 160/0
+  2066 ;;		Unchanged: FFE9F/0
+  2067 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2068 ;;      Params:         0       0       0       0
+  2069 ;;      Locals:         1       0       0       0
+  2070 ;;      Temps:          0       0       0       0
+  2071 ;;      Totals:         1       0       0       0
+  2072 ;;Total ram usage:        1 bytes
+  2073 ;; Hardware stack levels used:    1
+  2074 ;; Hardware stack levels required when called:    3
+  2075 ;; This function calls:
+  2076 ;;		_check_cts
+  2077 ;;		_spi_byte
+  2078 ;; This function is called by:
+  2079 ;;		_main
+  2080 ;; This function uses a non-reentrant model
+  2081 ;;
+  2082  01BD                     _spi_read_fifo:	
+  2083                           
+  2084                           ;slaver.c: 585: U8 i;
+  2085                           ;slaver.c: 587: i = 0;
+  2086                           
+  2087                           ; Regs used in _spi_read_fifo: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  2088  01BD  01F5               	clrf	spi_read_fifo@i
+  2089  01BE                     l2827:	
+  2090                           ;slaver.c: 588: while(i!=0xff)
+  2091                           
+  2092  01BE  0875               	movf	spi_read_fifo@i,w
+  2093  01BF  3AFF               	xorlw	255
+  2094  01C0  1903               	btfsc	3,2
+  2095  01C1  29C6               	goto	l940
+  2096                           
+  2097                           ;slaver.c: 589: i = check_cts();
+  2098  01C2  2223  118A         	fcall	_check_cts
+  2099  01C4  00F5               	movwf	spi_read_fifo@i
+  2100  01C5  29BE               	goto	l2827
+  2101  01C6                     l940:	
+  2102  01C6  3077               	movlw	119
+  2103                           
+  2104                           ;slaver.c: 591: RC6 = 1;
+  2105  01C7  1707               	bsf	7,6
+  2106                           
+  2107                           ;slaver.c: 592: RC7 = 0;
+  2108  01C8  1387               	bcf	7,7
+  2109                           
+  2110                           ;slaver.c: 593: RC6 = 0;
+  2111  01C9  1307               	bcf	7,6
+  2112                           
+  2113                           ;slaver.c: 594: spi_byte(0x77);
+  2114  01CA  220C  118A         	fcall	_spi_byte
+  2115                           
+  2116                           ;slaver.c: 595: for (i = 0; i< 14; i++)
+  2117  01CC  01F5               	clrf	spi_read_fifo@i
+  2118  01CD                     l2837:	
+  2119                           
+  2120                           ;slaver.c: 596: rx_buf[i] = spi_byte(0xff);
+  2121  01CD  0875               	movf	spi_read_fifo@i,w
+  2122  01CE  3E20               	addlw	_rx_buf& (0+255)
+  2123  01CF  0084               	movwf	4
+  2124  01D0  30FF               	movlw	255
+  2125  01D1  220C  118A         	fcall	_spi_byte
+  2126  01D3  1383               	bcf	3,7	;select IRP bank0
+  2127  01D4  0080               	movwf	0
+  2128  01D5  300E               	movlw	14
+  2129  01D6  0AF5               	incf	spi_read_fifo@i,f
+  2130  01D7  0275               	subwf	spi_read_fifo@i,w
+  2131  01D8  1C03               	skipc
+  2132  01D9  29CD               	goto	l2837
+  2133                           
+  2134                           ;slaver.c: 597: RC6 = 1;
+  2135  01DA  1707               	bsf	7,6
+  2136  01DB  0008               	return
+  2137  01DC                     __end_of_spi_read_fifo:	
+  2138  01DC                     __ptext456:	
+  2139 ;; =============== function _enable_rx_interrupt ends ============
+  2140                           
+  2141                           
+  2142 ;; *************** function _spi_read *****************
+  2143 ;; Defined at:
+  2144 ;;		line 540 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2145 ;; Parameters:    Size  Location     Type
+  2146 ;;  data_length     1    wreg     unsigned char 
+  2147 ;;  api_command     1   10[COMMON] unsigned char 
+  2148 ;; Auto vars:     Size  Location     Type
+  2149 ;;  data_length     1    0[BANK0 ] unsigned char 
+  2150 ;;  i               1    2[BANK0 ] unsigned char 
+  2151 ;;  p               1    1[BANK0 ] unsigned char [1]
+  2152 ;; Return value:  Size  Location     Type
+  2153 ;;		None               void
+  2154 ;; Registers used:
+  2155 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2156 ;; Tracked objects:
+  2157 ;;		On entry : 60/0
+  2158 ;;		On exit  : 60/0
+  2159 ;;		Unchanged: FFE9F/0
+  2160 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2161 ;;      Params:         1       0       0       0
+  2162 ;;      Locals:         0       3       0       0
+  2163 ;;      Temps:          0       0       0       0
+  2164 ;;      Totals:         1       3       0       0
+  2165 ;;Total ram usage:        4 bytes
+  2166 ;; Hardware stack levels used:    1
+  2167 ;; Hardware stack levels required when called:    4
+  2168 ;; This function calls:
+  2169 ;;		_check_cts
+  2170 ;;		_spi_write
+  2171 ;;		_spi_byte
+  2172 ;; This function is called by:
+  2173 ;;		_clr_interrupt
+  2174 ;; This function uses a non-reentrant model
+  2175 ;;
+  2176  01DC                     _spi_read:	
+  2177                           
+  2178                           ; Regs used in _spi_read: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2179                           ;spi_read@data_length stored from wreg
+  2180  01DC  00D2               	movwf	spi_read@data_length
+  2181                           
+  2182                           ;slaver.c: 541: U8 i;
+  2183                           ;slaver.c: 543: U8 p[1];
+  2184                           ;slaver.c: 544: p[0] = api_command;
+  2185  01DD  087A               	movf	spi_read@api_command,w
+  2186  01DE  00D3               	movwf	spi_read@p
+  2187                           
+  2188                           ;slaver.c: 545: i = 0;
+  2189  01DF  01D4               	clrf	spi_read@i
+  2190  01E0                     l3107:	
+  2191                           ;slaver.c: 546: while(i!=0xff)
+  2192                           
+  2193  01E0  0854               	movf	spi_read@i,w
+  2194  01E1  3AFF               	xorlw	255
+  2195  01E2  1903               	btfsc	3,2
+  2196  01E3  29E8               	goto	l3109
+  2197                           
+  2198                           ;slaver.c: 547: i = check_cts();
+  2199  01E4  2223  118A         	fcall	_check_cts
+  2200  01E6  00D4               	movwf	spi_read@i
+  2201  01E7  29E0               	goto	l3107
+  2202  01E8                     l3109:	
+  2203                           
+  2204                           ;slaver.c: 549: spi_write(1, p);
+  2205  01E8  3053               	movlw	spi_read@p& (0+255)
+  2206  01E9  00F5               	movwf	?_spi_write
+  2207  01EA  3001               	movlw	1
+  2208  01EB  01F6               	clrf	?_spi_write+1
+  2209  01EC  217D  118A         	fcall	_spi_write
+  2210                           
+  2211                           ;slaver.c: 551: i = 0;
+  2212  01EE  01D4               	clrf	spi_read@i
+  2213  01EF                     l3115:	
+  2214                           ;slaver.c: 552: while(i!=0xff)
+  2215                           
+  2216  01EF  0854               	movf	spi_read@i,w
+  2217  01F0  3AFF               	xorlw	255
+  2218  01F1  1903               	btfsc	3,2
+  2219  01F2  29F7               	goto	l923
+  2220                           
+  2221                           ;slaver.c: 553: i = check_cts();
+  2222  01F3  2223  118A         	fcall	_check_cts
+  2223  01F5  00D4               	movwf	spi_read@i
+  2224  01F6  29EF               	goto	l3115
+  2225  01F7                     l923:	
+  2226                           
+  2227                           ;slaver.c: 555: RC6 = 1;
+  2228                           
+  2229                           ;slaver.c: 556: RC7 = 0;
+  2230                           
+  2231                           ;slaver.c: 557: RC6 = 0;
+  2232  01F7  22DB  118A         	fcall	PL8	;call to abstracted procedure
+  2233                           
+  2234                           ;slaver.c: 558: spi_byte(0x44);
+  2235  01F9  220C  118A         	fcall	_spi_byte
+  2236                           
+  2237                           ;slaver.c: 559: for (i = 0; i< data_length; i++)
+  2238  01FB  01D4               	clrf	spi_read@i
+  2239  01FC                     l3125:	
+  2240  01FC  0852               	movf	spi_read@data_length,w
+  2241  01FD  0254               	subwf	spi_read@i,w
+  2242  01FE  1803               	btfsc	3,0
+  2243  01FF  2A0A               	goto	l926
+  2244                           
+  2245                           ;slaver.c: 560: spi_read_buf[i] = spi_byte(0xff);
+  2246  0200  0854               	movf	spi_read@i,w
+  2247  0201  3E39               	addlw	_spi_read_buf& (0+255)
+  2248  0202  0084               	movwf	4
+  2249  0203  30FF               	movlw	255
+  2250  0204  220C  118A         	fcall	_spi_byte
+  2251  0206  1383               	bcf	3,7	;select IRP bank0
+  2252  0207  0080               	movwf	0
+  2253  0208  0AD4               	incf	spi_read@i,f
+  2254  0209  29FC               	goto	l3125
+  2255  020A                     l926:	
+  2256                           
+  2257                           ;slaver.c: 561: RC6 = 1;
+  2258  020A  1707               	bsf	7,6
+  2259  020B  0008               	return
+  2260  020C                     __end_of_spi_read:	
+  2261  020C                     __ptext466:	
+  2262 ;; =============== function _delay_10ms ends ============
+  2263                           
+  2264                           
+  2265 ;; *************** function _spi_byte *****************
+  2266 ;; Defined at:
+  2267 ;;		line 483 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2268 ;; Parameters:    Size  Location     Type
+  2269 ;;  data            1    wreg     unsigned char 
+  2270 ;; Auto vars:     Size  Location     Type
+  2271 ;;  data            1    3[COMMON] unsigned char 
+  2272 ;;  i               1    2[COMMON] unsigned char 
+  2273 ;; Return value:  Size  Location     Type
+  2274 ;;                  1    wreg      unsigned char 
+  2275 ;; Registers used:
+  2276 ;;		wreg, status,2, status,0
+  2277 ;; Tracked objects:
+  2278 ;;		On entry : 0/0
+  2279 ;;		On exit  : 60/0
+  2280 ;;		Unchanged: FFF9F/0
+  2281 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2282 ;;      Params:         0       0       0       0
+  2283 ;;      Locals:         2       0       0       0
+  2284 ;;      Temps:          0       0       0       0
+  2285 ;;      Totals:         2       0       0       0
+  2286 ;;Total ram usage:        2 bytes
+  2287 ;; Hardware stack levels used:    1
+  2288 ;; Hardware stack levels required when called:    1
+  2289 ;; This function calls:
+  2290 ;;		Nothing
+  2291 ;; This function is called by:
+  2292 ;;		_spi_write
+  2293 ;;		_check_cts
+  2294 ;;		_spi_read
+  2295 ;;		_spi_write_fifo
+  2296 ;;		_spi_read_fifo
+  2297 ;;		_sdn_reset
+  2298 ;; This function uses a non-reentrant model
+  2299 ;;
+  2300  020C                     _spi_byte:	
+  2301                           
+  2302                           ; Regs used in _spi_byte: [wreg+status,2+status,0]
+  2303                           ;spi_byte@data stored from wreg
+  2304  020C  00F3               	movwf	spi_byte@data
+  2305                           
+  2306                           ;slaver.c: 484: unsigned char i;
+  2307                           ;slaver.c: 486: for (i = 0; i < 8; i++)
+  2308  020D  01F2               	clrf	spi_byte@i
+  2309  020E                     l897:	
+  2310                           
+  2311                           ;slaver.c: 487: {
+  2312                           ;slaver.c: 488: if (data & 0x80)
+  2313  020E  1FF3               	btfss	spi_byte@data,7
+  2314  020F  2A12               	goto	l899
+  2315                           
+  2316                           ;slaver.c: 489: RC5 = 1;
+  2317  0210  1687               	bsf	7,5
+  2318  0211  2A13               	goto	l900
+  2319  0212                     l899:	
+  2320                           
+  2321                           ;slaver.c: 490: else
+  2322                           ;slaver.c: 491: RC5 = 0;
+  2323  0212  1287               	bcf	7,5
+  2324  0213                     l900:	
+  2325                           
+  2326                           ;slaver.c: 493: data <<= 1;
+  2327  0213  1003               	clrc
+  2328  0214  0DF3               	rlf	spi_byte@data,f
+  2329                           
+  2330                           ;slaver.c: 494: RC7 = 1;
+  2331  0215  1787               	bsf	7,7
+  2332                           
+  2333                           ;slaver.c: 496: if (RC4)
+  2334  0216  1E07               	btfss	7,4
+  2335  0217  2A1A               	goto	l901
+  2336                           
+  2337                           ;slaver.c: 497: data |= 0x01;
+  2338  0218  1473               	bsf	spi_byte@data,0
+  2339  0219  2A1B               	goto	l902
+  2340  021A                     l901:	
+  2341                           
+  2342                           ;slaver.c: 498: else
+  2343                           ;slaver.c: 499: data &= 0xfe;
+  2344  021A  1073               	bcf	spi_byte@data,0
+  2345  021B                     l902:	
+  2346  021B  3008               	movlw	8
+  2347                           
+  2348                           ;slaver.c: 501: RC7 = 0;
+  2349  021C  1387               	bcf	7,7
+  2350  021D  0AF2               	incf	spi_byte@i,f
+  2351  021E  0272               	subwf	spi_byte@i,w
+  2352  021F  1C03               	skipc
+  2353  0220  2A0E               	goto	l897
+  2354                           
+  2355                           ;slaver.c: 502: }
+  2356                           ;slaver.c: 503: return (data);
+  2357  0221  0873               	movf	spi_byte@data,w
+  2358  0222  0008               	return
+  2359  0223                     __end_of_spi_byte:	
+  2360  0223                     __ptext462:	
+  2361 ;; =============== function _spi_read_fifo ends ============
+  2362                           
+  2363                           
+  2364 ;; *************** function _check_cts *****************
+  2365 ;; Defined at:
+  2366 ;;		line 527 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2367 ;; Parameters:    Size  Location     Type
+  2368 ;;		None
+  2369 ;; Auto vars:     Size  Location     Type
+  2370 ;;  i               1    4[COMMON] unsigned char 
+  2371 ;; Return value:  Size  Location     Type
+  2372 ;;                  1    wreg      unsigned char 
+  2373 ;; Registers used:
+  2374 ;;		wreg, status,2, status,0, pclath, cstack
+  2375 ;; Tracked objects:
+  2376 ;;		On entry : 60/0
+  2377 ;;		On exit  : 60/0
+  2378 ;;		Unchanged: FFF9F/0
+  2379 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2380 ;;      Params:         0       0       0       0
+  2381 ;;      Locals:         1       0       0       0
+  2382 ;;      Temps:          0       0       0       0
+  2383 ;;      Totals:         1       0       0       0
+  2384 ;;Total ram usage:        1 bytes
+  2385 ;; Hardware stack levels used:    1
+  2386 ;; Hardware stack levels required when called:    2
+  2387 ;; This function calls:
+  2388 ;;		_spi_byte
+  2389 ;; This function is called by:
+  2390 ;;		_spi_write
+  2391 ;;		_spi_read
+  2392 ;;		_spi_write_fifo
+  2393 ;;		_spi_read_fifo
+  2394 ;; This function uses a non-reentrant model
+  2395 ;;
+  2396  0223                     _check_cts:	
+  2397                           
+  2398                           ;slaver.c: 528: U8 i;
+  2399                           ;slaver.c: 530: RC6 = 1;
+  2400                           
+  2401                           ; Regs used in _check_cts: [wreg+status,2+status,0+pclath+cstack]
+  2402                           
+  2403                           ;slaver.c: 531: RC7 = 0;
+  2404                           
+  2405                           ;slaver.c: 532: RC6 = 0;
+  2406  0223  22DB  118A         	fcall	PL8	;call to abstracted procedure
+  2407                           
+  2408                           ;slaver.c: 533: spi_byte(0x44);
+  2409  0225  220C  118A         	fcall	_spi_byte
+  2410                           
+  2411                           ;slaver.c: 534: i = spi_byte(0);
+  2412  0227  3000               	movlw	0
+  2413  0228  220C               	fcall	_spi_byte
+  2414  0229  00F4               	movwf	check_cts@i
+  2415                           
+  2416                           ;slaver.c: 535: RC6 = 1;
+  2417  022A  1707               	bsf	7,6
+  2418                           
+  2419                           ;slaver.c: 536: return (i);
+  2420  022B  0008               	return
+  2421  022C                     __end_of_check_cts:	
+  2422  022C                     __ptext463:	
+  2423 ;; =============== function _check_cts ends ============
+  2424                           
+  2425                           
+  2426 ;; *************** function _sdn_reset *****************
+  2427 ;; Defined at:
+  2428 ;;		line 601 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2429 ;; Parameters:    Size  Location     Type
+  2430 ;;		None
+  2431 ;; Auto vars:     Size  Location     Type
+  2432 ;;  i               1    6[COMMON] unsigned char 
+  2433 ;; Return value:  Size  Location     Type
+  2434 ;;		None               void
+  2435 ;; Registers used:
+  2436 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  2437 ;; Tracked objects:
+  2438 ;;		On entry : 0/0
+  2439 ;;		On exit  : 0/0
+  2440 ;;		Unchanged: FFE00/0
+  2441 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2442 ;;      Params:         0       0       0       0
+  2443 ;;      Locals:         1       0       0       0
+  2444 ;;      Temps:          0       0       0       0
+  2445 ;;      Totals:         1       0       0       0
+  2446 ;;Total ram usage:        1 bytes
+  2447 ;; Hardware stack levels used:    1
+  2448 ;; Hardware stack levels required when called:    2
+  2449 ;; This function calls:
+  2450 ;;		_delay_1ms
+  2451 ;;		_spi_byte
+  2452 ;; This function is called by:
+  2453 ;;		_main
+  2454 ;;		_tx_data
+  2455 ;; This function uses a non-reentrant model
+  2456 ;;
+  2457  022C                     _sdn_reset:	
+  2458                           
+  2459                           ;slaver.c: 602: U8 i;
+  2460                           ;slaver.c: 604: RC1 = 1;
+  2461                           
+  2462                           ; Regs used in _sdn_reset: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  2463  022C  1283               	bcf	3,5	;RP0=0, select bank0
+  2464  022D  3002               	movlw	2
+  2465  022E  1303               	bcf	3,6	;RP1=0, select bank0
+  2466  022F  1487               	bsf	7,1
+  2467                           
+  2468                           ;slaver.c: 605: delay_1ms(2);
+  2469  0230  00F2               	movwf	?_delay_1ms
+  2470  0231  01F3               	clrf	?_delay_1ms+1
+  2471  0232  2253  118A         	fcall	_delay_1ms
+  2472                           
+  2473                           ;slaver.c: 606: RC1 = 0;
+  2474  0234  1283               	bcf	3,5	;RP0=0, select bank0
+  2475  0235  300A               	movlw	10
+  2476  0236  1303               	bcf	3,6	;RP1=0, select bank0
+  2477  0237  1087               	bcf	7,1
+  2478                           
+  2479                           ;slaver.c: 607: delay_1ms(10);
+  2480  0238  00F2               	movwf	?_delay_1ms
+  2481  0239  01F3               	clrf	?_delay_1ms+1
+  2482  023A  2253               	fcall	_delay_1ms
+  2483                           
+  2484                           ;slaver.c: 609: RC6 = 1;
+  2485  023B  1283               	bcf	3,5	;RP0=0, select bank0
+  2486  023C  1303               	bcf	3,6	;RP1=0, select bank0
+  2487  023D  1707               	bsf	7,6
+  2488                           
+  2489                           ;slaver.c: 610: RC7 = 0;
+  2490  023E  1387               	bcf	7,7
+  2491                           
+  2492                           ;slaver.c: 611: RC6 = 0;
+  2493  023F  1307               	bcf	7,6
+  2494                           
+  2495                           ;slaver.c: 612: for (i = 0; i< 7; i++)
+  2496  0240  01F6               	clrf	sdn_reset@i
+  2497  0241                     l2805:	
+  2498                           
+  2499                           ;slaver.c: 613: spi_byte(RF_POWER_UP_data[i]);
+  2500  0241  0876               	movf	sdn_reset@i,w
+  2501  0242  3E0F               	addlw	low (_RF_POWER_UP_data-__stringbase)
+  2502  0243  0084               	movwf	4
+  2503  0244  118A  230A  118A   	fcall	stringdir
+  2504  0247  220C  118A         	fcall	_spi_byte
+  2505  0249  3007               	movlw	7
+  2506  024A  0AF6               	incf	sdn_reset@i,f
+  2507  024B  0276               	subwf	sdn_reset@i,w
+  2508  024C  1C03               	skipc
+  2509  024D  2A41               	goto	l2805
+  2510  024E  3014               	movlw	20
+  2511                           
+  2512                           ;slaver.c: 614: RC6 = 1;
+  2513  024F  1707               	bsf	7,6
+  2514                           
+  2515                           ;slaver.c: 616: delay_1ms(20);
+  2516  0250  00F2               	movwf	?_delay_1ms
+  2517  0251  01F3               	clrf	?_delay_1ms+1
+  2518  0252  2A53               	ljmp	l2727
+  2519  0253                     __end_of_sdn_reset:	
+  2520  0253                     __ptext467:	
+  2521 ;; =============== function _spi_byte ends ============
+  2522                           
+  2523                           
+  2524 ;; *************** function _delay_1ms *****************
+  2525 ;; Defined at:
+  2526 ;;		line 632 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2527 ;; Parameters:    Size  Location     Type
+  2528 ;;  delay_time      2    2[COMMON] unsigned int 
+  2529 ;; Auto vars:     Size  Location     Type
+  2530 ;;  i               2    4[COMMON] unsigned int 
+  2531 ;; Return value:  Size  Location     Type
+  2532 ;;		None               void
+  2533 ;; Registers used:
+  2534 ;;		wreg, status,2, status,0
+  2535 ;; Tracked objects:
+  2536 ;;		On entry : 60/0
+  2537 ;;		On exit  : 0/0
+  2538 ;;		Unchanged: FFE00/0
+  2539 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2540 ;;      Params:         2       0       0       0
+  2541 ;;      Locals:         2       0       0       0
+  2542 ;;      Temps:          0       0       0       0
+  2543 ;;      Totals:         4       0       0       0
+  2544 ;;Total ram usage:        4 bytes
+  2545 ;; Hardware stack levels used:    1
+  2546 ;; Hardware stack levels required when called:    1
+  2547 ;; This function calls:
+  2548 ;;		Nothing
+  2549 ;; This function is called by:
+  2550 ;;		_main
+  2551 ;;		_sdn_reset
+  2552 ;; This function uses a non-reentrant model
+  2553 ;;
+  2554  0253                     _delay_1ms:	
+  2555  0253                     l2727:	
+  2556                           ;slaver.c: 633: unsigned int i;
+  2557                           ;slaver.c: 634: while(delay_time !=0)
+  2558                           
+  2559                           ; Regs used in _delay_1ms: [wreg+status,2+status,0]
+  2560                           
+  2561  0253  0873               	movf	delay_1ms@delay_time+1,w
+  2562  0254  0472               	iorwf	delay_1ms@delay_time,w
+  2563  0255  1903               	btfsc	3,2
+  2564  0256  0008               	return
+  2565                           
+  2566                           ;slaver.c: 635: {
+  2567                           ;slaver.c: 636: for (i =380; i!=0; i--)
+  2568  0257  307C               	movlw	124
+  2569  0258  00F4               	movwf	delay_1ms@i
+  2570  0259  3001               	movlw	1
+  2571  025A  00F5               	movwf	delay_1ms@i+1
+  2572  025B                     l956:	
+  2573  025B  0000               	nop	;#
+  2574  025C  0000               	nop	;#
+  2575  025D  3001               	movlw	1
+  2576  025E  02F4               	subwf	delay_1ms@i,f
+  2577  025F  1C03               	skipc
+  2578  0260  03F5               	decf	delay_1ms@i+1,f
+  2579  0261  0875               	movf	delay_1ms@i+1,w
+  2580  0262  0474               	iorwf	delay_1ms@i,w
+  2581  0263  1D03               	skipz
+  2582  0264  2A5B               	goto	l956
+  2583                           
+  2584                           ;slaver.c: 640: }
+  2585                           ;slaver.c: 641: delay_time--;
+  2586  0265  3001               	movlw	1
+  2587  0266  02F2               	subwf	delay_1ms@delay_time,f
+  2588  0267  3000               	movlw	0
+  2589  0268  1C03               	skipc
+  2590  0269  03F3               	decf	delay_1ms@delay_time+1,f
+  2591  026A  02F3               	subwf	delay_1ms@delay_time+1,f
+  2592  026B  2A53               	goto	l2727
+  2593  026C                     __end_of_delay_1ms:	
+  2594  026C                     __ptext457:	
+  2595 ;; =============== function _spi_read ends ============
+  2596                           
+  2597                           
+  2598 ;; *************** function _fifo_reset *****************
+  2599 ;; Defined at:
+  2600 ;;		line 366 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2601 ;; Parameters:    Size  Location     Type
+  2602 ;;		None
+  2603 ;; Auto vars:     Size  Location     Type
+  2604 ;;  p               2   10[COMMON] unsigned char [2]
+  2605 ;; Return value:  Size  Location     Type
+  2606 ;;		None               void
+  2607 ;; Registers used:
+  2608 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2609 ;; Tracked objects:
+  2610 ;;		On entry : 60/0
+  2611 ;;		On exit  : 60/0
+  2612 ;;		Unchanged: FFE9F/0
+  2613 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2614 ;;      Params:         0       0       0       0
+  2615 ;;      Locals:         2       0       0       0
+  2616 ;;      Temps:          0       0       0       0
+  2617 ;;      Totals:         2       0       0       0
+  2618 ;;Total ram usage:        2 bytes
+  2619 ;; Hardware stack levels used:    1
+  2620 ;; Hardware stack levels required when called:    4
+  2621 ;; This function calls:
+  2622 ;;		_spi_write
+  2623 ;; This function is called by:
+  2624 ;;		_main
+  2625 ;;		_rx_init
+  2626 ;;		_tx_data
+  2627 ;; This function uses a non-reentrant model
+  2628 ;;
+  2629  026C                     _fifo_reset:	
+  2630                           
+  2631                           ;slaver.c: 367: U8 p[2];
+  2632                           ;slaver.c: 369: p[0] = 0x15;
+  2633                           
+  2634                           ; Regs used in _fifo_reset: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2635  026C  3015               	movlw	21
+  2636  026D  00FA               	movwf	fifo_reset@p
+  2637                           
+  2638                           ;slaver.c: 370: p[1] = 0x03;
+  2639  026E  3003               	movlw	3
+  2640  026F  00FB               	movwf	fifo_reset@p+1
+  2641                           
+  2642                           ;slaver.c: 371: spi_write(2,p);
+  2643  0270  307A               	movlw	fifo_reset@p& (0+255)
+  2644  0271  00F5               	movwf	?_spi_write
+  2645  0272  3002               	movlw	2
+  2646  0273  01F6               	clrf	?_spi_write+1
+  2647  0274  297D               	ljmp	_spi_write
+  2648  0275                     __end_of_fifo_reset:	
+  2649  0275                     __ptext454:	
+  2650 ;; =============== function _tx_start ends ============
+  2651                           
+  2652                           
+  2653 ;; *************** function _enable_tx_interrupt *****************
+  2654 ;; Defined at:
+  2655 ;;		line 401 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2656 ;; Parameters:    Size  Location     Type
+  2657 ;;		None
+  2658 ;; Auto vars:     Size  Location     Type
+  2659 ;;  p               6    0[BANK0 ] unsigned char [6]
+  2660 ;; Return value:  Size  Location     Type
+  2661 ;;		None               void
+  2662 ;; Registers used:
+  2663 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2664 ;; Tracked objects:
+  2665 ;;		On entry : 60/0
+  2666 ;;		On exit  : 60/0
+  2667 ;;		Unchanged: FFE9F/0
+  2668 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2669 ;;      Params:         0       0       0       0
+  2670 ;;      Locals:         0       6       0       0
+  2671 ;;      Temps:          0       0       0       0
+  2672 ;;      Totals:         0       6       0       0
+  2673 ;;Total ram usage:        6 bytes
+  2674 ;; Hardware stack levels used:    1
+  2675 ;; Hardware stack levels required when called:    4
+  2676 ;; This function calls:
+  2677 ;;		_spi_write
+  2678 ;; This function is called by:
+  2679 ;;		_tx_data
+  2680 ;; This function uses a non-reentrant model
+  2681 ;;
+  2682  0275                     _enable_tx_interrupt:	
+  2683                           
+  2684                           ;slaver.c: 402: U8 p[6];
+  2685                           ;slaver.c: 404: p[0] = 0x11;
+  2686                           
+  2687                           ; Regs used in _enable_tx_interrupt: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2688  0275  3011               	movlw	17
+  2689  0276  00D2               	movwf	enable_tx_interrupt@p
+  2690  0277  3002               	movlw	2
+  2691                           
+  2692                           ;slaver.c: 405: p[1] = 0x01;
+  2693  0278  01D3               	clrf	enable_tx_interrupt@p+1
+  2694  0279  0AD3               	incf	enable_tx_interrupt@p+1,f
+  2695                           
+  2696                           ;slaver.c: 406: p[2] = 0x02;
+  2697  027A  00D4               	movwf	enable_tx_interrupt@p+2
+  2698  027B  3020               	movlw	32
+  2699                           
+  2700                           ;slaver.c: 407: p[3] = 0x00;
+  2701  027C  01D5               	clrf	enable_tx_interrupt@p+3
+  2702                           
+  2703                           ;slaver.c: 408: p[4] = 0x01;
+  2704  027D  01D6               	clrf	enable_tx_interrupt@p+4
+  2705  027E  0AD6               	incf	enable_tx_interrupt@p+4,f
+  2706                           
+  2707                           ;slaver.c: 409: p[5] = 0x20;
+  2708  027F  00D7               	movwf	enable_tx_interrupt@p+5
+  2709                           
+  2710                           ;slaver.c: 410: spi_write(0x06, p);
+  2711  0280  3052               	movlw	enable_tx_interrupt@p& (0+255)
+  2712  0281  00F5               	movwf	?_spi_write
+  2713  0282  3006               	movlw	6
+  2714  0283  01F6               	clrf	?_spi_write+1
+  2715  0284  297D               	ljmp	_spi_write
+  2716  0285                     __end_of_enable_tx_interrupt:	
+  2717  0285                     __ptext453:	
+  2718 ;; =============== function _rx_start ends ============
+  2719                           
+  2720                           
+  2721 ;; *************** function _tx_start *****************
+  2722 ;; Defined at:
+  2723 ;;		line 423 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2724 ;; Parameters:    Size  Location     Type
+  2725 ;;		None
+  2726 ;; Auto vars:     Size  Location     Type
+  2727 ;;  p               5    0[BANK0 ] unsigned char [5]
+  2728 ;; Return value:  Size  Location     Type
+  2729 ;;		None               void
+  2730 ;; Registers used:
+  2731 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2732 ;; Tracked objects:
+  2733 ;;		On entry : 60/0
+  2734 ;;		On exit  : 60/0
+  2735 ;;		Unchanged: FFE9F/0
+  2736 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2737 ;;      Params:         0       0       0       0
+  2738 ;;      Locals:         0       5       0       0
+  2739 ;;      Temps:          0       0       0       0
+  2740 ;;      Totals:         0       5       0       0
+  2741 ;;Total ram usage:        5 bytes
+  2742 ;; Hardware stack levels used:    1
+  2743 ;; Hardware stack levels required when called:    4
+  2744 ;; This function calls:
+  2745 ;;		_spi_write
+  2746 ;; This function is called by:
+  2747 ;;		_tx_data
+  2748 ;; This function uses a non-reentrant model
+  2749 ;;
+  2750  0285                     _tx_start:	
+  2751                           
+  2752                           ;slaver.c: 424: U8 p[5];
+  2753                           ;slaver.c: 426: p[0] = 0x31 ;
+  2754                           
+  2755                           ; Regs used in _tx_start: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2756  0285  3031               	movlw	49
+  2757  0286  00D2               	movwf	tx_start@p
+  2758  0287  3030               	movlw	48
+  2759                           
+  2760                           ;slaver.c: 427: p[1] = 0 ;
+  2761  0288  01D3               	clrf	tx_start@p+1
+  2762                           
+  2763                           ;slaver.c: 428: p[2] = 0x30;
+  2764  0289  00D4               	movwf	tx_start@p+2
+  2765  028A  3052               	movlw	tx_start@p& (0+255)
+  2766                           
+  2767                           ;slaver.c: 429: p[3] = 0;
+  2768  028B  01D5               	clrf	tx_start@p+3
+  2769                           
+  2770                           ;slaver.c: 430: p[4] = 0;
+  2771  028C  01D6               	clrf	tx_start@p+4
+  2772                           
+  2773                           ;slaver.c: 431: spi_write(5, p);
+  2774  028D  00F5               	movwf	?_spi_write
+  2775  028E  3005               	movlw	5
+  2776  028F  01F6               	clrf	?_spi_write+1
+  2777  0290  297D               	ljmp	_spi_write
+  2778  0291                     __end_of_tx_start:	
+  2779  0291                     __ptext451:	
+  2780 ;; =============== function _rx_init ends ============
+  2781                           
+  2782                           
+  2783 ;; *************** function _clr_interrupt *****************
+  2784 ;; Defined at:
+  2785 ;;		line 375 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2786 ;; Parameters:    Size  Location     Type
+  2787 ;;		None
+  2788 ;; Auto vars:     Size  Location     Type
+  2789 ;;  p               4    3[BANK0 ] unsigned char [4]
+  2790 ;; Return value:  Size  Location     Type
+  2791 ;;		None               void
+  2792 ;; Registers used:
+  2793 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2794 ;; Tracked objects:
+  2795 ;;		On entry : 60/0
+  2796 ;;		On exit  : 60/0
+  2797 ;;		Unchanged: FFE9F/0
+  2798 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2799 ;;      Params:         0       0       0       0
+  2800 ;;      Locals:         0       4       0       0
+  2801 ;;      Temps:          0       0       0       0
+  2802 ;;      Totals:         0       4       0       0
+  2803 ;;Total ram usage:        4 bytes
+  2804 ;; Hardware stack levels used:    1
+  2805 ;; Hardware stack levels required when called:    5
+  2806 ;; This function calls:
+  2807 ;;		_spi_write
+  2808 ;;		_spi_read
+  2809 ;; This function is called by:
+  2810 ;;		_main
+  2811 ;;		_rx_init
+  2812 ;;		_tx_data
+  2813 ;; This function uses a non-reentrant model
+  2814 ;;
+  2815  0291                     _clr_interrupt:	
+  2816                           
+  2817                           ;slaver.c: 376: U8 p[4];
+  2818                           ;slaver.c: 378: p[0] = 0x20;
+  2819                           
+  2820                           ; Regs used in _clr_interrupt: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2821  0291  3020               	movlw	32
+  2822  0292  00D5               	movwf	clr_interrupt@p
+  2823  0293  3055               	movlw	clr_interrupt@p& (0+255)
+  2824                           
+  2825                           ;slaver.c: 379: p[1] = 0;
+  2826  0294  01D6               	clrf	clr_interrupt@p+1
+  2827                           
+  2828                           ;slaver.c: 380: p[2] = 0;
+  2829  0295  01D7               	clrf	clr_interrupt@p+2
+  2830                           
+  2831                           ;slaver.c: 381: p[3] = 0;
+  2832  0296  01D8               	clrf	clr_interrupt@p+3
+  2833                           
+  2834                           ;slaver.c: 382: spi_write(4,p);
+  2835  0297  00F5               	movwf	?_spi_write
+  2836  0298  3004               	movlw	4
+  2837  0299  01F6               	clrf	?_spi_write+1
+  2838  029A  217D  118A         	fcall	_spi_write
+  2839                           
+  2840                           ;slaver.c: 383: spi_read(9,0x20);
+  2841  029C  3020               	movlw	32
+  2842  029D  00FA               	movwf	?_spi_read
+  2843  029E  3009               	movlw	9
+  2844  029F  29DC               	ljmp	_spi_read
+  2845  02A0                     __end_of_clr_interrupt:	
+  2846  02A0                     __ptext455:	
+  2847 ;; =============== function _enable_tx_interrupt ends ============
+  2848                           
+  2849                           
+  2850 ;; *************** function _enable_rx_interrupt *****************
+  2851 ;; Defined at:
+  2852 ;;		line 387 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2853 ;; Parameters:    Size  Location     Type
+  2854 ;;		None
+  2855 ;; Auto vars:     Size  Location     Type
+  2856 ;;  p               7    0[BANK0 ] unsigned char [7]
+  2857 ;; Return value:  Size  Location     Type
+  2858 ;;		None               void
+  2859 ;; Registers used:
+  2860 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2861 ;; Tracked objects:
+  2862 ;;		On entry : 60/0
+  2863 ;;		On exit  : 60/0
+  2864 ;;		Unchanged: FFE9F/0
+  2865 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2866 ;;      Params:         0       0       0       0
+  2867 ;;      Locals:         0       7       0       0
+  2868 ;;      Temps:          0       0       0       0
+  2869 ;;      Totals:         0       7       0       0
+  2870 ;;Total ram usage:        7 bytes
+  2871 ;; Hardware stack levels used:    1
+  2872 ;; Hardware stack levels required when called:    4
+  2873 ;; This function calls:
+  2874 ;;		_spi_write
+  2875 ;; This function is called by:
+  2876 ;;		_rx_init
+  2877 ;; This function uses a non-reentrant model
+  2878 ;;
+  2879  02A0                     _enable_rx_interrupt:	
+  2880                           
+  2881                           ;slaver.c: 388: U8 p[7];
+  2882                           ;slaver.c: 390: p[0] = 0x11;
+  2883                           
+  2884                           ; Regs used in _enable_rx_interrupt: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2885  02A0  3011               	movlw	17
+  2886  02A1  00D2               	movwf	enable_rx_interrupt@p
+  2887  02A2  3003               	movlw	3
+  2888                           
+  2889                           ;slaver.c: 391: p[1] = 0x01;
+  2890  02A3  01D3               	clrf	enable_rx_interrupt@p+1
+  2891  02A4  0AD3               	incf	enable_rx_interrupt@p+1,f
+  2892                           
+  2893                           ;slaver.c: 392: p[2] = 0x03;
+  2894  02A5  00D4               	movwf	enable_rx_interrupt@p+2
+  2895                           
+  2896                           ;slaver.c: 393: p[3] = 0x00;
+  2897  02A6  01D5               	clrf	enable_rx_interrupt@p+3
+  2898                           
+  2899                           ;slaver.c: 394: p[4] = 0x03;
+  2900  02A7  00D6               	movwf	enable_rx_interrupt@p+4
+  2901                           
+  2902                           ;slaver.c: 395: p[5] = 0x18;
+  2903  02A8  3018               	movlw	24
+  2904  02A9  00D7               	movwf	enable_rx_interrupt@p+5
+  2905  02AA  3052               	movlw	enable_rx_interrupt@p& (0+255)
+  2906                           
+  2907                           ;slaver.c: 396: p[6] = 0x00;
+  2908  02AB  01D8               	clrf	enable_rx_interrupt@p+6
+  2909                           
+  2910                           ;slaver.c: 397: spi_write(0x07, p);
+  2911  02AC  00F5               	movwf	?_spi_write
+  2912  02AD  3007               	movlw	7
+  2913  02AE  01F6               	clrf	?_spi_write+1
+  2914  02AF  297D               	ljmp	_spi_write
+  2915  02B0                     __end_of_enable_rx_interrupt:	
+  2916  02B0                     __ptext452:	
+  2917 ;; =============== function _clr_interrupt ends ============
+  2918                           
+  2919                           
+  2920 ;; *************** function _rx_start *****************
+  2921 ;; Defined at:
+  2922 ;;		line 435 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  2923 ;; Parameters:    Size  Location     Type
+  2924 ;;		None
+  2925 ;; Auto vars:     Size  Location     Type
+  2926 ;;  p               8    0[BANK0 ] unsigned char [8]
+  2927 ;; Return value:  Size  Location     Type
+  2928 ;;		None               void
+  2929 ;; Registers used:
+  2930 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  2931 ;; Tracked objects:
+  2932 ;;		On entry : 60/0
+  2933 ;;		On exit  : 60/0
+  2934 ;;		Unchanged: FFE9F/0
+  2935 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  2936 ;;      Params:         0       0       0       0
+  2937 ;;      Locals:         0       8       0       0
+  2938 ;;      Temps:          0       0       0       0
+  2939 ;;      Totals:         0       8       0       0
+  2940 ;;Total ram usage:        8 bytes
+  2941 ;; Hardware stack levels used:    1
+  2942 ;; Hardware stack levels required when called:    4
+  2943 ;; This function calls:
+  2944 ;;		_spi_write
+  2945 ;; This function is called by:
+  2946 ;;		_rx_init
+  2947 ;; This function uses a non-reentrant model
+  2948 ;;
+  2949  02B0                     _rx_start:	
+  2950  02B0                     l3161:	
+  2951                           ; Regs used in _rx_start: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  2952                           
+  2953                           
+  2954                           ;slaver.c: 436: U8 p[8];
+  2955                           ;slaver.c: 438: p[0] = 0x32 ;
+  2956  02B0  3032               	movlw	50
+  2957  02B1  00D2               	movwf	rx_start@p
+  2958  02B2  3008               	movlw	8
+  2959                           
+  2960                           ;slaver.c: 439: p[1] = 0 ;
+  2961  02B3  01D3               	clrf	rx_start@p+1
+  2962                           
+  2963                           ;slaver.c: 440: p[2] = 0x00;
+  2964  02B4  01D4               	clrf	rx_start@p+2
+  2965                           
+  2966                           ;slaver.c: 441: p[3] = 0;
+  2967  02B5  01D5               	clrf	rx_start@p+3
+  2968                           
+  2969                           ;slaver.c: 442: p[4] = 0;
+  2970  02B6  01D6               	clrf	rx_start@p+4
+  2971                           
+  2972                           ;slaver.c: 443: p[5] = 0;
+  2973  02B7  01D7               	clrf	rx_start@p+5
+  2974                           
+  2975                           ;slaver.c: 444: p[6] = 0x08;
+  2976  02B8  00D8               	movwf	rx_start@p+6
+  2977                           
+  2978                           ;slaver.c: 445: p[7] = 0x08;
+  2979  02B9  00D9               	movwf	rx_start@p+7
+  2980                           
+  2981                           ;slaver.c: 446: spi_write(8, p);
+  2982  02BA  3052               	movlw	rx_start@p& (0+255)
+  2983  02BB  00F5               	movwf	?_spi_write
+  2984  02BC  3008               	movlw	8
+  2985  02BD  01F6               	clrf	?_spi_write+1
+  2986  02BE  297D               	ljmp	_spi_write
+  2987  02BF                     __end_of_rx_start:	
+  2988  02BF                     PL2:	
+  2989  02BF  00D6               	movwf	SI4463_init@app_command_buf+4
+  2990  02C0  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  2991  02C1  00F5               	movwf	?_spi_write
+  2992  02C2  3005               	movlw	5
+  2993  02C3  01F6               	clrf	?_spi_write+1
+  2994  02C4  0008               	return
+  2995  02C5                     PL3:	
+  2996  02C5  01D4               	clrf	SI4463_init@app_command_buf+2
+  2997  02C6  0AD4               	incf	SI4463_init@app_command_buf+2,f
+  2998  02C7  00D5               	movwf	SI4463_init@app_command_buf+3
+  2999  02C8  3440               	retlw	64
+  3000  02C9                     PL4:	
+  3001  02C9  00F5               	movwf	?_spi_write
+  3002  02CA  3080               	movlw	128
+  3003  02CB  00F6               	movwf	?_spi_write+1
+  3004  02CC  3410               	retlw	16
+  3005  02CD                     PL5:	
+  3006  02CD  00D5               	movwf	SI4463_init@app_command_buf+3
+  3007  02CE  3052               	movlw	SI4463_init@app_command_buf& (0+255)
+  3008  02CF  01D6               	clrf	SI4463_init@app_command_buf+4
+  3009  02D0  01D7               	clrf	SI4463_init@app_command_buf+5
+  3010  02D1  01D8               	clrf	SI4463_init@app_command_buf+6
+  3011  02D2  0008               	return
+  3012  02D3                     PL6:	
+  3013  02D3  00F5               	movwf	?_spi_write
+  3014  02D4  3080               	movlw	128
+  3015  02D5  00F6               	movwf	?_spi_write+1
+  3016  02D6  3405               	retlw	5
+  3017  02D7                     PL7:	
+  3018  02D7  00F5               	movwf	?_spi_write
+  3019  02D8  3080               	movlw	128
+  3020  02D9  00F6               	movwf	?_spi_write+1
+  3021  02DA  340C               	retlw	12
+  3022  02DB                     PL8:	
+  3023  02DB  3044               	movlw	68
+  3024  02DC  1707               	bsf	7,6
+  3025  02DD  1387               	bcf	7,7
+  3026  02DE  1307               	bcf	7,6
+  3027  02DF  0008               	return
+  3028                           
+  3029                           	psect	text464
+  3030  0456                     __ptext464:	
+  3031 ;; =============== function _sdn_reset ends ============
+  3032                           
+  3033                           
+  3034 ;; *************** function _delay_x10ms *****************
+  3035 ;; Defined at:
+  3036 ;;		line 660 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  3037 ;; Parameters:    Size  Location     Type
+  3038 ;;  dx10ms          2    4[COMMON] unsigned int 
+  3039 ;; Auto vars:     Size  Location     Type
+  3040 ;;  j               2    6[COMMON] unsigned int 
+  3041 ;; Return value:  Size  Location     Type
+  3042 ;;		None               void
+  3043 ;; Registers used:
+  3044 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  3045 ;; Tracked objects:
+  3046 ;;		On entry : 17F/20
+  3047 ;;		On exit  : 0/0
+  3048 ;;		Unchanged: FFE00/0
+  3049 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  3050 ;;      Params:         2       0       0       0
+  3051 ;;      Locals:         2       0       0       0
+  3052 ;;      Temps:          0       0       0       0
+  3053 ;;      Totals:         4       0       0       0
+  3054 ;;Total ram usage:        4 bytes
+  3055 ;; Hardware stack levels used:    1
+  3056 ;; Hardware stack levels required when called:    2
+  3057 ;; This function calls:
+  3058 ;;		_delay_10ms
+  3059 ;; This function is called by:
+  3060 ;;		_main
+  3061 ;; This function uses a non-reentrant model
+  3062 ;;
+  3063  0456                     _delay_x10ms:	
+  3064                           
+  3065                           ;slaver.c: 661: unsigned int j;
+  3066                           ;slaver.c: 663: for(j = 0; j<dx10ms; j++)
+  3067                           
+  3068                           ; Regs used in _delay_x10ms: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  3069  0456  01F6               	clrf	delay_x10ms@j
+  3070  0457  01F7               	clrf	delay_x10ms@j+1
+  3071  0458                     l2785:	
+  3072  0458  0875               	movf	delay_x10ms@dx10ms+1,w
+  3073  0459  0277               	subwf	delay_x10ms@j+1,w
+  3074  045A  1D03               	skipz
+  3075  045B  2C5E               	goto	u385
+  3076  045C  0874               	movf	delay_x10ms@dx10ms,w
+  3077  045D  0276               	subwf	delay_x10ms@j,w
+  3078  045E                     u385:	
+  3079  045E  1803               	btfsc	3,0
+  3080  045F  0008               	return
+  3081                           
+  3082                           ;slaver.c: 664: delay_10ms();
+  3083  0460  2466  118A         	fcall	_delay_10ms
+  3084  0462  0AF6               	incf	delay_x10ms@j,f
+  3085  0463  1903               	skipnz
+  3086  0464  0AF7               	incf	delay_x10ms@j+1,f
+  3087  0465  2C58               	goto	l2785
+  3088  0466                     __end_of_delay_x10ms:	
+  3089  0466                     __ptext465:	
+  3090 ;; =============== function _delay_x10ms ends ============
+  3091                           
+  3092                           
+  3093 ;; *************** function _delay_10ms *****************
+  3094 ;; Defined at:
+  3095 ;;		line 646 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  3096 ;; Parameters:    Size  Location     Type
+  3097 ;;		None
+  3098 ;; Auto vars:     Size  Location     Type
+  3099 ;;  i               2    2[COMMON] int 
+  3100 ;; Return value:  Size  Location     Type
+  3101 ;;		None               void
+  3102 ;; Registers used:
+  3103 ;;		wreg, status,2, status,0, btemp+1
+  3104 ;; Tracked objects:
+  3105 ;;		On entry : 0/20
+  3106 ;;		On exit  : 0/0
+  3107 ;;		Unchanged: FFE00/0
+  3108 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  3109 ;;      Params:         0       0       0       0
+  3110 ;;      Locals:         2       0       0       0
+  3111 ;;      Temps:          0       0       0       0
+  3112 ;;      Totals:         2       0       0       0
+  3113 ;;Total ram usage:        2 bytes
+  3114 ;; Hardware stack levels used:    1
+  3115 ;; Hardware stack levels required when called:    1
+  3116 ;; This function calls:
+  3117 ;;		Nothing
+  3118 ;; This function is called by:
+  3119 ;;		_delay_x10ms
+  3120 ;; This function uses a non-reentrant model
+  3121 ;;
+  3122  0466                     _delay_10ms:	
+  3123                           
+  3124                           ;slaver.c: 647: int i;
+  3125                           ;slaver.c: 649: for(i = 0; i<2472; i++)
+  3126                           
+  3127                           ; Regs used in _delay_10ms: [wreg+status,2+status,0+btemp+1]
+  3128  0466  01F2               	clrf	delay_10ms@i
+  3129  0467  01F3               	clrf	delay_10ms@i+1
+  3130  0468                     l2753:	
+  3131                           
+  3132                           ;slaver.c: 650: {
+  3133                           ;slaver.c: 651: ;
+  3134  0468  0AF2               	incf	delay_10ms@i,f
+  3135  0469  1903               	skipnz
+  3136  046A  0AF3               	incf	delay_10ms@i+1,f
+  3137  046B  0873               	movf	delay_10ms@i+1,w
+  3138  046C  3A80               	xorlw	128
+  3139  046D  00FF               	movwf	127
+  3140  046E  3089               	movlw	137
+  3141  046F  027F               	subwf	127,w
+  3142  0470  1D03               	skipz
+  3143  0471  2C74               	goto	u345
+  3144  0472  30A8               	movlw	168
+  3145  0473  0272               	subwf	delay_10ms@i,w
+  3146  0474                     u345:	
+  3147  0474  1C03               	skipc
+  3148  0475  2C68               	goto	l2753
+  3149  0476  0064               	clrwdt	;#
+  3150  0477  0008               	return
+  3151  0478                     __end_of_delay_10ms:	
+  3152                           
+  3153                           	psect	text468
+  3154  0493                     __ptext468:	
+  3155 ;; =============== function _delay_1ms ends ============
+  3156                           
+  3157                           
+  3158 ;; *************** function _timer1_init *****************
+  3159 ;; Defined at:
+  3160 ;;		line 682 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  3161 ;; Parameters:    Size  Location     Type
+  3162 ;;		None
+  3163 ;; Auto vars:     Size  Location     Type
+  3164 ;;		None
+  3165 ;; Return value:  Size  Location     Type
+  3166 ;;		None               void
+  3167 ;; Registers used:
+  3168 ;;		wreg
+  3169 ;; Tracked objects:
+  3170 ;;		On entry : 60/0
+  3171 ;;		On exit  : 60/0
+  3172 ;;		Unchanged: FFF9F/0
+  3173 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  3174 ;;      Params:         0       0       0       0
+  3175 ;;      Locals:         0       0       0       0
+  3176 ;;      Temps:          0       0       0       0
+  3177 ;;      Totals:         0       0       0       0
+  3178 ;;Total ram usage:        0 bytes
+  3179 ;; Hardware stack levels used:    1
+  3180 ;; Hardware stack levels required when called:    1
+  3181 ;; This function calls:
+  3182 ;;		Nothing
+  3183 ;; This function is called by:
+  3184 ;;		_main
+  3185 ;; This function uses a non-reentrant model
+  3186 ;;
+  3187  0493                     _timer1_init:	
+  3188                           
+  3189                           ;slaver.c: 683: T1CON = 0x31;
+  3190                           
+  3191                           ; Regs used in _timer1_init: [wreg]
+  3192  0493  3031               	movlw	49
+  3193  0494  0090               	movwf	16	;volatile
+  3194                           
+  3195                           ;slaver.c: 684: TMR1IE = 1;
+  3196  0495  1683               	bsf	3,5	;RP0=1, select bank1
+  3197  0496  3078               	movlw	120
+  3198  0497  140C               	bsf	12,0
+  3199                           
+  3200                           ;slaver.c: 685: TMR1L = 0x78;
+  3201  0498  1283               	bcf	3,5	;RP0=0, select bank0
+  3202  0499  008E               	movwf	14	;volatile
+  3203                           
+  3204                           ;slaver.c: 686: TMR1H = 0xec;
+  3205  049A  30EC               	movlw	236
+  3206  049B  008F               	movwf	15	;volatile
+  3207  049C  0008               	return
+  3208  049D                     __end_of_timer1_init:	
+  3209                           
+  3210                           	psect	text469
+  3211  0488                     __ptext469:	
+  3212 ;; =============== function _timer1_init ends ============
+  3213                           
+  3214                           
+  3215 ;; *************** function _nop_10 *****************
+  3216 ;; Defined at:
+  3217 ;;		line 668 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  3218 ;; Parameters:    Size  Location     Type
+  3219 ;;		None
+  3220 ;; Auto vars:     Size  Location     Type
+  3221 ;;		None
+  3222 ;; Return value:  Size  Location     Type
+  3223 ;;		None               void
+  3224 ;; Registers used:
+  3225 ;;		None
+  3226 ;; Tracked objects:
+  3227 ;;		On entry : 60/0
+  3228 ;;		On exit  : 0/0
+  3229 ;;		Unchanged: FFE00/0
+  3230 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  3231 ;;      Params:         0       0       0       0
+  3232 ;;      Locals:         0       0       0       0
+  3233 ;;      Temps:          0       0       0       0
+  3234 ;;      Totals:         0       0       0       0
+  3235 ;;Total ram usage:        0 bytes
+  3236 ;; Hardware stack levels used:    1
+  3237 ;; Hardware stack levels required when called:    1
+  3238 ;; This function calls:
+  3239 ;;		Nothing
+  3240 ;; This function is called by:
+  3241 ;;		_main
+  3242 ;; This function uses a non-reentrant model
+  3243 ;;
+  3244  0488                     _nop_10:	
+  3245                           
+  3246                           ; Regs used in _nop_10: []
+  3247  0488  0000               	nop	;#
+  3248  0489  0000               	nop	;#
+  3249  048A  0000               	nop	;#
+  3250  048B  0000               	nop	;#
+  3251  048C  0000               	nop	;#
+  3252  048D  0000               	nop	;#
+  3253  048E  0000               	nop	;#
+  3254  048F  0000               	nop	;#
+  3255  0490  0000               	nop	;#
+  3256  0491  0000               	nop	;#
+  3257  0492  0008               	return
+  3258  0493                     __end_of_nop_10:	
+  3259                           
+  3260                           	psect	text470
+  3261  0478                     __ptext470:	
+  3262 ;; =============== function _nop_10 ends ============
+  3263                           
+  3264                           
+  3265 ;; *************** function _port_init *****************
+  3266 ;; Defined at:
+  3267 ;;		line 621 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  3268 ;; Parameters:    Size  Location     Type
+  3269 ;;		None
+  3270 ;; Auto vars:     Size  Location     Type
+  3271 ;;		None
+  3272 ;; Return value:  Size  Location     Type
+  3273 ;;		None               void
+  3274 ;; Registers used:
+  3275 ;;		wreg, status,2
+  3276 ;; Tracked objects:
+  3277 ;;		On entry : 0/20
+  3278 ;;		On exit  : 60/0
+  3279 ;;		Unchanged: FFF9F/0
+  3280 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  3281 ;;      Params:         0       0       0       0
+  3282 ;;      Locals:         0       0       0       0
+  3283 ;;      Temps:          0       0       0       0
+  3284 ;;      Totals:         0       0       0       0
+  3285 ;;Total ram usage:        0 bytes
+  3286 ;; Hardware stack levels used:    1
+  3287 ;; Hardware stack levels required when called:    1
+  3288 ;; This function calls:
+  3289 ;;		Nothing
+  3290 ;; This function is called by:
+  3291 ;;		_main
+  3292 ;; This function uses a non-reentrant model
+  3293 ;;
+  3294  0478                     _port_init:	
+  3295                           
+  3296                           ;slaver.c: 622: ANSEL=0X00;
+  3297                           
+  3298                           ; Regs used in _port_init: [wreg+status,2]
+  3299  0478  1283               	bcf	3,5	;RP0=0, select bank2
+  3300  0479  1703               	bsf	3,6	;RP1=1, select bank2
+  3301  047A  019E               	clrf	30	;volatile
+  3302                           
+  3303                           ;slaver.c: 623: ANSELH=0X00;
+  3304  047B  019F               	clrf	31	;volatile
+  3305                           
+  3306                           ;slaver.c: 624: WPUA=0X17;
+  3307  047C  3017               	movlw	23
+  3308  047D  1683               	bsf	3,5	;RP0=1, select bank1
+  3309  047E  1303               	bcf	3,6	;RP1=0, select bank1
+  3310  047F  0095               	movwf	21	;volatile
+  3311                           
+  3312                           ;slaver.c: 625: IOCA=0X00;
+  3313  0480  0196               	clrf	22	;volatile
+  3314                           
+  3315                           ;slaver.c: 626: TRISA=0X00;
+  3316  0481  0185               	clrf	5	;volatile
+  3317                           
+  3318                           ;slaver.c: 627: TRISC=0X1D;
+  3319  0482  301D               	movlw	29
+  3320  0483  0087               	movwf	7	;volatile
+  3321                           
+  3322                           ;slaver.c: 628: PORTC=0X80;
+  3323  0484  3080               	movlw	128
+  3324  0485  1283               	bcf	3,5	;RP0=0, select bank0
+  3325  0486  0087               	movwf	7	;volatile
+  3326  0487  0008               	return
+  3327  0488                     __end_of_port_init:	
+  3328                           
+  3329                           	psect	text471
+  3330  0430                     __ptext471:	
+  3331 ;; =============== function _port_init ends ============
+  3332                           
+  3333                           
+  3334 ;; *************** function _ISR_timer *****************
+  3335 ;; Defined at:
+  3336 ;;		line 691 in file "E:\My Design\3-si4463_demo\si4463\si4463_VC2\slaver\slaver.c"
+  3337 ;; Parameters:    Size  Location     Type
+  3338 ;;		None
+  3339 ;; Auto vars:     Size  Location     Type
+  3340 ;;		None
+  3341 ;; Return value:  Size  Location     Type
+  3342 ;;		None               void
+  3343 ;; Registers used:
+  3344 ;;		wreg, status,2, status,0
+  3345 ;; Tracked objects:
+  3346 ;;		On entry : 0/0
+  3347 ;;		On exit  : 60/0
+  3348 ;;		Unchanged: FFF9F/0
+  3349 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+  3350 ;;      Params:         0       0       0       0
+  3351 ;;      Locals:         0       0       0       0
+  3352 ;;      Temps:          2       0       0       0
+  3353 ;;      Totals:         2       0       0       0
+  3354 ;;Total ram usage:        2 bytes
+  3355 ;; Hardware stack levels used:    1
+  3356 ;; This function calls:
+  3357 ;;		Nothing
+  3358 ;; This function is called by:
+  3359 ;;		Interrupt level 1
+  3360 ;; This function uses a non-reentrant model
+  3361 ;;
+  3362  0430                     _ISR_timer:	
+  3363                           
+  3364                           ;slaver.c: 692: if(TMR1IF)
+  3365  0430  1283               	bcf	3,5	;RP0=0, select bank0
+  3366  0431  1303               	bcf	3,6	;RP1=0, select bank0
+  3367  0432  1C0C               	btfss	12,0
+  3368  0433  2C4F               	goto	i1l982
+  3369                           
+  3370                           ;slaver.c: 693: {
+  3371                           ;slaver.c: 695: TMR1L = 0x78;
+  3372  0434  3078               	movlw	120
+  3373  0435  008E               	movwf	14	;volatile
+  3374                           
+  3375                           ;slaver.c: 696: TMR1H = 0xec;
+  3376  0436  30EC               	movlw	236
+  3377  0437  008F               	movwf	15	;volatile
+  3378                           
+  3379                           ;slaver.c: 698: rf_timeout++;
+  3380  0438  0ACF               	incf	_rf_timeout,f
+  3381  0439  1903               	skipnz
+  3382  043A  0AD0               	incf	_rf_timeout+1,f
+  3383                           
+  3384                           ;slaver.c: 699: if(rf_timeout == 20)
+  3385  043B  084F               	movf	_rf_timeout,w
+  3386  043C  3A14               	xorlw	20
+  3387  043D  0450               	iorwf	_rf_timeout+1,w
+  3388  043E  1D03               	skipz
+  3389  043F  2C43               	goto	i1l2769
+  3390                           
+  3391                           ;slaver.c: 700: {
+  3392                           ;slaver.c: 701: rf_timeout=0;
+  3393  0440  01CF               	clrf	_rf_timeout
+  3394  0441  01D0               	clrf	_rf_timeout+1
+  3395                           
+  3396                           ;slaver.c: 702: Flag.rf_reach_timeout = 1;
+  3397  0442  1551               	bsf	_Flag,2
+  3398  0443                     i1l2769:	
+  3399                           
+  3400                           ;slaver.c: 703: }
+  3401                           ;slaver.c: 705: count_1hz++;
+  3402  0443  0ACD               	incf	_count_1hz,f
+  3403  0444  1903               	skipnz
+  3404  0445  0ACE               	incf	_count_1hz+1,f
+  3405                           
+  3406                           ;slaver.c: 706: if(count_1hz==60)
+  3407  0446  084D               	movf	_count_1hz,w
+  3408  0447  3A3C               	xorlw	60
+  3409  0448  044E               	iorwf	_count_1hz+1,w
+  3410  0449  1D03               	skipz
+  3411  044A  2C4E               	goto	i1l2777
+  3412                           
+  3413                           ;slaver.c: 707: {
+  3414                           ;slaver.c: 708: count_1hz=0;
+  3415  044B  01CD               	clrf	_count_1hz
+  3416  044C  01CE               	clrf	_count_1hz+1
+  3417                           
+  3418                           ;slaver.c: 709: Flag.reach_1s = 1;
+  3419  044D  1451               	bsf	_Flag,0
+  3420  044E                     i1l2777:	
+  3421                           
+  3422                           ;slaver.c: 711: }
+  3423                           ;slaver.c: 713: TMR1IF=0;
+  3424  044E  100C               	bcf	12,0
+  3425  044F                     i1l982:	
+  3426  044F  0871               	movf	??_ISR_timer+1,w
+  3427  0450  008A               	movwf	10
+  3428  0451  0E70               	swapf	??_ISR_timer^(0+-128),w
+  3429  0452  0083               	movwf	3
+  3430  0453  0EFE               	swapf	126,f
+  3431  0454  0E7E               	swapf	126,w
+  3432  0455  0009               	retfie
+  3433  0456                     __end_of_ISR_timer:	
+  3434                           
+  3435                           	psect	intentry
+  3436  0004                     __pintentry:	
+  3437                           ; Regs used in _ISR_timer: [wreg+status,2+status,0]
+  3438                           
+  3439  0004                     interrupt_function:	
+  3440  007E                     saved_w	set	btemp
+  3441  0004  00FE               	movwf	btemp
+  3442  0005  0E03               	swapf	3,w
+  3443  0006  00F0               	movwf	??_ISR_timer
+  3444  0007  080A               	movf	10,w
+  3445  0008  00F1               	movwf	??_ISR_timer+1
+  3446  0009  118A  2C30         	ljmp	_ISR_timer
+  3447                           
+  3448                           	psect	text472
+  3449  0000                     __ptext472:	
+  3450 ;; =============== function _ISR_timer ends ============
+  3451                           
+  3452  007E                     btemp	set	126	;btemp
+  3453  007E                     wtemp0	set	126
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Jul 22 16:02:54 2015
+
+                             pc 0002                              fsr 0004                             l900 0213  
+                           l901 021A                             l902 021B                             l903 0000  
+                           l911 019D                             l912 0000                             l915 0000  
+                           l923 01F7                             l940 01C6                             l908 0187  
+                           l932 01A8                             l926 020A                             l951 0000  
+                           l943 0000                             l935 0000                             l863 0000  
+                           l927 0000                             l872 0000                             l881 0000  
+                           l970 0000                             l866 0000                             l890 0027  
+                           l875 0000                             l956 025B                             l964 0000  
+                           l948 0000                             l884 0000                             l973 0000  
+                           l869 0000                             l959 0000                             l887 0000  
+                           l976 0000                             l897 020E                             l899 0212  
+                           _RA0 0028                             _RA1 0029                             _RC1 0039  
+                           _RC2 003A                             _RC4 003C                             _RC5 003D  
+                           _RC6 003E                             _RC7 003F                             u345 0474  
+                           u385 045E                  clr_interrupt@p 0055                             fsr0 0004  
+                           indf 0000                 spi_write_fifo@i 0075                _RF_POWER_UP_data 031E  
+                          l3001 0000                            l3011 0000                            l3003 0000  
+                          l3021 0000                            l3013 0000                            l3005 0000  
+                          l3101 0000                            l3031 0000                            l3023 0000  
+                          l3015 0000                            l3007 0000                            l3111 0000  
+                          l3103 0000                            l3041 0000                            l3033 0000  
+                          l3025 0000                            l3017 0000                            l3009 0000  
+                          l3201 0000                            l3051 0000                            l3043 0000  
+                          l3035 0000                            l3027 0000                            l3019 0000  
+                          l3123 0000                            l3115 01EF                            l3107 01E0  
+                          l3131 0000                            l3211 0000                            l3203 0000  
+                          l3061 0000                            l3053 0000                            l3045 0000  
+                          l3037 0000                            l3029 0000                            l3125 01FC  
+                          l3117 0000                            l3109 01E8                            l3133 0000  
+                          l3141 0000                            l3205 0000                            l3221 0000  
+                          l3071 0000                            l3063 0000                            l3055 0000  
+                          l3047 0000                            l3039 0000                            l3119 0000  
+                          l3135 0000                            l3127 0000                            l3151 0000  
+                          l3143 0000                            l3215 0000                            l3207 0000  
+                          l3231 0000                            l3223 0000                            l3081 0000  
+                          l3073 0000                            l3065 0000                            l3057 0000  
+                          l3049 0000                            l3137 0000                            l3129 0000  
+                          l3145 0000                            l3153 0000                            l3161 02B0  
+                          l3209 0000                            l3241 0000                            l3233 0000  
+                          l3225 0000                            l3217 0000                            l3091 0000  
+                          l3083 0000                            l3075 0000                            l3067 0000  
+                          l3059 0000                            l3139 0000                            l3147 0000  
+                          l3155 0000                            l3171 0000                            l3163 0000  
+                          l3243 0000                            l3235 0000                            l3227 0000  
+                          l3219 0000                            l2701 0000                            l3093 0000  
+                          l3085 0000                            l3077 0000                            l3069 0000  
+                          l3149 0000                            l3157 0000                            l3173 0000  
+                          l3165 0000                            l3181 0000                            l3261 0000  
+                          l3253 0000                            l3245 0000                            l3237 0000  
+                          l3229 0000                            l2703 0000                            l2711 0000  
+                          l3095 0000                            l3087 0000                            l3079 0000  
+                          l3159 0000                            l3175 0000                            l3167 0000  
+                          l3183 0000                            l3191 0000                            l3271 0000  
+                          l3247 03FD                            l3239 0000                            l2705 0000  
+                          l2721 0000                            l3089 0000                            l3097 0000  
+                          l3177 0000                            l3169 0000                            l3185 0000  
+                          l3193 0000                            l3281 0000                            l3257 0000  
+                          l2707 0000                            l2723 0000                            l2811 0000  
+                          l3099 0000                            l3187 0000                            l3179 0000  
+                          l3195 0000                            l3267 040E                            l3259 0000  
+                          l3283 042C                            l2709 0000                            l2741 0000  
+                          l2805 0241                            l2813 0000                            l2901 0000  
+                          l3189 0000                            l3197 0000                            l3269 0000  
+                          l2727 0253                            l2807 0000                            l2815 0000  
+                          l2831 0000                            l2823 0000                            l2911 0000  
+                          l2903 0000                            l3199 0000                            l3279 0000  
+                          l2729 0000                            l2753 0468                            l2809 0000  
+                          l2817 0000                            l2841 0000                            l2921 0000  
+                          l2913 0000                            l2905 0000                            l2739 0000  
+                          l2755 0000                            l2747 0000                            l2819 0000  
+                          l2827 01BE                            l2843 0000                            l2931 0000  
+                          l2923 0000                            l2915 0000                            l2907 0000  
+                          l2837 01CD                            l2829 0000                            l2853 0000  
+                          l2941 0000                            l2933 0000                            l2925 0000  
+                          l2917 0000                            l2909 0000                            l2695 0000  
+                          l2783 0000                            l2791 0000                            l2839 0000  
+                          l2855 0000                            l2847 017F                            l2863 01A0  
+                          l2951 0000                            l2943 0000                            l2935 0000  
+                          l2927 0000                            l2919 0000                            l2697 0000  
+                          l2785 0458                            l2793 0000                            l2857 018A  
+                          l2849 0000                            l2873 01AE                            l2865 0000  
+                          l2961 0000                            l2953 0000                            l2945 0000  
+                          l2937 0000                            l2929 0000                            l2881 0000  
+                          l2699 0000                            l2779 0000                            l2795 0000  
+                          l2787 0000                            l2875 0000                            l2867 0000  
+                          l2859 0000                            l2971 0000                            l2963 0000  
+                          l2955 0000                            l2947 0000                            l2939 0000  
+                          l2891 0000                            l2883 0000                            l2797 0000  
+                          l2789 0000                            l2877 0000                            l2981 0000  
+                          l2973 0000                            l2965 0000                            l2957 0000  
+                          l2949 0000                            l2893 0000                            l2885 0000  
+                          l2799 0000                            l2991 0000                            l2983 0000  
+                          l2975 0000                            l2967 0000                            l2959 0000  
+                          l2895 0000                            l2887 0000                            l2879 0031  
+                          l2993 0000                            l2985 0000                            l2977 0000  
+                          l2969 0000                            l2897 0000                            l2889 0000  
+                          l2995 0000                            l2987 0000                            l2979 0000  
+                          l2899 0000                            l2997 0000                            l2989 0000  
+                          l2999 0000                            _IOCA 0096                            _WPUA 0095  
+      _BCR_NCO_OFFSET_2_12_data 0335                            _Flag 0051          __end_of_spi_write_fifo 01BD  
+                  spi_byte@data 0073                            _main 03D7                            btemp 007E  
+                          start 000B                 ??_clr_interrupt 007B             spi_read@data_length 0052  
+                         ?_main 0070                           _ANSEL 011E                           _T1CON 0010  
+                         i1l982 044F                           _TMR1H 000F                           _TMR1L 000E  
+                         _PORTC 0007     _RF_MODEM_RAW_CONTROL_8_data 03A1                           _TRISA 0085  
+                         _TRISC 0087              __size_of_ISR_timer 0026             spi_read@api_command 007A  
+                         main@i 0067                           pclath 000A                 ?_spi_write_fifo 0070  
+               ??_spi_read_fifo 0075                 __end_of_rx_init 0015                 __end_of_tx_data 0031  
+                         status 0003                           wtemp0 007E            __size_of_delay_x10ms 0010  
+                  __end_of_main 0430              spi_write@tx_length 0077                          ??_main 007C  
+              _COE7_7_0_12_data 0365                          _ANSELH 011F                          i1l2761 0000  
+                        i1l2771 0000                          i1l2763 0000                          i1l2757 0000  
+                        i1l2775 0000                          i1l2767 0000                          i1l2777 044E  
+                        i1l2769 0443                          _INTCON 000B            __size_of_SI4463_init 014C  
+                        _OSCCON 008F                          _TMR1IE 0460                          _TMR1IF 0060  
+                        _WDTCON 0097               __end_of_ISR_timer 0456         _AGC_WINDOW_SIZE_12_data 0325  
+                  ?_timer1_init 0070      SI4463_init@app_command_buf 0052                          _nop_10 0488  
+                        _rx_buf 0020                          clrloop 04A7                          saved_w 007E  
+              __end_of_spi_byte 0223                __end_of_spi_read 020C   _RF_MODEM_AFC_LIMITER_1_3_data 03C0  
+                     ??_rx_init 007C                       ??_tx_data 007C                __end_of_rx_start 02BF  
+              __end_of_tx_start 0291                  spi_read_fifo@i 0075                  __pcstackCOMMON 0070  
+            __size_of_check_cts 0009              __size_of_delay_1ms 0019    __size_of_enable_rx_interrupt 0010  
+                    __pbssBANK0 0020  _RF_MODEM_TX_RAMP_DELAY_12_data 0385                      _delay_10ms 0466  
+      _RF_FRR_CTL_A_MODE_4_data 03B8                      __pmaintext 03D7                      __pintentry 0004  
+            __size_of_sdn_reset 0027                         ?_nop_10 0070    __size_of_enable_tx_interrupt 0010  
+                    _fifo_reset 026C              __size_of_port_init 0010                ??_spi_write_fifo 0075  
+            __size_of_spi_write 0022               __end_of_check_cts 022C               __end_of_delay_1ms 026C  
+         __end_of_clr_interrupt 02A0                       ?_spi_byte 0070                       ?_spi_read 007A  
+                    check_cts@i 0074                       ?_rx_start 0070                 __size_of_nop_10 000B  
+                     ?_tx_start 0070            __size_of_timer1_init 000A                      delay_1ms@i 0074  
+                       _rx_init 000D                         _tx_data 0015                      _rf_timeout 004F  
+          end_of_initialization 04A3               __end_of_sdn_reset 0253                   ??_delay_x10ms 0076  
+                   ?_delay_10ms 0070             delay_1ms@delay_time 0072           __end_of_spi_read_fifo 01DC  
+             __end_of_port_init 0488               __end_of_spi_write 019F                      ??_spi_byte 0072  
+                    ??_spi_read 007B                      ??_rx_start 007A               _COE13_7_0_12_data 0345  
+                    ??_tx_start 007A                       _ISR_timer 0430                     ?_fifo_reset 0070  
+                 ??_SI4463_init 007A             _enable_rx_interrupt 02A0                      main@chksum 0066  
+                    _tx_ph_data 0310             __end_of_delay_x10ms 0466            ?_enable_rx_interrupt 0070  
+                    ?_ISR_timer 0070                  __end_of_nop_10 0493             __size_of_delay_10ms 0012  
+           start_initialization 049D       _RF_MODEM_MOD_TYPE_12_data 0375      _RF_MODEM_FREQ_DEV_0_1_data 03D2  
+           _enable_tx_interrupt 0275             __end_of_SI4463_init 017D             __size_of_fifo_reset 0009  
+                      ??_nop_10 0072           ??_enable_rx_interrupt 007A            ?_enable_tx_interrupt 0070  
+                 __pcstackBANK0 0052            enable_rx_interrupt@p 0052                     _delay_x10ms 0456  
+                     _check_cts 0223                       _delay_1ms 0253                       __ptext450 000D  
+                     __ptext451 0291                       __ptext460 017D                       __ptext452 02B0  
+                     __ptext461 01BD                       __ptext453 0285                       __ptext470 0478  
+                     __ptext462 0223                       __ptext454 0275                       __ptext471 0430  
+                     __ptext463 022C                       __ptext455 02A0                       __ptext472 0000  
+                     __ptext464 0456                       __ptext456 01DC                       __ptext465 0466  
+                     __ptext457 026C                       __ptext449 0015                       __ptext466 020C  
+                     __ptext458 0031                       __ptext467 0253                       __ptext459 019F  
+                     __ptext468 0493                       __ptext469 0488           ??_enable_tx_interrupt 007A  
+             __size_of_spi_byte 0017               __size_of_spi_read 0030                     ??_ISR_timer 0070  
+                     __pstrings 0300               __size_of_rx_start 000F                      sdn_reset@i 0076  
+                     _count_1hz 004D               __size_of_tx_start 000C                        ?_rx_init 0070  
+                      ?_tx_data 0070                     _SI4463_init 0031                    ??_delay_10ms 0072  
+             interrupt_function 0004                      ?_check_cts 0070                       _sdn_reset 022C  
+                    ?_delay_1ms 0072                   ??_timer1_init 0072                    delay_x10ms@j 0076  
+                     _port_init 0478                       _spi_write 017D                     __stringbase 030F  
+                  ??_fifo_reset 007A                _COE1_7_0_12_data 0355              __end_of_delay_10ms 0478  
+        __size_of_clr_interrupt 000F                      spi_write@i 0079                      spi_write@j 0078  
+                    spi_write@p 0075         __size_of_spi_write_fifo 001E                      ?_sdn_reset 0070  
+            __end_of_fifo_reset 0275                      ?_port_init 0070                      ?_spi_write 0075  
+           __end_of_timer1_init 049D          __size_of_spi_read_fifo 001F                     delay_10ms@i 0072  
+              __size_of_rx_init 0008                __size_of_tx_data 001C                   __size_of_main 0059  
+                   ??_check_cts 0074               delay_x10ms@dx10ms 0074                     ??_delay_1ms 0074  
+    _RF_SYNTH_PFDCP_CPFF_7_data 03AD                        clear_ram 04A6                   _clr_interrupt 0291  
+                      _spi_byte 020C                        _spi_read 01DC                        _rx_start 02B0  
+                     spi_byte@i 0072                       spi_read@i 0054                       spi_read@p 0053  
+                      _tx_start 0285     _RF_MODEM_RAW_SEARCH2_2_data 03C7                       rx_start@p 0052  
+          enable_tx_interrupt@p 0052                        intlevel1 0000                    ?_delay_x10ms 0074  
+   _RF_MODEM_AGC_CONTROL_1_data 03CD                     ??_sdn_reset 0076                       tx_start@p 0052  
+                 _spi_read_fifo 01BD                       stringcode 030A     __end_of_enable_rx_interrupt 02B0  
+                ?_clr_interrupt 0070                     _timer1_init 0493                     ??_port_init 0072  
+                   ??_spi_write 0077                    _spi_read_buf 0039                        stringdir 030A  
+                      stringtab 0300     _RF_FREQ_CONTROL_INTE_8_data 0395                    ?_SI4463_init 0070  
+                _spi_write_fifo 019F                  ?_spi_read_fifo 0070                     fifo_reset@p 007A  
+   __end_of_enable_tx_interrupt 0285  

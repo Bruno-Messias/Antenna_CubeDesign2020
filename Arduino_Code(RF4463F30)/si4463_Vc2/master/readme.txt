@@ -1,0 +1,27 @@
+MCU: PIC16F689
+RF module: SI4463PRO  C2 version
+TOOLCHAIN NAME: MPLAB IDE
+TOOLCHAIN VERSION: 8.70
+
+MCU: PIC16F689
+RF module: RF4463PRO
+Compile: Picc
+TOOLCHAIN NAME: MPLAB IDE
+TOOLCHAIN VERSION: 8.70
+
+Function :  Tx 10 bytes of payload every 1 second.
+
+Program features:sending fixed test data per second per second: 				0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x6d,
+		chksum: 0x6d = (0x41 + 0x42 + 0x43 + 0x44 + 0x45 + 0x46 + 0x47 + 0x48 + 0x49)
+
+
+SI4463 parameters:
+/*
+// Crys_freq(Hz): 30000000    Crys_tol(ppm): 10    IF_mode: 2    High_perf_Ch_Fil: 1    OSRtune: 0    Ch_Fil_Bw_AFC: 0    ANT_DIV: 0    PM_pattern: 0    
+// MOD_type: 2    Rsymb(sps): 1200    Fdev(Hz): 5000    RXBW(Hz): 150000    Manchester: 0    AFC_en: 0    Rsymb_error: 0.0    Chip-Version: 2    
+// RF Freq.(MHz): 433.5    API_TC: 29    fhst: 250000    inputBW: 0    BERT: 0    RAW_dout: 0    D_source: 0    Hi_pfm_div: 1    
+// API_ARR_Det_en: 0    Fdev_error: 0    API_ETSI: 0    
+// 
+// # WB filter 1 (BW =  28.62 kHz);  NB-filter 1 (BW = 28.62 kHz) // 
+// Modulation index: 8.333
+*/
