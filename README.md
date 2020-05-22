@@ -16,7 +16,7 @@ Repository of devenloping an antenna for CubeDesign2020
   * Conector PC104
   * 1x SPI Bus 3 - Para telemetria do EPS(2kbps)
   * 1x SPI Bus 4 - Para as imagens da rasp(8Mbps)
-  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena)
+  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena) - *(possivelmente opcional)*
   * 4xGPIO para controles gerais da radio
 
 * Frequência de operação: 437MHz - 438MHz(NGHam protocol) - pesquisar
