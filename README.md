@@ -37,8 +37,8 @@ Repository of devenloping an antenna for CubeDesign2020
   * Alimentaçõa:
     * 3.3V e 90mA
   * Conexões
-    * 1x I2C - para controle de abertura from TT&C
-    * !x JTAG da TT&C
+    * 1x I2C - para controle de abertura from *TT&C*
+    * !x JTAG da *TT&C*
     
      
 
