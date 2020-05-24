@@ -14,20 +14,24 @@ Repository of devenloping an antenna for CubeDesign2020
 * Conexões:
 
   * Conector PC104
-  * 2x SPI Bus - para Dados da Raspberry e para Beacon
-  * 2x UART bus - para dados da EPS - telemetria no beacon outro para debug
-  * 2xI2C para o módulo da antenna e para a operação do Raspberry
-  * 5xGPIO para controles gerais da radio
+  * 1x SPI Bus 3 - Para telemetria do EPS(2kbps)
+  * 1x SPI Bus 4 - Para as imagens da rasp(8Mbps)
+  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena) - *(possivelmente opcional)*
+  * 4xGPIO para controles gerais da radio
 
 * Frequência de operação: 437MHz - 438MHz(NGHam protocol) - pesquisar
 * Modulacçao dos dados: GFSK(BT= 0.5)
-
  ---
- 
  ## Antenna
  
  ### Overview: 
 * Impedâcia casada em 50 Ohms
 * Conector SMA e cabos coaxiais
-* ...
+* Antena:
+  * Dipolo de 1/4 de Onda:
+     * Antena Radio: 17 cm
+     * Antena Beacon: 51 cm
+* Sistema de deploy:
+  * ...
+     
 
