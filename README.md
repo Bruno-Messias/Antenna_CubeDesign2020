@@ -34,6 +34,6 @@ Repository of devenloping an antenna for CubeDesign2020
      * Antena Radio: 17 cm
      * Antena Beacon: 51 cm
 * Sistema de deploy:
-  * ...
+  * ISIS antenna
      
 
