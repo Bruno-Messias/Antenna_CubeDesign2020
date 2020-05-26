@@ -34,7 +34,7 @@ Repository of devenloping an antenna for CubeDesign2020
      * Antena Radio: 17 cm
      * Antena Beacon: 51 cm
 * Sistema de deploy:
-  * Alimentaçõa:
+  * Alimentação:
     * 3.3V e 90mA
   * Conexões
     * 1x I2C - para controle de abertura, da *TT&C*
