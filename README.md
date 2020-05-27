@@ -16,7 +16,7 @@ Repository of devenloping an antenna for CubeDesign2020
   * Conector PC104
   * 1x SPI Bus 3 - Para telemetria do EPS(2kbps)
   * 1x SPI Bus 4 - Para as imagens da rasp(8Mbps)
-  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena) - *(possivelmente opcional)*
+  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena)
   * 4xGPIO para controles gerais da radio
   
   Obs: Possibilidade de usar o beacon para a telemetria das baterias e sensoriamento ADCS pelo Beacon -> necessidade da antena de 51 cm
