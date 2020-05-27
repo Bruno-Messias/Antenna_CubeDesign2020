@@ -39,6 +39,9 @@ Repository of devenloping an antenna for CubeDesign2020
   * Conexões
     * 1x I2C - para controle de abertura, da *TT&C*
     * 1x JTAG da *TT&C*
-    
-     
+
+---
+## Diagram:
+
+![](https://github.com/Bruno-Messias/Antenna_CubeDesign2020/blob/master/Communication_Systeam-TTC%20(2).png)
 
