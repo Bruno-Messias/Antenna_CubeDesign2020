@@ -8,7 +8,7 @@ Repository of devenloping an antenna for CubeDesign2020
 ### Overview :
 * Alimentação:
 
-  * 3.3V e 30 mA - para o microcontrolador(apenas necessário para o beacon)
+  * 3.3V e 30 mA - para o microcontrolador
   * 5V para alimentação do módulo de transmissão
 
 * Conexões:
@@ -16,8 +16,10 @@ Repository of devenloping an antenna for CubeDesign2020
   * Conector PC104
   * 1x SPI Bus 3 - Para telemetria do EPS(2kbps)
   * 1x SPI Bus 4 - Para as imagens da rasp(8Mbps)
-  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena) - *(possivelmente opcional)*
+  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena)
   * 4xGPIO para controles gerais da radio
+  
+  Obs: Possibilidade de usar o beacon para a telemetria das baterias e sensoriamento ADCS pelo Beacon -> necessidade da antena de 51 cm
 
 * Frequência de operação: 437MHz - 438MHz(NGHam protocol) - pesquisar
 * Modulacçao dos dados: GFSK(BT= 0.5)
@@ -32,6 +34,14 @@ Repository of devenloping an antenna for CubeDesign2020
      * Antena Radio: 17 cm
      * Antena Beacon: 51 cm
 * Sistema de deploy:
-  * ...
-     
+  * Alimentação:
+    * 3.3V e 90mA
+  * Conexões
+    * 1x I2C - para controle de abertura, da *TT&C*
+    * 1x JTAG da *TT&C*
+
+---
+## Diagram:
+
+![](https://github.com/Bruno-Messias/Antenna_CubeDesign2020/blob/master/Communication_Systeam-TTC%20(2).png)
 
