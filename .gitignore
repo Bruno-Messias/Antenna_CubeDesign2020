@@ -4,3 +4,8 @@
 *.workspace
 Simulating_Raspberry/Simulate_RBPi3.pdsprj
 Chat_Arduino/comunicate_between_arduinos/comunicate_between_arduinos.ino.with_bootloader.standard.hex
+*.aux
+*.fdb_latexmk
+*.log
+*.gz
+*.fls
