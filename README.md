@@ -39,5 +39,5 @@ Repository of devenloping an antenna for CubeDesign2020
 ---
 ## Diagram:
 
-![](https://github.com/Bruno-Messias/Antenna_CubeDesign2020/blob/master/Communication_Systeam-TTC%20(2).png)
+![](https://github.com/Bruno-Messias/Antenna_CubeDesign2020/blob/master/Documents/Overview_TT%26C/diagrams/Systeam.png)
 
