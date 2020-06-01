@@ -79,6 +79,5 @@ Repository of devenloping an antenna for CubeDesign2020
 - [ ] spiReadBuf(uint8_t readLen,uint8_t* readBuf)
 
 
-* `<SPI.H>`
 
 
