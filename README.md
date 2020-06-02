@@ -16,10 +16,11 @@ Repository of devenloping an antenna for CubeDesign2020
 * Conexões:
 
   * 1x SPI Bus - para o envio de pacotes de dados e recepção de telecomandos
-  * 6xGPIO
+  * 8xGPIO
     * 4xGPIO - Para controles gerais do radio
     * 1xGPIO - Para o deploy da Antena
     * 1xGPIO - Para controle de alimentaçã para transmissão
+    * 2xGPIO - Para controle de Tx e Rx
 
 * Frequência de operação: 437MHz - 438MHz(NGHam protocol)
 * Modulacçao dos dados: GFSK(BT= 0.5)
