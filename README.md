@@ -6,22 +6,23 @@ Repository of devenloping an antenna for CubeDesign2020
 ## TT&C
 
 ### Overview :
-* Alimentação:
-
-  * 3.3V e 30 mA - para o microcontrolador
-  * 5V para alimentação do módulo de transmissão
+* Objetivos:
+  * Implementar  toda a comunicação do satélite com a *GroundStation* via RF
+     * Envio de telemetrias  das baterias periodicament
+     * Envio  de dados de altitude do ADCS via telecomando
+     * Envio das imagens adquiridas via telecomando
+  * Receber telecomandos da *GroundStation*, como o deploy da antena
 
 * Conexões:
 
-  * Conector PC104
-  * 1x SPI Bus 3 - Para telemetria do EPS(2kbps)
-  * 1x SPI Bus 4 - Para as imagens da rasp(8Mbps)
-  * 1xI2C para o módulo da antenna a partir da rasp(deploy da antena)
-  * 4xGPIO para controles gerais da radio
-  
-  Obs: Possibilidade de usar o beacon para a telemetria das baterias e sensoriamento ADCS pelo Beacon -> necessidade da antena de 51 cm
+  * 1x SPI Bus - para o envio de pacotes de dados e recepção de telecomandos
+  * 8xGPIO
+    * 4xGPIO - Para controles gerais do radio
+    * 1xGPIO - Para o deploy da Antena
+    * 1xGPIO - Para controle de alimentaçã para transmissão
+    * 2xGPIO - Para controle de Tx e Rx
 
-* Frequência de operação: 437MHz - 438MHz(NGHam protocol) - pesquisar
+* Frequência de operação: 437MHz - 438MHz(NGHam protocol)
 * Modulacçao dos dados: GFSK(BT= 0.5)
  ---
  ## Antenna
@@ -30,18 +31,54 @@ Repository of devenloping an antenna for CubeDesign2020
 * Impedâcia casada em 50 Ohms
 * Conector SMA e cabos coaxiais
 * Antena:
-  * Dipolo de 1/4 de Onda:
-     * Antena Radio: 17 cm
-     * Antena Beacon: 51 cm
+  * Dipolo de 1/4 de Onda - Antena de 17cm
+  
 * Sistema de deploy:
   * Alimentação:
     * 3.3V e 90mA
   * Conexões
-    * 1x I2C - para controle de abertura, da *TT&C*
-    * 1x JTAG da *TT&C*
-
+    * 1XGPIO - opção de utilizar um relê para quiemar o fio de deploy
 ---
 ## Diagram:
 
-![](https://github.com/Bruno-Messias/Antenna_CubeDesign2020/blob/master/Communication_Systeam-TTC%20(2).png)
+![](https://github.com/Bruno-Messias/Antenna_CubeDesign2020/blob/master/Documents/Overview_TT%26C/diagrams/Systeam.png)
+
+---
+## Adaptação das bilbiotecas:
+
+* `<RF4463.h>`
+
+- [ ] init()
+- [ ] checkDevice()
+- [ ] txPacket(uint8_t* sendbuf,uint8_t sendLen)
+- [ ] enterStandbyMode()
+- [ ] rxinit()
+- [ ] waitIRQ()
+- [ ] rxPacket(uint8_t* recvbuf)
+- [ ] setGPIOMode(uint8_t GPIO0Mode,uint8_t GPIO1Mode)
+- [ ] setPreambleLen(uint8_t len)
+- [ ] setSyncWords(uint8_t * syncWords,uint8_t len)
+- [ ] setTxPower(uint8_t power)
+- [ ] setCommand(uint8_t length,uint8_t command,uint8_t* paraBuf)
+- [ ] getCommand(uint8_t length,uint8_t command,uint8_t* paraBuf)
+- [ ] setProperties(uint16_t startProperty, uint8_t length ,uint8_t* paraBuf)
+- [ ] getProperties(uint16_t startProperty, uint8_t length ,uint8_t* paraBuf)
+- [ ] clrInterrupts()
+- [ ] spiInit()
+- [ ] pinInit()
+- [ ] powerOnReset()
+- [ ] enterTxMode()
+- [ ] enterRxMode()
+- [ ] setConfig(const uint8_t* parameters,uint16_t paraLen)
+- [ ] writeTxFifo(uint8_t* databuf,uint8_t length)
+- [ ] ReadRxFifo(uint8_t* databuf)
+- [ ] fifoReset()
+- [ ] setTxInterrupt()
+- [ ] setRxInterrupt()
+- [ ] checkCTS()
+- [ ] spiWriteBuf(uint8_t writeLen,uint8_t* writeBuf)
+- [ ] spiReadBuf(uint8_t readLen,uint8_t* readBuf)
+
+
+
 
