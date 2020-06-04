@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Raspbery_RF4463" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Raspbery_RF4463" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Raspbery_RF4463" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="RF4463Rasp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="RF4463Rasp.h" />
+		<Unit filename="demo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="softPwm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="softPwm.h" />
+		<Unit filename="softServo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="softServo.h" />
+		<Unit filename="softTone.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="softTone.h" />
+		<Unit filename="version.h" />
+		<Unit filename="wiringPi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="wiringPi.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

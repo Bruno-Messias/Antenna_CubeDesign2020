@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1591289406 source:c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\rf4463rasp.c
+	"RF4463Rasp.h"
+
+1591289407 c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\rf4463rasp.h
+
+1591289643 source:c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\demo.c
+	<stdio.h>
+	<stdlib.h>
+	"RF4463Rasp.h"
+
+1577671934 source:c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\softpwm.c
+	<stdio.h>
+	<malloc.h>
+	<pthread.h>
+	"wiringPi.h"
+	"softPwm.h"
+
+1577671934 c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\wiringpi.h
+
+1577671934 c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\softpwm.h
+
+1577671934 source:c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\softservo.c
+	<string.h>
+	<time.h>
+	<sys/time.h>
+	<pthread.h>
+	"wiringPi.h"
+	"softServo.h"
+
+1577671934 c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\softservo.h
+
+1577671934 source:c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\softtone.c
+	<stdio.h>
+	<pthread.h>
+	"wiringPi.h"
+	"softTone.h"
+
+1577671934 c:\users\bruno\onedrive\documentos\github\antenna_cubedesign2020\rf4463_raspberry\raspbery_rf4463\softtone.h
+
