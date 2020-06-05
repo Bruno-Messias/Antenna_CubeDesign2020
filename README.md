@@ -78,6 +78,8 @@ Repository of devenloping an antenna for CubeDesign2020
 - [ ] spiWriteBuf(uint8_t writeLen,uint8_t* writeBuf)
 - [ ] spiReadBuf(uint8_t readLen,uint8_t* readBuf)
 
+---
+Using WiringPi mirror: [link](https://github.com/WiringPi/WiringPi)
 
 
 
