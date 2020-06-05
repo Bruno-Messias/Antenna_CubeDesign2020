@@ -16,11 +16,10 @@ Repository of devenloping an antenna for CubeDesign2020
 * Conexões:
 
   * 1x SPI Bus - para o envio de pacotes de dados e recepção de telecomandos
-  * 8xGPIO
+  * 6xGPIO
     * 4xGPIO - Para controles gerais do radio
     * 1xGPIO - Para o deploy da Antena
-    * 1xGPIO - Para controle de alimentaçã para transmissão
-    * 2xGPIO - Para controle de Tx e Rx
+    * 1xGPIO - Para controle de alimentação para transmissão
 
 * Frequência de operação: 437MHz - 438MHz(NGHam protocol)
 * Modulacçao dos dados: GFSK(BT= 0.5)
@@ -79,6 +78,8 @@ Repository of devenloping an antenna for CubeDesign2020
 - [ ] spiWriteBuf(uint8_t writeLen,uint8_t* writeBuf)
 - [ ] spiReadBuf(uint8_t readLen,uint8_t* readBuf)
 
+---
+Using WiringPi mirror: [link](https://github.com/WiringPi/WiringPi)
 
 
 
