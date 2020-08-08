@@ -3,27 +3,6 @@
 Repository of devenloping an antenna for CubeDesign2020
 
 
-## TT&C
-
-### Overview :
-* Objetivos:
-  * Implementar  toda a comunicação do satélite com a *GroundStation* via RF
-     * Envio de telemetrias  das baterias periodicament
-     * Envio  de dados de altitude do ADCS via telecomando
-     * Envio das imagens adquiridas via telecomando
-  * Receber telecomandos da *GroundStation*, como o deploy da antena
-
-* Conexões:
-
-  * 1x SPI Bus - para o envio de pacotes de dados e recepção de telecomandos
-  * 6xGPIO
-    * 4xGPIO - Para controles gerais do radio
-    * 1xGPIO - Para o deploy da Antena
-    * 1xGPIO - Para controle de alimentação para transmissão
-
-* Frequência de operação: 437MHz - 438MHz(NGHam protocol)
-* Modulacçao dos dados: GFSK(BT= 0.5)
- ---
  ## Antenna
  
  ### Overview: 
@@ -48,6 +27,12 @@ Repository of devenloping an antenna for CubeDesign2020
 * `<RF4463.h>`
 
 - [ ] init()
+    - [x] spiInit()
+    - [x] pinInit()
+    - [ ] powerOnReset()
+      - [ ]spiWriteBuf(uint8_t writeLen,uint8_t* writeBuf)
+        - [ ] spiByte(uint8_t writeData)
+
 - [ ] checkDevice()
 - [ ] txPacket(uint8_t* sendbuf,uint8_t sendLen)
 - [ ] enterStandbyMode()
@@ -63,9 +48,9 @@ Repository of devenloping an antenna for CubeDesign2020
 - [ ] setProperties(uint16_t startProperty, uint8_t length ,uint8_t* paraBuf)
 - [ ] getProperties(uint16_t startProperty, uint8_t length ,uint8_t* paraBuf)
 - [ ] clrInterrupts()
-- [ ] spiInit()
-- [ ] pinInit()
-- [ ] powerOnReset()
+
+
+
 - [ ] enterTxMode()
 - [ ] enterRxMode()
 - [ ] setConfig(const uint8_t* parameters,uint16_t paraLen)
